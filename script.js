@@ -71,18 +71,48 @@ async function updateCalendarData() {
 async function refreshMarkers(events) {
     markersLayer.clearLayers();
 
-    
-    for (const event of events) {
+    // Grouping by title and location for residencies (like Avignon)
+    const groups = {};
+    events.forEach(event => {
         // Skip if manually hidden (status 0)
-        if (event.manualStatus === 0) continue;
+        if (event.manualStatus === 0) return;
         
+        const loc = event.location || event.venue || "Inconnu";
+        const title = event.summary || event.title || "Date";
+        const key = `${title}|${loc}`;
+        
+        if (!groups[key]) {
+            groups[key] = { ...event, allDates: [] };
+        }
+        const d = event.start?.dateTime || event.start?.date || event.date;
+        if (d) groups[key].allDates.push(new Date(d));
+    });
+
+    for (const key in groups) {
+        const group = groups[key];
+        group.allDates.sort((a, b) => a - b);
+        
+        if (group.allDates.length > 1) {
+            const start = group.allDates[0];
+            const end = group.allDates[group.allDates.length - 1];
+            const opt = { day: 'numeric', month: 'long' };
+            if (start.getFullYear() === end.getFullYear()) {
+                group.dateRange = `Du ${start.toLocaleDateString('fr-FR', opt)} au ${end.toLocaleDateString('fr-FR', { ...opt, year: 'numeric' })}`;
+            } else {
+                group.dateRange = `Du ${start.toLocaleDateString('fr-FR', { ...opt, year: 'numeric' })} au ${end.toLocaleDateString('fr-FR', { ...opt, year: 'numeric' })}`;
+            }
+            // Use the average of dates or just the start date for "isPast" logic
+            group.date = group.allDates[0].toISOString();
+        }
+
         // Stagger if geocoding might be needed
-        if (!event.coords) {
+        if (!group.coords) {
             await new Promise(resolve => setTimeout(resolve, 150)); 
         }
-        await addTourMarker(event);
+        await addTourMarker(group);
     }
 }
+
 
 
 
@@ -116,10 +146,12 @@ async function addTourMarker(event) {
     }
 }
 
-function placeMarker(coords, event) {
+function placeMarker(coords, group) {
     if (!coords || coords[0] === 0 || isNaN(coords[0])) return; // Safety check
     
+    const event = group;
     const rawDate = event.start?.dateTime || event.start?.date || event.date;
+
     const dateObj = new Date(rawDate);
     const isPast = dateObj < new Date();
 
@@ -139,9 +171,11 @@ function placeMarker(coords, event) {
         displayTitle = `BSQ "GB" @ ${displayTitle.split('@')[1] || displayTitle}`;
     }
 
-    const displayDate = (status === 2) 
-        ? `Année ${dateObj.getFullYear()}` 
-        : (isNaN(dateObj) ? rawDate : dateObj.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }));
+    const displayDate = group.dateRange ? group.dateRange : 
+        ((status === 2) 
+            ? `Année ${dateObj.getFullYear()}` 
+            : (isNaN(dateObj) ? rawDate : dateObj.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })));
+
 
     // Dynamic Styling
     let className = status === 2 ? 'option-marker' : 'custom-marker';
