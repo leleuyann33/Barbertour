@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbershop Quartet - Tournée en France</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- Google Fonts: Sancreek & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sancreek&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1 class="brand-title">Compagnie Barber Shop Quartet</h1>
+            <p class="subtitle">La Carte de la Tournée </p>
+        </header>
+        
+        <main>
+            <div id="theater-frame">
+                <div class="map-container">
+                    <div id="map"></div>
+                </div>
+            </div>
+
+            <div class="side-panel">
+                <div class="poster-box">
+                    <img src="poster.jpg" alt="Génération Barber Poster">
+                </div>
+            </div>
+        </main>
+
+    <footer>
+        <p>&copy; 2025 Compagnie Barber Shop Quartet. Tous droits réservés. <span id="secret-trigger" style="cursor: pointer; margin-left: 10px;">🪒</span></p>
+    </footer>
+    </div>
+
+    <!-- Secret Chest Modal -->
+    <div id="secret-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🪒 Coffre Secret - Gestion des Tournées</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div id="shows-list-header">
+                <p>Cliquez sur les pastilles pour basculer le statut : <span class="dot red"></span> Confirmé | <span class="dot yellow"></span> Prévu | <span class="dot empty"></span> Masqué</p>
+            </div>
+            <div id="shows-list-container">
+                <!-- Data will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Map Logic -->
+    <script src="script.js"></script>
+</body>
+</html>

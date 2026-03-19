@@ -1,0 +1,32 @@
+name: Sync Tour Dates
+
+on:
+  schedule:
+    - cron: '0 4 * * *' # Every day at 4 AM UTC
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/set-up-python@v2
+        with:
+          python_version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run sync script
+        run: python sync_calendar.py
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add dates.json
+          git commit -m "Auto-update tour dates from Google Calendar" || exit 0
+          git push
