@@ -422,7 +422,7 @@ function renderChronologicalList(events) {
         const d = new Date(e.start?.dateTime || e.start?.date || e.date);
         const status = e.manualStatus !== undefined ? e.manualStatus : (e.summary || e.title || "").toUpperCase().includes('OPTION') ? 2 : 1;
         if (!showOptions && status === 2) return false;
-        return d >= new Date().setHours(0,0,0,0); // Future only
+        return d >= new Date().setHours(0,0,0,0);
     }).sort((a, b) => {
         const da = new Date(a.start?.dateTime || a.start?.date || a.date);
         const db = new Date(b.start?.dateTime || b.start?.date || b.date);
@@ -434,24 +434,53 @@ function renderChronologicalList(events) {
         return;
     }
 
-    listContainer.innerHTML = futureEvents.map(e => {
+    // Group by Month
+    const groups = {};
+    futureEvents.forEach(e => {
         const d = new Date(e.start?.dateTime || e.start?.date || e.date);
-        const status = e.manualStatus !== undefined ? e.manualStatus : (e.summary || e.title || "").toUpperCase().includes('OPTION') ? 2 : 1;
-        const statusLabel = status === 2 ? 'Option' : 'Confirmé';
-        const displayTitle = (e.summary || e.title || "").replace(/Option/gi, '').replace(/BSQ/gi, '').replace(/"GB"/gi, '').trim();
+        const monthKey = d.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' }).toUpperCase();
+        if (!groups[monthKey]) groups[monthKey] = [];
+        groups[monthKey].push(e);
+    });
 
-        return `
-            <div class="date-item ${status === 2 ? 'option' : 'confirmed'}">
-                <div class="item-date">${d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}</div>
-                <div class="item-info">
-                    <h3>${displayTitle}</h3>
-                    <p>${e.location || e.venue}</p>
+    let html = '';
+    for (const month in groups) {
+        html += `<div class="month-group"><h3 class="month-title">${month}</h3>`;
+        html += groups[month].map(e => {
+            const d = new Date(e.start?.dateTime || e.start?.date || e.date);
+            const status = e.manualStatus !== undefined ? e.manualStatus : (e.summary || e.title || "").toUpperCase().includes('OPTION') ? 2 : 1;
+            const statusLabel = status === 2 ? 'Option' : 'Confirmé';
+            const displayTitle = (e.summary || e.title || "").replace(/Option/gi, '').replace(/BSQ/gi, '').replace(/"GB"/gi, '').trim();
+            const coordsStr = e.coords ? `[${e.coords[0]}, ${e.coords[1]}]` : "null";
+
+            return `
+                <div class="date-item ${status === 2 ? 'option' : 'confirmed'}" onclick='centerOnShow(${coordsStr}, "${displayTitle.replace(/"/g, '&quot;')}")' style="cursor: pointer;">
+                    <div class="item-date">${d.toLocaleDateString('fr-FR', { day: 'numeric' })}</div>
+                    <div class="item-info">
+                        <h3>${displayTitle}</h3>
+                        <p>${e.location || e.venue}</p>
+                    </div>
+                    <div class="item-status ${status === 2 ? 'option' : 'confirmed'}">${statusLabel}</div>
                 </div>
-                <div class="item-status ${status === 2 ? 'option' : 'confirmed'}">${statusLabel}</div>
-            </div>
-        `;
-    }).join('');
+            `;
+        }).join('');
+        html += `</div>`;
+    }
+
+    listContainer.innerHTML = html;
 }
+
+window.centerOnShow = function(coords, title) {
+    if (!coords) {
+        alert("Coordonnées non trouvées pour ce lieu.");
+        return;
+    }
+    map.setView(coords, 10, { animate: true });
+    // Scroll back to map
+    document.getElementById('theater-frame').scrollIntoView({ behavior: 'smooth' });
+};
+
+
 
 // Controls Logic
 document.getElementById('toggle-options')?.addEventListener('change', () => {

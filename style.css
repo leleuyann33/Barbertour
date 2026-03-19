@@ -581,22 +581,25 @@ input:checked + .slider:before {
 }
 
 #radio-power {
-    bottom: 65px;
-    left: 105px; /* Aligned with a knob on the image */
+    bottom: 95px;
+    left: 80px; /* Aligned with left knob on illustration */
 }
 
 .radio-dial-light {
     position: absolute;
-    top: 50%;
+    top: 52%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 250px;
+    width: 240px;
     height: 120px;
-    background: radial-gradient(circle, rgba(225, 177, 44, 0.3) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(225, 177, 44, 0.5) 0%, transparent 65%);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.5s ease;
+    border-radius: 60px;
 }
+
+
 
 .radio-player.on .radio-dial-light {
     opacity: 1;
@@ -701,3 +704,20 @@ input:checked + .slider:before {
 #media-preview img, #media-preview video {
     width: 100%;
 }
+
+.month-group {
+    margin-bottom: 3rem;
+    border-top: 2px solid rgba(225, 177, 44, 0.2);
+    padding-top: 1rem;
+}
+
+.month-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--teal);
+    letter-spacing: 5px;
+    margin-bottom: 1.5rem;
+    padding-left: 10px;
+    text-shadow: 0 0 10px rgba(64, 224, 208, 0.3);
+}
+
