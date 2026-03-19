@@ -18,6 +18,9 @@ L.control.zoom({
 
 // Automated Aspiration: Data will be fetched live from Google Calendar
 let tourDates = []; // Dynamic container
+const CORS_PROXY = "https://corsproxy.io/?";
+const markersLayer = L.layerGroup().addTo(map);
+
 
 // Venue Coordinates Cache (to bypass CORS blocks for known locations)
 const VENUE_COORDS = {
