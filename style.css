@@ -721,3 +721,32 @@ input:checked + .slider:before {
     text-shadow: 0 0 10px rgba(64, 224, 208, 0.3);
 }
 
+.month-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 2rem;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 50px;
+    border: 1px solid rgba(225, 177, 44, 0.1);
+}
+
+.month-nav-btn {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 5px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+
+.month-nav-btn:hover {
+    background: var(--gold);
+    color: var(--bg-dark);
+}

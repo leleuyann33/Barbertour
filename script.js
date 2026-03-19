@@ -436,17 +436,28 @@ function renderChronologicalList(events) {
 
     // Group by Month
     const groups = {};
+    const months = [];
     futureEvents.forEach(e => {
         const d = new Date(e.start?.dateTime || e.start?.date || e.date);
         const monthKey = d.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' }).toUpperCase();
-        if (!groups[monthKey]) groups[monthKey] = [];
+        if (!groups[monthKey]) {
+            groups[monthKey] = [];
+            months.push(monthKey);
+        }
         groups[monthKey].push(e);
     });
 
+    // Populate Month Nav
+    const nav = document.getElementById('month-nav');
+    if (nav) {
+        nav.innerHTML = months.map(m => `<button class="month-nav-btn" onclick="scrollToMonth('${m}')">${m.split(' ')[0]}</button>`).join('');
+    }
+
     let html = '';
-    for (const month in groups) {
-        html += `<div class="month-group"><h3 class="month-title">${month}</h3>`;
+    for (const month of months) {
+        html += `<div class="month-group" id="month-${month.replace(/\s+/g, '-')}"><h3 class="month-title">${month}</h3>`;
         html += groups[month].map(e => {
+
             const d = new Date(e.start?.dateTime || e.start?.date || e.date);
             const status = e.manualStatus !== undefined ? e.manualStatus : (e.summary || e.title || "").toUpperCase().includes('OPTION') ? 2 : 1;
             const statusLabel = status === 2 ? 'Option' : 'Confirmé';
@@ -479,6 +490,12 @@ window.centerOnShow = function(coords, title) {
     // Scroll back to map
     document.getElementById('theater-frame').scrollIntoView({ behavior: 'smooth' });
 };
+
+window.scrollToMonth = function(month) {
+    const id = `month-${month.replace(/\s+/g, '-')}`;
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+};
+
 
 
 
