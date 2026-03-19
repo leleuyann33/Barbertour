@@ -416,14 +416,18 @@ function renderChronologicalList(events) {
 
     const showOptions = document.getElementById('toggle-options')?.checked !== false;
     
-    // Filter and Sort
+    // Filter and Sort: Strictly confirmed dates only (no Options)
     const futureEvents = events.filter(e => {
         if (e.manualStatus === 0) return false;
         const d = new Date(e.start?.dateTime || e.start?.date || e.date);
         const status = e.manualStatus !== undefined ? e.manualStatus : (e.summary || e.title || "").toUpperCase().includes('OPTION') ? 2 : 1;
-        if (!showOptions && status === 2) return false;
+        
+        // Phase 3 Fix: The user wants Options HIDDEN from the list now.
+        if (status === 2) return false; 
+        
         return d >= new Date().setHours(0,0,0,0);
     }).sort((a, b) => {
+
         const da = new Date(a.start?.dateTime || a.start?.date || a.date);
         const db = new Date(b.start?.dateTime || b.start?.date || b.date);
         return da - db;
@@ -505,24 +509,73 @@ document.getElementById('toggle-options')?.addEventListener('change', () => {
     renderChronologicalList(tourDates);
 });
 
-// Radio Logic
-const radio = document.getElementById('vintage-radio');
-const radioPower = document.getElementById('radio-power');
+// Radio Logic (SVG Version)
+const radioWrap = document.getElementById('radioWrap');
+const radioPowerBtn = document.getElementById('radio-power-btn');
 const audio = document.getElementById('radio-audio');
+const radioHint = document.querySelector('.hint');
+const volKnob = document.getElementById('vol-knob');
+const volIndicator = document.getElementById('vol-indicator');
+const tuningKnob = document.getElementById('tuning-knob');
+const tuningIndicator = document.getElementById('tuning-indicator');
 
-radioPower?.addEventListener('click', () => {
-    radio.classList.toggle('on');
-    if (radio.classList.contains('on')) {
-        audio.play().catch(() => console.log("Audio needs interaction or failed to load"));
+let isRadioOn = false;
+let currentVolume = 0.5;
+let currentTuning = 0;
+
+function setRadioOn(on, flicker) {
+    isRadioOn = on;
+    if (on && flicker) {
+        radioWrap.classList.remove('on');
+        radioWrap.classList.add('flickering');
+        setTimeout(() => radioWrap.classList.add('on'), 200);
+        if (radioHint) radioHint.style.opacity = '0';
+        audio.play().catch(e => console.log("Interaction required for audio"));
+    } else if (on) {
+        radioWrap.classList.add('flickering', 'on');
+        if (radioHint) radioHint.style.opacity = '0';
+        audio.play().catch(e => console.log("Interaction required for audio"));
     } else {
+        radioWrap.classList.remove('on', 'flickering');
+        if (radioHint) radioHint.style.opacity = '0.7';
         audio.pause();
     }
+}
+
+
+radioPowerBtn?.addEventListener('click', () => {
+    setRadioOn(!isRadioOn, true);
 });
 
-// Media Modal (Razor 2) Logic
+// Volume Control (Drag)
+let isDraggingVol = false;
+volKnob?.addEventListener('mousedown', () => isDraggingVol = true);
+window.addEventListener('mouseup', () => isDraggingVol = false);
+window.addEventListener('mousemove', (e) => {
+    if (!isDraggingVol) return;
+    currentVolume = Math.min(1, Math.max(0, currentVolume - e.movementY * 0.01));
+    audio.volume = currentVolume;
+    // Rotate indicator (approx -45 to 45 deg)
+    const angle = (currentVolume - 0.5) * 180;
+    volIndicator.setAttribute('transform', `rotate(${angle}, 200, 148)`);
+});
+
+// Tuning Control (Drag) - Visual Only
+let isDraggingTune = false;
+tuningKnob?.addEventListener('mousedown', () => isDraggingTune = true);
+window.addEventListener('mouseup', () => isDraggingTune = false);
+window.addEventListener('mousemove', (e) => {
+    if (!isDraggingTune) return;
+    currentTuning = Math.min(1, Math.max(0, currentTuning - e.movementY * 0.01));
+    const angle = (currentTuning - 0.5) * 180;
+    tuningIndicator.setAttribute('transform', `rotate(${angle}, 280, 148)`);
+});
+
+// Media Modal Logic
 const mediaTrigger = document.getElementById('media-trigger');
 const mediaModal = document.getElementById('media-modal');
 const closeMediaModal = document.querySelector('.close-media-modal');
+
 const mediaUpload = document.getElementById('media-upload');
 const mediaPreview = document.getElementById('media-preview');
 
