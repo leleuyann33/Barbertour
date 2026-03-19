@@ -584,6 +584,8 @@ input:checked + .slider:before {
 #radio-anchor {
     position: relative;
     width: 140px; /* Fixed width for the scaled radio */
+    left: -140px;  /* Décalé à gauche de sa propre largeur */
+    top: -90px;    /* Remonté de sa propre hauteur (150px × 0.6 scale) */
 }
 
 #radio-section {
@@ -868,7 +870,7 @@ svg.radio text {
     opacity: 0.9;
 }
 
-/* Décaler la radio encore plus à gauche */
+/* Radio anchor - push section title to left edge */
 #radio-anchor {
     margin-right: auto;
     padding-left: 0;
