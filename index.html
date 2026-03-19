@@ -30,8 +30,37 @@
                 <div class="poster-box">
                     <img src="poster.jpg" alt="Génération Barber Poster">
                 </div>
+                <div class="controls-box">
+                    <label class="switch-container">
+                        <input type="checkbox" id="toggle-options" checked>
+                        <span class="slider"></span>
+                        <span class="label-text">Afficher les "Options" (points jaunes)</span>
+                    </label>
+                </div>
             </div>
         </main>
+
+        <section id="radio-section">
+            <div class="radio-player" id="vintage-radio">
+                <div class="radio-body">
+                    <img src="vintage_radio_player_skin_1773939472528.png" alt="Radio Vintage">
+                    <button id="radio-power" class="radio-btn" title="On/Off"></button>
+                    <div class="radio-dial-light"></div>
+                </div>
+                <audio id="radio-audio" loop>
+                    <source src="" type="audio/mpeg">
+                </audio>
+                <div id="media-trigger" style="cursor: pointer; opacity: 0.1; position: absolute; bottom: 5px; right: 5px;">🪒</div>
+            </div>
+        </section>
+
+        <section id="list-section">
+            <h2 class="section-title">Prochaines Dates de la Tournée</h2>
+            <div id="chronological-list">
+                <p style="text-align: center; color: #777;">Chargement des dates...</p>
+            </div>
+        </section>
+
 
     <footer>
         <p>&copy; 2025 Compagnie Barber Shop Quartet. Tous droits réservés. <span id="secret-trigger" style="cursor: pointer; margin-left: 10px;">🪒</span></p>
@@ -50,6 +79,19 @@
             </div>
             <div id="shows-list-container">
                 <!-- Data will be injected here -->
+            </div>
+        </div>
+    <!-- Media Upload Modal -->
+    <div id="media-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🪒 Galerie Barber - Photos & Vidéos</h2>
+                <span class="close-media-modal">&times;</span>
+            </div>
+            <div class="media-upload-zone">
+                <p>Uploader un souvenir de la tournée :</p>
+                <input type="file" id="media-upload" accept="image/*,video/*">
+                <div id="media-preview"></div>
             </div>
         </div>
     </div>

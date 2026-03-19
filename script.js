@@ -61,12 +61,14 @@ async function updateCalendarData() {
             const localEvents = await res.json();
             tourDates = localEvents;
             refreshMarkers(tourDates);
+            renderChronologicalList(tourDates); // Phase 3: Update list
             console.log("Données de la tournée chargées avec succès.");
         }
     } catch (e) {
         console.error("Erreur lors du chargement des dates de tournée.", e);
     }
 }
+
 
 
 
@@ -80,29 +82,39 @@ async function refreshMarkers(events) {
     markersLayer.clearLayers();
 
     // Grouping by title and location for residencies (like Avignon)
+    const showOptions = document.getElementById('toggle-options')?.checked !== false;
     const groups = {};
+    
     events.forEach(event => {
         if (event.manualStatus === 0) return;
         
         let loc = event.location || event.venue || "Inconnu";
         let title = event.summary || event.title || "Date";
         
+        // Status determination
+        let status = event.manualStatus;
+        if (status === undefined) {
+            status = title.toUpperCase().includes('OPTION') ? 2 : 1;
+        }
+
+        // Phase 3: Filter out options if toggle is OFF
+        if (!showOptions && status === 2) return;
+
         // Clean title for consistent grouping key
         let cleanTitle = title.replace(/Option/gi, "").replace(/BSQ/gi, "").replace(/"GB"/gi, "").replace(/À VENIR/gi, "").replace(/  +/g, " ").trim().toUpperCase();
         let cleanLoc = loc.trim().toUpperCase();
         const key = cleanTitle + "|" + cleanLoc;
         
         if (!groups[key]) {
-            groups[key] = { ...event, allDates: [] };
+            groups[key] = { ...event, allDates: [], calcStatus: status };
         }
         const dStr = event.start?.dateTime || event.start?.date || event.date;
         if (dStr) {
             const d = new Date(dStr);
-            if (!isNaN(d.getTime())) {
-                groups[key].allDates.push(d);
-            }
+            if (!isNaN(d.getTime())) groups[key].allDates.push(d);
         }
     });
+
 
     const groupKeys = Object.keys(groups);
     for (const key of groupKeys) {
@@ -396,5 +408,105 @@ window.toggleStatus = function(index, newStatus) {
     refreshMarkers(tourDates);
 };
 
+// --- PHASE 3: NEW FUNCTIONS ---
+
+function renderChronologicalList(events) {
+    const listContainer = document.getElementById('chronological-list');
+    if (!listContainer) return;
+
+    const showOptions = document.getElementById('toggle-options')?.checked !== false;
+    
+    // Filter and Sort
+    const futureEvents = events.filter(e => {
+        if (e.manualStatus === 0) return false;
+        const d = new Date(e.start?.dateTime || e.start?.date || e.date);
+        const status = e.manualStatus !== undefined ? e.manualStatus : (e.summary || e.title || "").toUpperCase().includes('OPTION') ? 2 : 1;
+        if (!showOptions && status === 2) return false;
+        return d >= new Date().setHours(0,0,0,0); // Future only
+    }).sort((a, b) => {
+        const da = new Date(a.start?.dateTime || a.start?.date || a.date);
+        const db = new Date(b.start?.dateTime || b.start?.date || b.date);
+        return da - db;
+    });
+
+    if (futureEvents.length === 0) {
+        listContainer.innerHTML = '<p style="text-align: center; color: #888;">Aucune date à venir pour le moment.</p>';
+        return;
+    }
+
+    listContainer.innerHTML = futureEvents.map(e => {
+        const d = new Date(e.start?.dateTime || e.start?.date || e.date);
+        const status = e.manualStatus !== undefined ? e.manualStatus : (e.summary || e.title || "").toUpperCase().includes('OPTION') ? 2 : 1;
+        const statusLabel = status === 2 ? 'Option' : 'Confirmé';
+        const displayTitle = (e.summary || e.title || "").replace(/Option/gi, '').replace(/BSQ/gi, '').replace(/"GB"/gi, '').trim();
+
+        return `
+            <div class="date-item ${status === 2 ? 'option' : 'confirmed'}">
+                <div class="item-date">${d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}</div>
+                <div class="item-info">
+                    <h3>${displayTitle}</h3>
+                    <p>${e.location || e.venue}</p>
+                </div>
+                <div class="item-status ${status === 2 ? 'option' : 'confirmed'}">${statusLabel}</div>
+            </div>
+        `;
+    }).join('');
+}
+
+// Controls Logic
+document.getElementById('toggle-options')?.addEventListener('change', () => {
+    refreshMarkers(tourDates);
+    renderChronologicalList(tourDates);
+});
+
+// Radio Logic
+const radio = document.getElementById('vintage-radio');
+const radioPower = document.getElementById('radio-power');
+const audio = document.getElementById('radio-audio');
+
+radioPower?.addEventListener('click', () => {
+    radio.classList.toggle('on');
+    if (radio.classList.contains('on')) {
+        audio.play().catch(() => console.log("Audio needs interaction or failed to load"));
+    } else {
+        audio.pause();
+    }
+});
+
+// Media Modal (Razor 2) Logic
+const mediaTrigger = document.getElementById('media-trigger');
+const mediaModal = document.getElementById('media-modal');
+const closeMediaModal = document.querySelector('.close-media-modal');
+const mediaUpload = document.getElementById('media-upload');
+const mediaPreview = document.getElementById('media-preview');
+
+mediaTrigger?.addEventListener('click', () => {
+    mediaModal.style.display = 'block';
+});
+
+closeMediaModal?.addEventListener('click', () => {
+    mediaModal.style.display = 'none';
+});
+
+mediaUpload?.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const url = URL.createObjectURL(file);
+    mediaPreview.innerHTML = '';
+    
+    if (file.type.startsWith('image/')) {
+        const img = document.createElement('img');
+        img.src = url;
+        mediaPreview.appendChild(img);
+    } else if (file.type.startsWith('video/')) {
+        const vid = document.createElement('video');
+        vid.src = url;
+        vid.controls = true;
+        mediaPreview.appendChild(vid);
+    }
+});
+
 updateCalendarData();
 setInterval(updateCalendarData, 86400000);
+
