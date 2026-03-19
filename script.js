@@ -70,12 +70,13 @@ async function updateCalendarData() {
 
 async function refreshMarkers(events) {
     if (!events || !events.length) {
-        console.warn("Pas d'événements à afficher.");
+        console.warn("Pas d'Ã©vÃ©nements Ã  afficher.");
         return;
     }
-    console.log("Rendu des marqueurs pour", events.length, "événements.");
+    console.log("DÃ©marrage du rendu pour", events.length, "Ã©vÃ©nements.");
     markersLayer.clearLayers();
 
+    // Grouping by title and location for residencies (like Avignon)
     const groups = {};
     events.forEach(event => {
         if (event.manualStatus === 0) return;
@@ -84,7 +85,7 @@ async function refreshMarkers(events) {
         let title = event.summary || event.title || "Date";
         
         // Clean title for consistent grouping key
-        let cleanTitle = title.replace(/Option/gi, "").replace(/BSQ/gi, "").replace(/"GB"/gi, "").trim().toUpperCase();
+        let cleanTitle = title.replace(/Option/gi, "").replace(/BSQ/gi, "").replace(/"GB"/gi, "").replace(/Ã€ VENIR/gi, "").replace(/  +/g, " ").trim().toUpperCase();
         let cleanLoc = loc.trim().toUpperCase();
         const key = cleanTitle + "|" + cleanLoc;
         
@@ -94,29 +95,35 @@ async function refreshMarkers(events) {
         const dStr = event.start?.dateTime || event.start?.date || event.date;
         if (dStr) {
             const d = new Date(dStr);
-            if (!isNaN(d.getTime())) groups[key].allDates.push(d);
+            if (!isNaN(d.getTime())) {
+                groups[key].allDates.push(d);
+            }
         }
     });
 
-    for (const key in groups) {
+    const groupKeys = Object.keys(groups);
+    for (const key of groupKeys) {
         try {
             const group = groups[key];
             if (group.allDates.length === 0) continue;
+
             group.allDates.sort((a, b) => a - b);
             
             if (group.allDates.length > 1) {
                 const start = group.allDates[0];
                 const end = group.allDates[group.allDates.length - 1];
-                const opt = { day: "numeric", month: "long" };
+                const opt = { day: 'numeric', month: 'long' };
+                
                 if (start.getFullYear() === end.getFullYear()) {
-                    group.dateRange = "Du " + start.toLocaleDateString("fr-FR", opt) + " au " + end.toLocaleDateString("fr-FR", { ...opt, year: "numeric" });
+                    group.dateRange = `Du ${start.toLocaleDateString('fr-FR', opt)} au ${end.toLocaleDateString('fr-FR', { ...opt, year: 'numeric' })}`;
                 } else {
-                    group.dateRange = "Du " + start.toLocaleDateString("fr-FR", { ...opt, year: "numeric" }) + " au " + end.toLocaleDateString("fr-FR", { ...opt, year: "numeric" });
+                    group.dateRange = `Du ${start.toLocaleDateString('fr-FR', { ...opt, year: 'numeric' })} au ${end.toLocaleDateString('fr-FR', { ...opt, year: 'numeric' })}`;
                 }
                 group.date = start.toISOString();
             } else {
                 group.date = group.allDates[0].toISOString();
             }
+
             if (!group.coords) {
                 await addTourMarker(group);
             } else {
@@ -127,92 +134,7 @@ async function refreshMarkers(events) {
         }
     }
 }
-    console.log("Rendu des marqueurs pour", events.length, "événements.");
-    markersLayer.clearLayers();
 
-    const groups = {};
-    events.forEach(event => {
-        if (event.manualStatus === 0) return;
-        const loc = event.location || event.venue || "Inconnu";
-        const title = event.summary || event.title || "Date";
-        const key = title + "|" + loc;
-        if (!groups[key]) {
-            groups[key] = { ...event, allDates: [] };
-        }
-        const dStr = event.start?.dateTime || event.start?.date || event.date;
-        if (dStr) {
-            const d = new Date(dStr);
-            if (!isNaN(d.getTime())) groups[key].allDates.push(d);
-        }
-    });
-
-    for (const key in groups) {
-        try {
-            const group = groups[key];
-            if (group.allDates.length === 0) continue;
-            group.allDates.sort((a, b) => a - b);
-            if (group.allDates.length > 1) {
-                const start = group.allDates[0];
-                const end = group.allDates[group.allDates.length - 1];
-                const opt = { day: "numeric", month: "long" };
-                if (start.getFullYear() === end.getFullYear()) {
-                    group.dateRange = "Du " + start.toLocaleDateString("fr-FR", opt) + " au " + end.toLocaleDateString("fr-FR", { ...opt, year: "numeric" });
-                } else {
-                    group.dateRange = "Du " + start.toLocaleDateString("fr-FR", { ...opt, year: "numeric" }) + " au " + end.toLocaleDateString("fr-FR", { ...opt, year: "numeric" });
-                }
-                group.date = start.toISOString();
-            } else {
-                group.date = group.allDates[0].toISOString();
-            }
-            if (!group.coords) {
-                await addTourMarker(group);
-            } else {
-                placeMarker(group.coords, group);
-            }
-        } catch (e) {
-            console.error("Erreur de rendu pour le groupe :", key, e);
-        }
-    }
-};
-    events.forEach(event => {
-        // Skip if manually hidden (status 0)
-        if (event.manualStatus === 0) return;
-        
-        const loc = event.location || event.venue || "Inconnu";
-        const title = event.summary || event.title || "Date";
-        const key = `${title}|${loc}`;
-        
-        if (!groups[key]) {
-            groups[key] = { ...event, allDates: [] };
-        }
-        const d = event.start?.dateTime || event.start?.date || event.date;
-        if (d) groups[key].allDates.push(new Date(d));
-    });
-
-    for (const key in groups) {
-        const group = groups[key];
-        group.allDates.sort((a, b) => a - b);
-        
-        if (group.allDates.length > 1) {
-            const start = group.allDates[0];
-            const end = group.allDates[group.allDates.length - 1];
-            const opt = { day: 'numeric', month: 'long' };
-            if (start.getFullYear() === end.getFullYear()) {
-                group.dateRange = `Du ${start.toLocaleDateString('fr-FR', opt)} au ${end.toLocaleDateString('fr-FR', { ...opt, year: 'numeric' })}`;
-            } else {
-                group.dateRange = `Du ${start.toLocaleDateString('fr-FR', { ...opt, year: 'numeric' })} au ${end.toLocaleDateString('fr-FR', { ...opt, year: 'numeric' })}`;
-            }
-            // Use the average of dates or just the start date for "isPast" logic
-            group.date = group.allDates[0].toISOString();
-        }
-
-        // Stagger if geocoding might be needed
-        if (!group.coords) {
-            await new Promise(resolve => setTimeout(resolve, 150)); 
-        }
-        await addTourMarker(group);
-    }
-}
 
 
 
