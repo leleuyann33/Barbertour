@@ -18,16 +18,19 @@
 body {
     background-color: var(--bg-dark);
     background-image: 
-        radial-gradient(circle at center, var(--poster-teal) 0%, var(--bg-dark) 100%),
-        repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 10px),
-        repeating-linear-gradient(-45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 10px);
-    background-blend-mode: overlay;
+        linear-gradient(rgba(7, 44, 40, 0.85), rgba(7, 44, 40, 0.85)),
+        url('Generation-barber-shop-spectacle.webp');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-blend-mode: multiply; /* Filigrane effect */
     color: var(--white);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
 }
+
 
 header {
     padding: 3rem 1rem;
@@ -180,10 +183,8 @@ main {
     opacity: 0.4;
 }
 
-/* Twinkle Effect (Future Confirmed) */
-.twinkle {
-    /* Twinkle animation removed as requested by user */
-}
+/* .twinkle removal */
+
 
 .custom-marker:hover, .option-marker:hover {
     transform: scale(1.5);
@@ -536,42 +537,76 @@ input:checked + .slider:before {
     letter-spacing: 1px;
 }
 
+/* Admin Features */
+.admin-trigger {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 1100;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+    user-select: none;
+    background: rgba(0,0,0,0.5);
+    border-radius: 4px;
+    padding: 2px 5px;
+}
+
+.admin-trigger:hover {
+    opacity: 1;
+}
+
+#media-frame {
+    position: relative;
+}
+
+/* Radio & Title Alignment Row */
+.list-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0px; /* Gap handled by padding-left of anchor */
+    max-width: 1200px;
+    margin: 40px auto 20px;
+    padding-left: 20px; /* Align with map edge */
+}
+
+.section-title {
+    margin: 0;
+    font-size: 2rem;
+    color: var(--gold);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    font-family: 'Playfair Display', serif;
+}
+
 /* Radio Player Section */
-#radio-section {
-    padding: 4rem 1rem;
-    display: flex;
-    justify-content: center;
-    background: radial-gradient(circle at center, rgba(64, 224, 208, 0.05) 0%, transparent 70%);
-}
-
-.radio-player {
+#radio-anchor {
     position: relative;
-    width: 500px;
-    max-width: 95%;
-    perspective: 1000px;
-}
-
-.radio-body {
-    position: relative;
-    border-radius: 40px;
-    overflow: hidden;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(64, 224, 208, 0.1);
-    border: 8px solid #222;
-    transition: transform 0.5s ease;
+    width: 140px; /* Fixed width for the scaled radio */
 }
 
 #radio-section {
-    padding: 2rem 1rem;
+    position: relative;
+    padding: 0;
     display: flex;
-    justify-content: center;
-    background: rgba(0,0,0,0.1);
+    flex-direction: column;
+    align-items: center;
+}
+
+.radio-header {
+    display: none;
 }
 
 .radio-container {
     position: relative;
-    width: 320px;
-    height: 220px;
+    width: 220px;
+    height: 150px;
+    transform: scale(0.6); 
+    transform-origin: center left;
+    pointer-events: auto;
 }
+
 
 .radio-container:hover .hint { opacity: 0.7; }
 
@@ -677,25 +712,29 @@ svg.radio text {
 
 .date-item {
     display: grid;
-    grid-template-columns: 150px 1fr auto;
+    grid-template-columns: 80px 1fr; /* Narrower date column */
     align-items: center;
-    padding: 1.5rem 2.5rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(225, 177, 44, 0.1);
-    border-radius: 15px;
+    max-width: 600px; /* Reduced width as requested */
+    margin: 0 auto;
+    padding: 0.8rem 1.5rem;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(225, 177, 44, 0.2);
+    border-radius: 10px;
     transition: all 0.3s ease;
-    border-left: 5px solid transparent;
+    border-left: 6px solid #ff3e3e; /* Bold red on left */
+    border-right: 6px solid var(--gold); /* Bold gold on right */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .date-item:hover {
-    background: rgba(64, 224, 208, 0.05);
+    background: rgba(64, 224, 208, 0.1);
     border-color: var(--gold);
-    transform: translateX(10px);
-    border-left-color: var(--gold);
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
 }
 
-.date-item.confirmed { border-left-color: #ff3e3e; }
-.date-item.option { border-left-color: var(--gold); opacity: 0.8; }
+.date-item.option { border-left-color: var(--gold); opacity: 0.9; }
+
 
 .item-date {
     font-family: 'Sancreek', cursive;
@@ -726,24 +765,49 @@ svg.radio text {
 .item-status.option { background: rgba(225, 177, 44, 0.2); color: var(--gold); }
 
 /* Media Upload Styling */
-.media-upload-zone {
-    text-align: center;
-    padding: 2rem;
-    border: 2px dashed rgba(225, 177, 44, 0.3);
+/* Media Frame Styling */
+#media-frame {
+    margin-top: 1rem;
+    padding: 15px;
+    background: #111;
+    border: 3px double var(--gold);
     border-radius: 15px;
-    background: rgba(255,255,255,0.02);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-#media-preview {
-    margin-top: 2rem;
-    max-height: 300px;
-    overflow: hidden;
+#media-frame img, #media-frame video {
+    max-width: 100%;
     border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    margin-bottom: 10px;
 }
 
-#media-preview img, #media-preview video {
-    width: 100%;
+.media-controls { margin-top: 10px; }
+.upload-btn {
+    background: var(--gold);
+    color: #000;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: 0.3s;
 }
+.upload-btn:hover { background: #c19b26; transform: scale(1.05); }
+
+#media-frame .placeholder-text {
+    font-style: italic;
+    color: #555;
+    font-size: 0.9rem;
+}
+
 
 .month-group {
     margin-bottom: 3rem;
@@ -789,4 +853,71 @@ svg.radio text {
 .month-nav-btn:hover {
     background: var(--gold);
     color: var(--bg-dark);
+}
+
+/* Label Radio Barber */
+.radio-label {
+    font-family: 'Sancreek', cursive;
+    font-size: 1rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px rgba(225, 177, 44, 0.5), 1px 1px 0 rgba(0,0,0,0.7);
+    margin-top: 2px;
+    text-align: center;
+    opacity: 0.9;
+}
+
+/* Décaler la radio encore plus à gauche */
+#radio-anchor {
+    margin-right: auto;
+    padding-left: 0;
+}
+
+/* Playlist items admin */
+.playlist-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border: 1px solid rgba(225,177,44,0.1);
+    margin-bottom: 4px;
+}
+
+.playlist-item:hover {
+    background: rgba(225,177,44,0.1);
+    border-color: rgba(225,177,44,0.3);
+}
+
+.playlist-item.playing {
+    background: rgba(225,177,44,0.15);
+    border-color: var(--gold);
+}
+
+.playlist-icon {
+    color: var(--gold);
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.playlist-name {
+    color: #ddd;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Secret trigger © - discret mais pointer */
+#secret-trigger {
+    opacity: 0.6;
+    transition: opacity 0.3s, color 0.3s;
+}
+#secret-trigger:hover {
+    opacity: 1;
+    color: var(--gold);
 }

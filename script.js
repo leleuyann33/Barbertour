@@ -6,7 +6,7 @@ const map = L.map('map', {
     zoomDelta: 0.5,
     wheelPxPerZoomLevel: 120,
     minZoom: 5,
-    maxZoom: 12,
+    maxZoom: 13,
     zoomControl: false
     // maxBounds removed to stop map from "sliding away" or "snapping"
 });
@@ -82,7 +82,7 @@ async function refreshMarkers(events) {
     markersLayer.clearLayers();
 
     // Grouping by title and location for residencies (like Avignon)
-    const showOptions = document.getElementById('toggle-options')?.checked !== false;
+    const showOptions = false; // Options hidden by default for visitors
     const groups = {};
     
     events.forEach(event => {
@@ -185,7 +185,7 @@ async function addTourMarker(event) {
 }
 
 function placeMarker(coords, group) {
-    if (!coords || coords[0] === 0 || isNaN(coords[0])) return; // Safety check
+    if (!coords || coords[0] === 0 || isNaN(coords[0])) return; // Admin Security
     
     const event = group;
     const rawDate = event.start?.dateTime || event.start?.date || event.date;
@@ -241,7 +241,7 @@ function placeMarker(coords, group) {
         funMessage = `<div style="color: #bbb; font-style: italic; margin-top: 8px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 5px;">"${pastMessages[Math.floor(Math.random() * pastMessages.length)]}"</div>`;
     }
 
-    const statusLine = (isPast || status === 3) ? "" : `<p><strong>Statut:</strong> ${status === 2 ? "C'est prévu" : "C'est confirmé !"}</p>`;
+    const statusLine = (isPast || status === 3) ? "" : `<p><strong>Statut:</strong> ${status === 2 ? "C'est prévu" : "Vite, réservez !"}</p>`;
 
     const popupContent = `
         <div class="tour-popup">
@@ -317,14 +317,21 @@ const modal = document.getElementById('secret-modal');
 const closeModal = document.querySelector('.close-modal');
 const showsContainer = document.getElementById('shows-list-container');
 
-secretTrigger.addEventListener('click', () => {
-    const password = prompt("Entrez le mot de passe secret :");
+// Admin Security
+window.isAdmin = false;
+window.checkAdmin = function(type) {
+    if (window.isAdmin) return; // Already admin
+    const password = prompt("Veuillez entrer le mot de passe administrateur :");
     if (password === "BARBER2025") {
-        openSecretModal();
-    } else if (password !== null) {
-        alert("Mot de passe incorrect !");
+        window.isAdmin = true;
+        document.querySelectorAll('.admin-only').forEach(el => {
+            el.style.display = 'block';
+        });
+        alert("Mode Administrateur activé.");
+    } else {
+        alert("Mot de passe incorrect.");
     }
-});
+};
 
 closeModal.addEventListener('click', () => modal.style.display = 'none');
 window.addEventListener('click', (e) => { if (e.target == modal) modal.style.display = 'none'; });
@@ -369,7 +376,8 @@ function renderShowsList() {
     footerActions.className = 'modal-footer-actions';
     footerActions.innerHTML = `
         <button class="add-btn" onclick="addNewEvent()">➕ Ajouter une date</button>
-        <button class="save-btn" onclick="saveAllAndRefresh()">💾 Appliquer les modifications</button>
+        <button class="save-btn" onclick="saveAllAndRefresh()">💾 Appliquer (Carte)</button>
+        <button class="save-btn" style="background: #27ae60; color: white;" onclick="exportJson()">📥 Télécharger dates.json</button>
     `;
     showsContainer.appendChild(footerActions);
 }
@@ -408,26 +416,94 @@ window.toggleStatus = function(index, newStatus) {
     refreshMarkers(tourDates);
 };
 
+window.exportJson = function() {
+    const dataStr = JSON.stringify(tourDates, null, 2);
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'dates.json';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    alert("Fichier dates.json généré ! Remplacez le fichier existant par celui-ci pour sauvegarder vos modifications.");
+};
+
 // --- PHASE 3: NEW FUNCTIONS ---
+
+// --- PHASE 4: PLAYLIST & FINAL LOGIC ---
+// Web Radio Jazz (stream public) + morceaux personnalisés
+const JAZZ_STREAM = "https://jazz-wr04.ice.infomaniak.ch/jazz-wr04-128.mp3"; // Jazz Radio France - 128kbps
+const RADIO_PLAYLIST = []; // Morceaux uploadés manuellement par l'admin
+let currentTrackIndex = 0;
+let playingPersonalTrack = false;
+
+// Radio Playlist Upload (admin uniquement)
+const radioPlaylistUpload = document.createElement('input');
+radioPlaylistUpload.type = 'file';
+radioPlaylistUpload.accept = 'audio/*';
+radioPlaylistUpload.multiple = true;
+radioPlaylistUpload.style.display = 'none';
+document.body.appendChild(radioPlaylistUpload);
+
+window.openRadioPlaylistUpload = function() {
+    radioPlaylistUpload.click();
+};
+
+radioPlaylistUpload.addEventListener('change', (e) => {
+    const files = Array.from(e.target.files);
+    files.forEach(file => {
+        const url = URL.createObjectURL(file);
+        RADIO_PLAYLIST.push({ name: file.name, url });
+    });
+    alert(`${files.length} morceau(x) ajouté(s) à la playlist Barber !`);
+    renderRadioPlaylist();
+});
+
+function renderRadioPlaylist() {
+    let playlistPanel = document.getElementById('radio-playlist-panel');
+    if (!playlistPanel) return;
+    if (RADIO_PLAYLIST.length === 0) {
+        playlistPanel.innerHTML = '<p style="color:#888;font-size:0.85rem;">Aucun morceau ajouté.</p>';
+        return;
+    }
+    playlistPanel.innerHTML = RADIO_PLAYLIST.map((track, i) => `
+        <div class="playlist-item ${currentTrackIndex === i && playingPersonalTrack ? 'playing' : ''}" onclick="playTrack(${i})">
+            <span class="playlist-icon">${currentTrackIndex === i && playingPersonalTrack ? '▶' : '♪'}</span>
+            <span class="playlist-name">${track.name}</span>
+        </div>
+    `).join('');
+}
+
+window.playTrack = function(index) {
+    if (!audio) return;
+    currentTrackIndex = index;
+    playingPersonalTrack = true;
+    audio.src = RADIO_PLAYLIST[index].url;
+    audio.play();
+    renderRadioPlaylist();
+};
+
+window.switchToJazzStream = function() {
+    if (!audio) return;
+    playingPersonalTrack = false;
+    audio.src = JAZZ_STREAM;
+    audio.play();
+    renderRadioPlaylist();
+};
 
 function renderChronologicalList(events) {
     const listContainer = document.getElementById('chronological-list');
     if (!listContainer) return;
 
-    const showOptions = document.getElementById('toggle-options')?.checked !== false;
-    
-    // Filter and Sort: Strictly confirmed dates only (no Options)
     const futureEvents = events.filter(e => {
         if (e.manualStatus === 0) return false;
         const d = new Date(e.start?.dateTime || e.start?.date || e.date);
         const status = e.manualStatus !== undefined ? e.manualStatus : (e.summary || e.title || "").toUpperCase().includes('OPTION') ? 2 : 1;
-        
-        // Phase 3 Fix: The user wants Options HIDDEN from the list now.
-        if (status === 2) return false; 
-        
+        if (status === 2) return false; // Confirmed ONLY for visitors
         return d >= new Date().setHours(0,0,0,0);
     }).sort((a, b) => {
-
         const da = new Date(a.start?.dateTime || a.start?.date || a.date);
         const db = new Date(b.start?.dateTime || b.start?.date || b.date);
         return da - db;
@@ -438,7 +514,6 @@ function renderChronologicalList(events) {
         return;
     }
 
-    // Group by Month
     const groups = {};
     const months = [];
     futureEvents.forEach(e => {
@@ -451,7 +526,6 @@ function renderChronologicalList(events) {
         groups[monthKey].push(e);
     });
 
-    // Populate Month Nav
     const nav = document.getElementById('month-nav');
     if (nav) {
         nav.innerHTML = months.map(m => `<button class="month-nav-btn" onclick="scrollToMonth('${m}')">${m.split(' ')[0]}</button>`).join('');
@@ -461,28 +535,156 @@ function renderChronologicalList(events) {
     for (const month of months) {
         html += `<div class="month-group" id="month-${month.replace(/\s+/g, '-')}"><h3 class="month-title">${month}</h3>`;
         html += groups[month].map(e => {
-
             const d = new Date(e.start?.dateTime || e.start?.date || e.date);
-            const status = e.manualStatus !== undefined ? e.manualStatus : (e.summary || e.title || "").toUpperCase().includes('OPTION') ? 2 : 1;
-            const statusLabel = status === 2 ? 'Option' : 'Confirmé';
             const displayTitle = (e.summary || e.title || "").replace(/Option/gi, '').replace(/BSQ/gi, '').replace(/"GB"/gi, '').trim();
             const coordsStr = e.coords ? `[${e.coords[0]}, ${e.coords[1]}]` : "null";
 
             return `
-                <div class="date-item ${status === 2 ? 'option' : 'confirmed'}" onclick='centerOnShow(${coordsStr}, "${displayTitle.replace(/"/g, '&quot;')}")' style="cursor: pointer;">
+                <div class="date-item" onclick='centerOnShow(${coordsStr}, "${displayTitle.replace(/"/g, '&quot;')}")' style="cursor: pointer;">
                     <div class="item-date">${d.toLocaleDateString('fr-FR', { day: 'numeric' })}</div>
                     <div class="item-info">
                         <h3>${displayTitle}</h3>
                         <p>${e.location || e.venue}</p>
                     </div>
-                    <div class="item-status ${status === 2 ? 'option' : 'confirmed'}">${statusLabel}</div>
                 </div>
             `;
         }).join('');
         html += `</div>`;
     }
-
     listContainer.innerHTML = html;
+}
+
+// Re-init Triggers (Solid logic for multiple sources)
+function initTriggers() {
+    const secretBtn = document.getElementById('secret-trigger');
+    const mediaBtn = document.getElementById('media-trigger');
+    const modal = document.getElementById('secret-modal');
+    const mediaModal = document.getElementById('media-modal');
+    
+    secretBtn?.addEventListener('click', () => {
+        const password = prompt("Entrez le mot de passe secret :");
+        if (password === "BARBER2025") {
+            modal.style.display = 'block';
+            renderShowsList();
+        }
+    });
+
+    // Note: mediaBtn trigger is now handled by window.checkAdmin in HTML
+
+    document.querySelectorAll('.close-modal, .close-media-modal').forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            mediaModal.style.display = 'none';
+        });
+    });
+}
+
+// Volume Control Fix
+let isDraggingVol = false;
+const audio = document.getElementById('radio-audio');
+const volKnob = document.getElementById('vol-knob');
+const volIndicator = document.getElementById('vol-indicator');
+
+volKnob?.addEventListener('mousedown', () => isDraggingVol = true);
+window.addEventListener('mouseup', () => isDraggingVol = false);
+window.addEventListener('mousemove', (e) => {
+    if (!isDraggingVol || !audio) return;
+    const currentVolume = Math.min(1, Math.max(0, audio.volume - e.movementY * 0.01));
+    audio.volume = currentVolume;
+    const angle = (currentVolume - 0.5) * 180;
+    volIndicator?.setAttribute('transform', `rotate(${angle}, 200, 148)`);
+});
+
+// Radio Power Logic
+const radioWrap = document.getElementById('radioWrap');
+const radioPowerBtn = document.getElementById('radio-power-btn');
+const radioHint = document.querySelector('.hint');
+
+function setRadioOn(on, flicker) {
+    if (!audio) return;
+    if (on && flicker) {
+        // Charger le stream Jazz si pas de morceau perso en cours
+        if (!playingPersonalTrack || !audio.src) {
+            audio.src = JAZZ_STREAM;
+        }
+        radioWrap.classList.add('flickering');
+        setTimeout(() => radioWrap.classList.add('on'), 200);
+        if (radioHint) radioHint.style.opacity = '0';
+        audio.play().catch(e => console.warn('Autoplay blocked:', e));
+    } else if (on) {
+        if (!playingPersonalTrack || !audio.src) {
+            audio.src = JAZZ_STREAM;
+        }
+        radioWrap.classList.add('on');
+        audio.play().catch(e => console.warn('Autoplay blocked:', e));
+    } else {
+        radioWrap.classList.remove('on', 'flickering');
+        if (radioHint) radioHint.style.opacity = '0.7';
+        audio.pause();
+    }
+}
+
+radioPowerBtn?.addEventListener('click', () => {
+    const isOn = radioWrap.classList.contains('on');
+    setRadioOn(!isOn, true);
+});
+
+// Media Upload -> Gallery Frame
+const mediaUpload = document.getElementById('media-upload');
+const mediaFrame = document.getElementById('media-frame');
+
+mediaUpload?.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file || !mediaFrame) return;
+
+    const url = URL.createObjectURL(file);
+    mediaFrame.innerHTML = '';
+    
+    if (file.type.startsWith('image/')) {
+        const img = document.createElement('img');
+        img.src = url;
+        mediaFrame.appendChild(img);
+    } else if (file.type.startsWith('video/')) {
+        const vid = document.createElement('video');
+        vid.src = url;
+        vid.controls = true;
+        mediaFrame.appendChild(vid);
+    }
+});
+
+// Main Init
+// Direct Media Upload (Side Panel)
+const directMediaUpload = document.getElementById('direct-media-upload');
+directMediaUpload?.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file || !mediaFrame) return;
+
+    const url = URL.createObjectURL(file);
+    mediaFrame.innerHTML = '';
+    
+    if (file.type.startsWith('image/')) {
+        const img = document.createElement('img');
+        img.src = url;
+        mediaFrame.appendChild(img);
+    } else if (file.type.startsWith('video/')) {
+        const vid = document.createElement('video');
+        vid.src = url;
+        vid.controls = true;
+        vid.autoplay = true;
+        mediaFrame.appendChild(vid);
+    }
+    
+    // Add back the upload button (admin only)
+    const controls = document.createElement('div');
+    controls.className = 'media-controls admin-only';
+    controls.style.display = window.isAdmin ? 'block' : 'none';
+    controls.innerHTML = `<button class="upload-btn" onclick="document.getElementById('direct-media-upload').click()">➕ Changer le média</button>`;
+    mediaFrame.appendChild(controls);
+});
+
+async function initApp() {
+    await updateCalendarData();
+    initTriggers();
 }
 
 window.centerOnShow = function(coords, title) {
@@ -500,112 +702,8 @@ window.scrollToMonth = function(month) {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 };
 
+initApp();
 
-
-
-// Controls Logic
-document.getElementById('toggle-options')?.addEventListener('change', () => {
-    refreshMarkers(tourDates);
-    renderChronologicalList(tourDates);
-});
-
-// Radio Logic (SVG Version)
-const radioWrap = document.getElementById('radioWrap');
-const radioPowerBtn = document.getElementById('radio-power-btn');
-const audio = document.getElementById('radio-audio');
-const radioHint = document.querySelector('.hint');
-const volKnob = document.getElementById('vol-knob');
-const volIndicator = document.getElementById('vol-indicator');
-const tuningKnob = document.getElementById('tuning-knob');
-const tuningIndicator = document.getElementById('tuning-indicator');
-
-let isRadioOn = false;
-let currentVolume = 0.5;
-let currentTuning = 0;
-
-function setRadioOn(on, flicker) {
-    isRadioOn = on;
-    if (on && flicker) {
-        radioWrap.classList.remove('on');
-        radioWrap.classList.add('flickering');
-        setTimeout(() => radioWrap.classList.add('on'), 200);
-        if (radioHint) radioHint.style.opacity = '0';
-        audio.play().catch(e => console.log("Interaction required for audio"));
-    } else if (on) {
-        radioWrap.classList.add('flickering', 'on');
-        if (radioHint) radioHint.style.opacity = '0';
-        audio.play().catch(e => console.log("Interaction required for audio"));
-    } else {
-        radioWrap.classList.remove('on', 'flickering');
-        if (radioHint) radioHint.style.opacity = '0.7';
-        audio.pause();
-    }
-}
-
-
-radioPowerBtn?.addEventListener('click', () => {
-    setRadioOn(!isRadioOn, true);
-});
-
-// Volume Control (Drag)
-let isDraggingVol = false;
-volKnob?.addEventListener('mousedown', () => isDraggingVol = true);
-window.addEventListener('mouseup', () => isDraggingVol = false);
-window.addEventListener('mousemove', (e) => {
-    if (!isDraggingVol) return;
-    currentVolume = Math.min(1, Math.max(0, currentVolume - e.movementY * 0.01));
-    audio.volume = currentVolume;
-    // Rotate indicator (approx -45 to 45 deg)
-    const angle = (currentVolume - 0.5) * 180;
-    volIndicator.setAttribute('transform', `rotate(${angle}, 200, 148)`);
-});
-
-// Tuning Control (Drag) - Visual Only
-let isDraggingTune = false;
-tuningKnob?.addEventListener('mousedown', () => isDraggingTune = true);
-window.addEventListener('mouseup', () => isDraggingTune = false);
-window.addEventListener('mousemove', (e) => {
-    if (!isDraggingTune) return;
-    currentTuning = Math.min(1, Math.max(0, currentTuning - e.movementY * 0.01));
-    const angle = (currentTuning - 0.5) * 180;
-    tuningIndicator.setAttribute('transform', `rotate(${angle}, 280, 148)`);
-});
-
-// Media Modal Logic
-const mediaTrigger = document.getElementById('media-trigger');
-const mediaModal = document.getElementById('media-modal');
-const closeMediaModal = document.querySelector('.close-media-modal');
-
-const mediaUpload = document.getElementById('media-upload');
-const mediaPreview = document.getElementById('media-preview');
-
-mediaTrigger?.addEventListener('click', () => {
-    mediaModal.style.display = 'block';
-});
-
-closeMediaModal?.addEventListener('click', () => {
-    mediaModal.style.display = 'none';
-});
-
-mediaUpload?.addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const url = URL.createObjectURL(file);
-    mediaPreview.innerHTML = '';
-    
-    if (file.type.startsWith('image/')) {
-        const img = document.createElement('img');
-        img.src = url;
-        mediaPreview.appendChild(img);
-    } else if (file.type.startsWith('video/')) {
-        const vid = document.createElement('video');
-        vid.src = url;
-        vid.controls = true;
-        mediaPreview.appendChild(vid);
-    }
-});
-
-updateCalendarData();
 setInterval(updateCalendarData, 86400000);
+
 
