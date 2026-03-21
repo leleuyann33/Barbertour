@@ -2,8 +2,8 @@ name: Sync Tour Dates
 
 on:
   schedule:
-    - cron: '0 4 * * *' # Every day at 4 AM UTC
-  workflow_dispatch: # Allows manual trigger
+    - cron: '0 4 * * *' # Chaque nuit à 4h UTC (6h heure de Paris en été)
+  workflow_dispatch: # Déclenchement manuel possible via gh CLI ou interface GitHub
 
 jobs:
   build:
@@ -18,9 +18,12 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: pip install requests
+        run: pip install google-auth google-api-python-client requests
 
       - name: Run sync script
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+          CALENDAR_ID: ${{ secrets.CALENDAR_ID }}
         run: python sync_calendar.py
 
       - name: Commit and push changes
