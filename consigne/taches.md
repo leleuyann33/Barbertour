@@ -2,14 +2,15 @@
 
 Liste des tâches terminées et à venir.
 
-## 🔴 En cours / À reprendre (session 2026-03-21)
-- [ ] **PRIORITÉ** : Déboguer pourquoi l'API Google Calendar ne retourne pas la date DUNKERQUE.
-  - Le workflow GitHub Actions fonctionne maintenant (bug sync.yml corrigé).
-  - Hypothèse : le calendrier public nécessite une config spéciale pour l'API Key (vs OAuth).
-  - Piste : vérifier les logs complets du run `23370291176` — étape "Run sync script" — chercher le code de retour HTTP réel de l'API.
-  - **CONTRAINTE** : Ne PAS ajouter la date manuellement dans `dates.json`. Le robot doit la trouver seul.
-  - Commande pour tester l'API directement : `Invoke-WebRequest "https://www.googleapis.com/calendar/v3/calendars/compagniebarbershopquartet%40gmail.com/events?key=AIzaSyDOtGM5jr8bNp1utVpG2_gSRH03RNGBkI8&singleEvents=true&timeMin=2026-03-01T00:00:00Z&maxResults=10"`
-  - Pour relancer le workflow : `& "C:\Program Files\GitHub CLI\gh.exe" workflow run sync.yml --repo leleuyann33/Barbertour`
+## 🔴 En attente de l'utilisateur (session 2026-03-21)
+- [ ] **PRIORITÉ** : L'utilisateur doit configurer le Service Account Google (suivre `consigne/tutoriel_service_account.md`).
+  - Étape 1 : Créer projet Google Cloud
+  - Étape 2 : Activer Google Calendar API
+  - Étape 3 : Créer le Service Account et noter son email
+  - Étape 4 : Télécharger la clé JSON
+  - Étape 5 : Partager le calendrier avec l'email du Service Account
+  - Étape 6 : Ajouter les 2 Secrets GitHub (`GOOGLE_SERVICE_ACCOUNT_KEY` et `CALENDAR_ID`)
+  - Étape 7 : Lancer le robot et vérifier que DUNKERQUE est bien récupérée
 
 ## À faire (futur)
 - [ ] Vérifier que DUNKERQUE (22 mars 2026) apparaît bien sur la carte après fix.

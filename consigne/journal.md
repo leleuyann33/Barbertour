@@ -38,3 +38,13 @@ Journal chronologique des actions, décisions et changements notables.
 - **Piste 3** : Il se peut que le calendrier Google nécessite d'être partagé explicitement via **Paramètres → Partager ce calendrier → Rendre disponible au public** (pas juste l'embed).
 - **Commande pour relancer** : `& "C:\Program Files\GitHub CLI\gh.exe" workflow run sync.yml --repo leleuyann33/Barbertour`
 - **Commande pour voir les logs** : `& "C:\Program Files\GitHub CLI\gh.exe" run view --repo leleuyann33/Barbertour --log-failed`
+
+## [2026-03-21] - Migration vers Service Account Google Calendar
+
+- **Décision** : Abandon de l'approche API Key (ne fonctionnait pas avec Calendar v3). Migration vers Service Account Google.
+- **Raison** : L'utilisateur reçoit les dates de la Compagnie dans son propre calendrier Google → il suffit de partager ce calendrier avec le Service Account.
+- **Code modifié** : `sync_calendar.py` réécrit entièrement pour utiliser `google-auth` + `google-api-python-client`.
+- **Workflow modifié** : `sync.yml` mis à jour — dépendances `google-auth google-api-python-client`, secrets `GOOGLE_SERVICE_ACCOUNT_KEY` et `CALENDAR_ID`.
+- **Tutoriel créé** : `consigne/tutoriel_service_account.md` — guide pas à pas en 7 étapes.
+- **Commit** : `d91365b` — "feat: migration vers Service Account Google Calendar + tutoriel"
+- **Statut** : En attente que l'utilisateur configure le Service Account (étapes 1 à 6 du tutoriel).
