@@ -434,7 +434,7 @@ window.exportJson = function() {
 
 // --- PHASE 4: PLAYLIST & FINAL LOGIC ---
 // Web Radio Jazz (stream public) + morceaux personnalisés
-const JAZZ_STREAM = "https://stream.srg-ssr.ch/m/rsj/mp3_128"; // Radio Swiss Jazz - 128kbps
+const JAZZ_STREAM = "https://jazz-wr04.ice.infomaniak.ch/jazz-wr04-128.mp3"; // Jazz Radio France - 128kbps
 const RADIO_PLAYLIST = []; // Morceaux uploadés manuellement par l'admin
 let currentTrackIndex = 0;
 let playingPersonalTrack = false;
@@ -620,8 +620,8 @@ function setRadioOn(on, flicker) {
 
 // Entire Radio Body Clickable
 radioWrap?.addEventListener('click', (e) => {
-    // Stop if clicking controls (specific knobs or buttons)
-    if (e.target.closest('#vol-knob, #tuning-knob, #radio-power-btn, input, button, a')) return;
+    // Stop if clicking controls
+    if (e.target.closest('input, button, a, svg > circle, svg > rect')) return;
     const isOn = radioWrap.classList.contains('on');
     setRadioOn(!isOn, true);
 });

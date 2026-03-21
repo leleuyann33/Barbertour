@@ -672,29 +672,3 @@ svg.radio {
     opacity: 1;
     color: var(--gold);
 }
-
-/* Finalized Layout Positions - LOCKED AS ORDERED */
-#section-title-main {
-    position: relative !important;
-    left: 145px !important;
-    top: -274px !important;
-    z-index: 10;
-}
-#radio-anchor {
-    position: relative !important;
-    left: -1016px !important;
-    top: -198px !important;
-    z-index: 11;
-}
-#radio-label-node {
-    position: relative !important;
-    left: -1139px !important;
-    top: -249px !important;
-    z-index: 12;
-}
-#full-months-grid {
-    position: relative !important;
-    left: 3px !important;
-    top: 99px !important;
-    z-index: 10;
-}
