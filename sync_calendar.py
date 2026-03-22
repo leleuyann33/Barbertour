@@ -1,16 +1,27 @@
 import json
 import os
-from datetime import timezone
+import sys
+from datetime import datetime
 
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
+try:
+    from google.oauth2 import service_account
+    from googleapiclient.discovery import build
+except ImportError:
+    print("Erreur : Les bibliothèques Google ne sont pas installées.")
+    print("Lancez : pip install google-auth google-api-python-client requests")
+    sys.exit(1)
 
-# Configuration — CALENDAR_ID est stocké en GitHub Secret ou en variable d'env
-CALENDAR_ID = os.environ.get('CALENDAR_ID') or 'leyannpro@gmail.com'
+# Configuration
+CALENDAR_ID = os.environ.get('CALENDAR_ID')
+# Sécurité : Pas de CALENDAR_ID par défaut pour éviter de sync sur le mauvais compte
+if not CALENDAR_ID:
+    print("ERREUR : La variable d'environnement CALENDAR_ID est manquante.")
+    sys.exit(1)
+
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 JSON_PATH = 'dates.json'
 
-# Known Coordinates Cache (identique à l'original)
+# Known Coordinates Cache (pour Dunkerque et autres)
 VENUE_COORDS = {
     "Essaïon Théâtre": [48.8596, 2.3539],
     "Espace Nino Ferrer": [48.5106, 2.6358],
@@ -44,22 +55,25 @@ VENUE_COORDS = {
 
 
 def geocode(location):
-    """Retourne les coordonnées depuis le cache, ou None."""
+    """Retourne les coordonnées depuis le cache ou via Nominatim."""
     if not location:
         return None
+    
+    # Check cache
     for venue, coords in VENUE_COORDS.items():
         if venue.lower() in location.lower():
             return coords
-    # Fallback Nominatim (optionnel, évite les blocages en CI)
+            
+    # Fallback Nominatim
     try:
         import requests
         url = f"https://nominatim.openstreetmap.org/search?format=json&q={location}&limit=1"
-        resp = requests.get(url, headers={'User-Agent': 'BarberSyncBot/2.0'}, timeout=5)
+        resp = requests.get(url, headers={'User-Agent': 'BarberSyncBot/3.0'}, timeout=5)
         data = resp.json()
         if data:
             return [float(data[0]['lat']), float(data[0]['lon'])]
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"  WAINING : Erreur geocoding pour '{location}': {e}")
     return None
 
 
@@ -67,75 +81,119 @@ def get_service():
     """Authentification via Service Account (clé JSON stockée en GitHub Secret)."""
     key_json = os.environ.get('GOOGLE_SERVICE_ACCOUNT_KEY')
     if not key_json:
-        raise EnvironmentError(
-            "Variable d'environnement GOOGLE_SERVICE_ACCOUNT_KEY manquante. "
-            "Ajouter la clé JSON du Service Account dans les Secrets GitHub."
+        print("ERREUR : Variable d'environnement GOOGLE_SERVICE_ACCOUNT_KEY manquante.")
+        sys.exit(1)
+        
+    try:
+        service_account_info = json.loads(key_json)
+        creds = service_account.Credentials.from_service_account_info(
+            service_account_info, scopes=SCOPES
         )
-    service_account_info = json.loads(key_json)
-    creds = service_account.Credentials.from_service_account_info(
-        service_account_info, scopes=SCOPES
-    )
-    return build('calendar', 'v3', credentials=creds)
+        return build('calendar', 'v3', credentials=creds)
+    except Exception as e:
+        print(f"ERREUR : Echec de l'authentification Google Cloud : {e}")
+        sys.exit(1)
 
 
 def sync():
-    print("Connexion au calendrier via Service Account...")
-    service = get_service()
-
-    print(f"Récupération des événements du calendrier : {CALENDAR_ID}")
-    events_result = service.events().list(
-        calendarId=CALENDAR_ID,
-        timeMin='2025-01-01T00:00:00Z',
-        maxResults=500,
-        singleEvents=True,
-        orderBy='startTime'
-    ).execute()
-
-    items = events_result.get('items', [])
-    print(f"{len(items)} événement(s) trouvé(s) dans le calendrier.")
-
-    # Charger l'existant pour préserver les manualStatus
+    print(f"--- Démarrage de la synchronisation ({datetime.now().strftime('%Y-%m-%d %H:%M:%S')}) ---")
+    
+    # 1. Charger les données existantes (Sécurité : On ne veut jamais rien perdre)
     existing_data = []
     if os.path.exists(JSON_PATH):
-        with open(JSON_PATH, 'r', encoding='utf-8') as f:
-            existing_data = json.load(f)
+        try:
+            with open(JSON_PATH, 'r', encoding='utf-8') as f:
+                existing_data = json.load(f)
+            print(f"✓ {len(existing_data)} dates chargées depuis {JSON_PATH}.")
+        except Exception as e:
+            print(f"ERREUR : Impossible de lire {JSON_PATH} : {e}")
+            sys.exit(1)
+    else:
+        print(f"! {JSON_PATH} n'existe pas encore. Nouveau fichier sera créé.")
 
-    processed_events = []
+    # Créer un index des dates existantes pour une fusion rapide (clé: date + titre)
+    # On normalise le titre pour la comparaison
+    def get_key(ev): return f"{ev['date']}_{ev['title'].strip().upper()}"
+    existing_map = {get_key(ev): ev for ev in existing_data}
+
+    # 2. Se connecter à Google Calendar
+    service = get_service()
+    print(f"✓ Connecté à l'API Google Calendar.")
+
+    # 3. Récupérer les événements
+    try:
+        print(f"Récupération des événements pour : {CALENDAR_ID}...")
+        events_result = service.events().list(
+            calendarId=CALENDAR_ID,
+            timeMin='2025-01-01T00:00:00Z',
+            maxResults=1000,
+            singleEvents=True,
+            orderBy='startTime'
+        ).execute()
+        items = events_result.get('items', [])
+        print(f"✓ {len(items)} événements trouvés dans le calendrier.")
+    except Exception as e:
+        print(f"ERREUR : Impossible de récupérer les événements : {e}")
+        # En cas d'erreur API, on s'arrête SANS enregistrer le fichier (Crucial pour la sécurité)
+        sys.exit(1)
+
+    # 4. Traiter et Fusionner
+    new_count = 0
+    update_count = 0
+    
     for item in items:
-        title = item.get('summary', 'Date de tournée')
+        title = item.get('summary', '').strip()
+        if not title:
+            continue
 
-        # Filtre : seuls les événements BSQ / BARBER / OPTION
+        # Filtre de sécurité : seuls les titres avec BSQ, BARBER ou OPTION
         if not any(x in title.upper() for x in ['BSQ', 'BARBER', 'OPTION']):
-            print(f"  Ignoré (filtre) : {title}")
             continue
 
         location = item.get('location', '')
         date_str = item.get('start', {}).get('dateTime', item.get('start', {}).get('date', ''))
         date = date_str.split('T')[0] if 'T' in date_str else date_str
+        
+        # Créer l'objet événement
+        event_key = f"{date}_{title.upper()}"
+        
+        if event_key in existing_map:
+            # Mise à jour optionnelle d'une date existante (ex: changement de lieu)
+            # On ne touche PAS au manualStatus si présent
+            existing_ev = existing_map[event_key]
+            if location and location != existing_ev.get('location'):
+                existing_ev['location'] = location
+                existing_ev['coords'] = geocode(location)
+                update_count += 1
+                print(f"  ↻ Mis à jour : {title} ({date})")
+        else:
+            # Ajout d'une nouvelle date
+            new_ev = {
+                "date": date,
+                "title": title,
+                "location": location,
+                "coords": geocode(location)
+            }
+            existing_data.append(new_ev)
+            existing_map[event_key] = new_ev
+            new_count += 1
+            print(f"  + Nouveau : {title} ({date})")
 
-        coords = geocode(location)
+    # 5. Sauvegarder (Fusion finale)
+    # On trie par date pour garder un fichier propre
+    existing_data.sort(key=lambda x: x['date'])
 
-        event = {
-            "date": date,
-            "title": title,
-            "location": location,
-            "coords": coords
-        }
-
-        # Préserver le manualStatus si la date existait déjà
-        for old in existing_data:
-            if old['date'] == event['date'] and old['title'] == event['title']:
-                if 'manualStatus' in old:
-                    event['manualStatus'] = old['manualStatus']
-                break
-
-        processed_events.append(event)
-        print(f"  ✓ Ajouté : {title} ({date})")
-
-    with open(JSON_PATH, 'w', encoding='utf-8') as f:
-        json.dump(processed_events, f, indent=2, ensure_ascii=False)
-
-    print(f"\nSync terminé. {len(processed_events)} événement(s) sauvegardé(s) dans {JSON_PATH}.")
+    try:
+        with open(JSON_PATH, 'w', encoding='utf-8') as f:
+            json.dump(existing_data, f, indent=2, ensure_ascii=False)
+        print(f"\n--- SYNCHRONISATION RÉUSSIE ---")
+        print(f"Nouvelles dates ajoutées : {new_count}")
+        print(f"Dates mises à jour : {update_count}")
+        print(f"Total de dates dans le fichier : {len(existing_data)}")
+        print(f"Aucune date n'a été supprimée.")
+    except Exception as e:
+        print(f"ERREUR : Echec de l'écriture du fichier {JSON_PATH} : {e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
