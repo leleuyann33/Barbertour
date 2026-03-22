@@ -12,12 +12,8 @@ except ImportError:
     sys.exit(1)
 
 # Configuration
-CALENDAR_ID = os.environ.get('CALENDAR_ID')
-# Sécurité : Pas de CALENDAR_ID par défaut pour éviter de sync sur le mauvais compte
-if not CALENDAR_ID:
-    print("ERREUR : La variable d'environnement CALENDAR_ID est manquante.")
-    sys.exit(1)
-
+CALENDAR_ID_ENV = os.environ.get('CALENDAR_ID', 'primary')
+CALENDAR_IDS = [cid.strip() for cid in CALENDAR_ID_ENV.split(',')]
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 JSON_PATH = 'dates.json'
 
@@ -120,28 +116,34 @@ def sync():
     service = get_service()
     print(f"✓ Connecté à l'API Google Calendar.")
 
-    # 3. Récupérer les événements
-    try:
-        print(f"Récupération des événements pour : {CALENDAR_ID}...")
-        events_result = service.events().list(
-            calendarId=CALENDAR_ID,
-            timeMin='2025-01-01T00:00:00Z',
-            maxResults=1000,
-            singleEvents=True,
-            orderBy='startTime'
-        ).execute()
-        items = events_result.get('items', [])
-        print(f"✓ {len(items)} événements trouvés dans le calendrier.")
-    except Exception as e:
-        print(f"ERREUR : Impossible de récupérer les événements : {e}")
-        # En cas d'erreur API, on s'arrête SANS enregistrer le fichier (Crucial pour la sécurité)
-        sys.exit(1)
+    # 3. Récupérer les événements de TOUS les calendriers
+    all_items = []
+    for calendar_id in CALENDAR_IDS:
+        try:
+            print(f"Récupération des événements pour : {calendar_id}...")
+            events_result = service.events().list(
+                calendarId=calendar_id,
+                timeMin='2025-01-01T00:00:00Z',
+                maxResults=1000,
+                singleEvents=True,
+                orderBy='startTime'
+            ).execute()
+            items = events_result.get('items', [])
+            print(f"  ✓ {len(items)} événements trouvés dans {calendar_id}.")
+            all_items.extend(items)
+        except Exception as e:
+            print(f"⚠️ ERREUR : Impossible de récupérer les événements pour {calendar_id} : {e}")
+            # Si un calendrier échoue, on continue pour les autres, mais on signale.
+            continue
+
+    if not all_items and len(CALENDAR_IDS) > 0:
+        print("WAINING : Aucun événement trouvé sur l'ensemble des calendriers.")
 
     # 4. Traiter et Fusionner
     new_count = 0
     update_count = 0
     
-    for item in items:
+    for item in all_items:
         title = item.get('summary', '').strip()
         if not title:
             continue
