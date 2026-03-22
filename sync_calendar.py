@@ -119,8 +119,9 @@ def sync():
     # 3. Récupérer les événements de TOUS les calendriers
     all_items = []
     for calendar_id in CALENDAR_IDS:
+        # A. Tentative Google API (pour agendas privés partagés)
         try:
-            print(f"Récupération des événements pour : {calendar_id}...")
+            print(f"Récupération via API Google pour : {calendar_id}...")
             events_result = service.events().list(
                 calendarId=calendar_id,
                 timeMin='2025-01-01T00:00:00Z',
@@ -129,12 +130,41 @@ def sync():
                 orderBy='startTime'
             ).execute()
             items = events_result.get('items', [])
-            print(f"  ✓ {len(items)} événements trouvés dans {calendar_id}.")
+            print(f"  ✓ {len(items)} événements trouvés via API dans {calendar_id}.")
             all_items.extend(items)
+            continue # Si ça marche, on passe au suivant
+        except Exception:
+            print(f"  ℹ Accès API non disponible pour {calendar_id}. Tentative via flux Public iCal...")
+
+        # B. Tentative iCal Public (pour agendas publics sans invitation)
+        try:
+            import requests
+            # Correction de l'email pour l'URL iCal
+            safe_id = calendar_id.replace('@', '%40')
+            ical_url = f"https://calendar.google.com/calendar/ical/{safe_id}/public/basic.ics"
+            resp = requests.get(ical_url, timeout=10)
+            if resp.status_code == 200:
+                # Parsing basique de l'iCal (sans bibliothèque complexe pour rester léger)
+                lines = resp.text.splitlines()
+                current_ev = {}
+                ical_events = 0
+                for line in lines:
+                    if line.startswith('BEGIN:VEVENT'): current_ev = {}
+                    elif line.startswith('SUMMARY:'): current_ev['summary'] = line[8:]
+                    elif line.startswith('LOCATION:'): current_ev['location'] = line[9:]
+                    elif line.startswith('DTSTART'): 
+                        # DTSTART;VALUE=DATE:20261225 ou DTSTART:20261225T200000Z
+                        val = line.split(':')[-1]
+                        current_ev['start'] = {'date': f"{val[0:4]}-{val[4:6]}-{val[6:8]}"}
+                    elif line.startswith('END:VEVENT'):
+                        if current_ev.get('summary'):
+                            all_items.append(current_ev)
+                            ical_events += 1
+                print(f"  ✓ {ical_events} événements trouvés via flux Public pour {calendar_id}.")
+            else:
+                print(f"  ❌ Erreur flux Public pour {calendar_id} : {resp.status_code}")
         except Exception as e:
-            print(f"⚠️ ERREUR : Impossible de récupérer les événements pour {calendar_id} : {e}")
-            # Si un calendrier échoue, on continue pour les autres, mais on signale.
-            continue
+            print(f"  ⚠️ Échec total pour {calendar_id} : {e}")
 
     if not all_items and len(CALENDAR_IDS) > 0:
         print("WAINING : Aucun événement trouvé sur l'ensemble des calendriers.")
