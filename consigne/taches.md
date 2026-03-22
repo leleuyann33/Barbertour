@@ -12,6 +12,9 @@ Liste des tâches terminées et à venir.
   - Étape 6 : Ajouter les 2 Secrets GitHub (`GOOGLE_SERVICE_ACCOUNT_KEY` et `CALENDAR_ID`)
   - Étape 7 : Lancer le robot et vérifier que DUNKERQUE est bien récupérée
 
+## 🟠 Travail inachevé (Modèle IA précédent)
+- [x] **Committer la modification locale** : Le fichier `sync_calendar.py` a été modifié en local (le Fallback par défaut `CALENDAR_ID` est désormais `leyannpro@gmail.com`). L'IA l'a committé et poussé sur GitHub.
+- [ ] **Mettre à jour le secret GitHub** : Si l'utilisateur a déjà configuré le secret GitHub `CALENDAR_ID` dans le passé, vérifier et s'assurer qu'il contient bien `leyannpro@gmail.com` (sinon il écrasera la nouvelle valeur par défaut).
 ## À faire (futur)
 - [ ] Vérifier que DUNKERQUE (22 mars 2026) apparaît bien sur la carte après fix.
 - [ ] Valider que le robot tourne bien chaque nuit à 4h UTC.

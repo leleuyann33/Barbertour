@@ -6,7 +6,7 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
 # Configuration — CALENDAR_ID est stocké en GitHub Secret ou en variable d'env
-CALENDAR_ID = os.environ.get('CALENDAR_ID', 'compagniebarbershopquartet@gmail.com')
+CALENDAR_ID = os.environ.get('CALENDAR_ID') or 'leyannpro@gmail.com'
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 JSON_PATH = 'dates.json'
 

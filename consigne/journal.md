@@ -48,3 +48,9 @@ Journal chronologique des actions, décisions et changements notables.
 - **Tutoriel créé** : `consigne/tutoriel_service_account.md` — guide pas à pas en 7 étapes.
 - **Commit** : `d91365b` — "feat: migration vers Service Account Google Calendar + tutoriel"
 - **Statut** : En attente que l'utilisateur configure le Service Account (étapes 1 à 6 du tutoriel).
+
+## [2026-03-22] - Correction de l'email du calendrier (Travail inachevé / IA précédente)
+
+- **Action** : Le modèle IA précédent a modifié le fichier `sync_calendar.py` localement pour changer le `CALENDAR_ID` par défaut de `compagniebarbershopquartet@gmail.com` à `leyannpro@gmail.com` suite à une demande de l'utilisateur.
+- **Statut** : **Travail inachevé**. La modification a été faite uniquement en local. Elle n'a pas été committée ni poussée sur le dépôt GitHub. Le workflow sur le serveur utilise donc toujours l'ancien code ou dépend de la variable d'environnement (GitHub Secret).
+- **Consigne pour la suite** : Committer et pousser cette modification sur le dépôt distant, ou s'assurer que la variable d'environnement `CALENDAR_ID` côté GitHub Secrets a bien pour valeur `leyannpro@gmail.com` si l'option secret est privilégiée.
