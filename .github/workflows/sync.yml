@@ -1,9 +1,10 @@
 name: Sync Tour Dates
 
+# on:
+#   schedule:
+#     - cron: '0 4 * * *' # Désactivé temporairement pour sécurité
 on:
-  schedule:
-    - cron: '0 4 * * *' # Chaque nuit à 4h UTC (6h heure de Paris en été)
-  workflow_dispatch: # Déclenchement manuel possible via gh CLI ou interface GitHub
+  workflow_dispatch: # Garde uniquement le déclenchement manuel sécurisé
 
 permissions:
   contents: write
