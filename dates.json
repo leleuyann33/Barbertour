@@ -1,524 +1,875 @@
 [
   {
+    "date": "2025-02-24",
+    "title": "Barber targon",
+    "location": "",
+    "coords": null
+  },
+  {
+    "date": "2025-02-27",
+    "title": "Barber targon",
+    "location": "",
+    "coords": null
+  },
+  {
+    "date": "2025-03-03",
+    "title": "Barber cestas",
+    "location": "",
+    "coords": null
+  },
+  {
     "date": "2025-03-19",
     "title": "BSQ \"GB\" @ BORDEAUX (33)",
     "location": "Théâtre des Beaux-Arts, Bordeaux (33)",
-    "coords": [44.8378, -0.5792]
+    "coords": [
+      44.8378,
+      -0.5792
+    ]
   },
   {
     "date": "2025-03-20",
     "title": "BSQ \"GB\" @ BORDEAUX (33)",
     "location": "Théâtre des Beaux-Arts, Bordeaux (33)",
-    "coords": [44.8378, -0.5792]
+    "coords": [
+      44.8378,
+      -0.5792
+    ]
   },
   {
     "date": "2025-03-21",
     "title": "BSQ \"GB\" @ BORDEAUX (33)",
     "location": "Théâtre des Beaux-Arts, Bordeaux (33)",
-    "coords": [44.8378, -0.5792]
+    "coords": [
+      44.8378,
+      -0.5792
+    ]
   },
   {
     "date": "2025-03-22",
     "title": "BSQ \"GB\" @ BORDEAUX (33)",
     "location": "Théâtre des Beaux-Arts, Bordeaux (33)",
-    "coords": [44.8378, -0.5792]
+    "coords": [
+      44.8378,
+      -0.5792
+    ]
   },
   {
     "date": "2025-03-26",
     "title": "BSQ \"GB\" @ BORDEAUX (33)",
     "location": "Théâtre des Beaux-Arts, Bordeaux (33)",
-    "coords": [44.8378, -0.5792]
+    "coords": [
+      44.8378,
+      -0.5792
+    ]
   },
   {
     "date": "2025-03-27",
     "title": "BSQ \"GB\" @ BORDEAUX (33)",
     "location": "Théâtre des Beaux-Arts, Bordeaux (33)",
-    "coords": [44.8378, -0.5792]
+    "coords": [
+      44.8378,
+      -0.5792
+    ]
   },
   {
     "date": "2025-03-28",
     "title": "BSQ \"GB\" @ BORDEAUX (33)",
     "location": "Théâtre des Beaux-Arts, Bordeaux (33)",
-    "coords": [44.8378, -0.5792]
+    "coords": [
+      44.8378,
+      -0.5792
+    ]
   },
   {
     "date": "2025-03-29",
     "title": "BSQ \"GB\" @ BORDEAUX (33)",
     "location": "Théâtre des Beaux-Arts, Bordeaux (33)",
-    "coords": [44.8378, -0.5792]
+    "coords": [
+      44.8378,
+      -0.5792
+    ]
   },
   {
     "date": "2025-04-12",
     "title": "BSQ \"BEST-OF\" @ LOUHOSSOA (64)",
     "location": "Salle Harri Xuri, Louhossoa (64)",
-    "coords": [43.3167, -1.3500]
+    "coords": [
+      43.3167,
+      -1.35
+    ]
   },
   {
     "date": "2025-05-13",
     "title": "BSQ \"BEST-OF\" @ SAUJON (17)",
     "location": "La Salicorne, Saujon (17)",
-    "coords": [45.6711, -0.9250]
+    "coords": [
+      45.6711,
+      -0.925
+    ]
   },
   {
     "date": "2025-05-15",
     "title": "BSQ \"GB\" @ BORDEAUX (33)",
     "location": "Théâtre Femina, Bordeaux (33)",
-    "coords": [44.8413, -0.5751]
+    "coords": [
+      44.8413,
+      -0.5751
+    ]
   },
   {
     "date": "2025-05-16",
     "title": "BSQ \"GB\" @ MONTPON-MENESTEROL (24)",
     "location": "Salle Le Lascaux, Montpon-Ménestérol (24)",
-    "coords": [45.0083, 0.1611]
+    "coords": [
+      45.0083,
+      0.1611
+    ]
   },
   {
     "date": "2025-06-05",
     "title": "BSQ \"GB\" @ PORTETS (33)",
     "location": "Espace Culturel La Forge, Portets (33)",
-    "coords": [44.6961, -0.4267]
+    "coords": [
+      44.6961,
+      -0.4267
+    ]
   },
   {
     "date": "2025-06-06",
     "title": "BSQ \"GB\" @ SALLES (33)",
     "location": "Salle des fêtes, Salles (33)",
-    "coords": [44.5522, -0.8692]
+    "coords": [
+      44.5522,
+      -0.8692
+    ]
   },
   {
     "date": "2025-06-11",
     "title": "BSQ \"GB\" @ PELLOUAILLES-LES-VIGNES (49)",
     "location": "Carré des Arts, Pellouailles-les-Vignes (49)",
-    "coords": [47.5208, -0.4439]
+    "coords": [
+      47.5208,
+      -0.4439
+    ]
   },
   {
     "date": "2025-07-05",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre Essaïon, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
+  },
+  {
+    "date": "2025-07-25",
+    "title": "Option Antoine",
+    "location": "",
+    "coords": null
   },
   {
     "date": "2025-07-31",
     "title": "BSQ \"GB\" @ GUJAN-MESTRAS (33)",
     "location": "Les Jeudis de Larros, Gujan-Mestras (33)",
-    "coords": [44.6347, -1.0667]
+    "coords": [
+      44.6347,
+      -1.0667
+    ]
   },
   {
     "date": "2025-09-13",
     "title": "BSQ \"Opus\" @ BLANZAT (63)",
     "location": "La Muscade, Blanzat (63)",
-    "coords": [45.8283, 3.0767]
+    "coords": [
+      45.8283,
+      3.0767
+    ]
   },
   {
     "date": "2025-09-27",
     "title": "Option BSQ \"GB\" @ MOULINS (03)",
     "location": "Théâtre Municipal, Moulins (03)",
-    "coords": [46.5667, 3.3333]
+    "coords": [
+      46.5667,
+      3.3333
+    ]
   },
   {
     "date": "2025-10-04",
     "title": "BSQ \"GB\" @ LEON (40)",
     "location": "Centre Culturel, Léon (40)",
-    "coords": [43.8767, -1.3033]
+    "coords": [
+      43.8767,
+      -1.3033
+    ]
+  },
+  {
+    "date": "2025-10-17",
+    "title": "Option",
+    "location": "",
+    "coords": null
   },
   {
     "date": "2025-10-20",
     "title": "Option BSQ \"GB\" @ LYON (69)",
     "location": "Bourse du Travail, Lyon (69)",
-    "coords": [45.7578, 4.8320]
+    "coords": [
+      45.7578,
+      4.832
+    ]
+  },
+  {
+    "date": "2026-01-24",
+    "title": "Camblane Barber",
+    "location": "",
+    "coords": null
+  },
+  {
+    "date": "2026-01-27",
+    "title": "Montage bbsq paris et 1ere montage le 27 de 8h à 17h",
+    "location": "",
+    "coords": null
   },
   {
     "date": "2026-01-28",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre",
     "location": "Essaïon Théâtre, Paris (75)",
-    "coords": [48.8596, 2.3539]
+    "coords": [
+      48.8596,
+      2.3539
+    ]
   },
   {
     "date": "2026-02-04",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre",
     "location": "Essaïon Théâtre, Paris (75)",
-    "coords": [48.8596, 2.3539]
+    "coords": [
+      48.8596,
+      2.3539
+    ]
   },
   {
     "date": "2026-02-11",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre",
     "location": "Essaïon Théâtre, Paris (75)",
-    "coords": [48.8596, 2.3539]
+    "coords": [
+      48.8596,
+      2.3539
+    ]
   },
   {
     "date": "2026-02-18",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre",
     "location": "Essaïon Théâtre, Paris (75)",
-    "coords": [48.8596, 2.3539]
+    "coords": [
+      48.8596,
+      2.3539
+    ]
   },
   {
     "date": "2026-02-25",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre",
     "location": "Essaïon Théâtre, Paris (75)",
-    "coords": [48.8596, 2.3539]
+    "coords": [
+      48.8596,
+      2.3539
+    ]
   },
   {
     "date": "2026-03-04",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre",
     "location": "Essaïon Théâtre, Paris (75)",
-    "coords": [48.8596, 2.3539]
+    "coords": [
+      48.8596,
+      2.3539
+    ]
   },
   {
     "date": "2026-03-11",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre",
     "location": "Essaïon Théâtre, Paris (75)",
-    "coords": [48.8596, 2.3539]
+    "coords": [
+      48.8596,
+      2.3539
+    ]
   },
   {
     "date": "2026-03-13",
     "title": "BSQ \"GB\" / DAMMARIE-LES-LYS (77)",
     "location": "Espace Nino Ferrer, Dammarie-les-Lys (77)",
-    "coords": [48.5106, 2.6358]
+    "coords": [
+      48.5106,
+      2.6358
+    ]
   },
-    {
+  {
     "date": "2026-03-18",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre",
     "location": "Essaïon Théâtre, Paris (75)",
-    "coords": [48.8596, 2.3539]
+    "coords": [
+      48.8596,
+      2.3539
+    ]
+  },
+  {
+    "date": "2026-03-24",
+    "title": "Ares option",
+    "location": "",
+    "coords": null
   },
   {
     "date": "2026-03-25",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre",
     "location": "Essaïon Théâtre, Paris (75)",
-    "coords": [48.8596, 2.3539]
+    "coords": [
+      48.8596,
+      2.3539
+    ]
+  },
+  {
+    "date": "2026-03-25",
+    "title": "Ares option",
+    "location": "",
+    "coords": null
   },
   {
     "date": "2026-04-01",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre",
     "location": "Essaïon Théâtre, Paris (75)",
-    "coords": [48.8596, 2.3539]
+    "coords": [
+      48.8596,
+      2.3539
+    ]
   },
   {
     "date": "2026-04-08",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre",
     "location": "Essaïon Théâtre, Paris (75)",
-    "coords": [48.8596, 2.3539]
+    "coords": [
+      48.8596,
+      2.3539
+    ]
+  },
+  {
+    "date": "2026-04-09",
+    "title": "BBSQ (68) Munster",
+    "location": "",
+    "coords": null
   },
   {
     "date": "2026-04-10",
     "title": "BSQ \"GB\" @ MUNSTER (68)",
     "location": "Espace Culturel Saint-Grégoire, Munster (68)",
-    "coords": [48.0425, 7.1384]
+    "coords": [
+      48.0425,
+      7.1384
+    ]
   },
   {
     "date": "2026-04-15",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre",
     "location": "Essaïon Théâtre, Paris (75)",
-    "coords": [48.8596, 2.3539]
+    "coords": [
+      48.8596,
+      2.3539
+    ]
   },
   {
     "date": "2026-04-22",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre",
     "location": "Essaïon Théâtre, Paris (75)",
-    "coords": [48.8596, 2.3539]
+    "coords": [
+      48.8596,
+      2.3539
+    ]
+  },
+  {
+    "date": "2026-04-23",
+    "title": "Arès option",
+    "location": "",
+    "coords": null
   },
   {
     "date": "2026-05-02",
     "title": "Option BSQ \"GB\" @ ETAULES (17)",
     "location": "Salle La PLéiade, Etaules (17)",
-    "coords": [45.7333, -1.0991]
+    "coords": [
+      45.7333,
+      -1.0991
+    ]
   },
   {
     "date": "2026-05-29",
     "title": "BSQ \"GB\" @ SAINT-YRIEIX-LA-PERCHE (87)",
     "location": "Centre culturel Jean-Pierre Fabrègue, Saint-Yrieix-la-Perche (87)",
-    "coords": [45.5132, 1.2045]
+    "coords": [
+      45.5132,
+      1.2045
+    ]
+  },
+  {
+    "date": "2026-06-05",
+    "title": "BBSQ (26)",
+    "location": "",
+    "coords": null
   },
   {
     "date": "2026-06-06",
     "title": "BSQ \"GB\" @ ROIFFIEUX (07)",
     "location": "L'ApARTe, Roiffieux (07)",
-    "coords": [45.2319, 4.6547]
+    "coords": [
+      45.2319,
+      4.6547
+    ]
+  },
+  {
+    "date": "2026-06-06",
+    "title": "BBSQ (07)",
+    "location": "",
+    "coords": null
+  },
+  {
+    "date": "2026-06-19",
+    "title": "Arès option",
+    "location": "",
+    "coords": null
   },
   {
     "date": "2026-07-04",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-05",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-06",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-07",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-08",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-10",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-11",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-12",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-13",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-14",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-15",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-17",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-18",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-19",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-20",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-21",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-22",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-24",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-25",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-26",
     "title": "BSQ \"GB\" @ AVIGNON (84)",
     "location": "Théâtre l'Arrache Cœur, Avignon (84)",
-    "coords": [43.9493, 4.8055]
+    "coords": [
+      43.9493,
+      4.8055
+    ]
   },
   {
     "date": "2026-07-29",
     "title": "BSQ \"GB\" @ VIANNE (47)",
     "location": "Vianne (47)",
-    "coords": [44.1965, 0.3205]
+    "coords": [
+      44.1965,
+      0.3205
+    ]
+  },
+  {
+    "date": "2026-07-30",
+    "title": "BSQ tournée ccas",
+    "location": "",
+    "coords": null
   },
   {
     "date": "2026-09-19",
     "title": "BSQ \"GB\" @ TOURNON-SUR-RHÔNE (07)",
     "location": "Théâtre Jacques Bodoin, Tournon-sur-Rhône (07)",
-    "coords": [45.0681, 4.8322]
-  },
-  {
-    "date": "2026-10-03",
-    "title": "BSQ \"GB\" @ SAUTRON (44)",
-    "location": "Espace Phelippes Beaulieu, Sautron (44)",
-    "coords": [47.2639, -1.6667]
+    "coords": [
+      45.0681,
+      4.8322
+    ]
   },
   {
     "date": "2026-09-25",
     "title": "BSQ \"GB\" @ SAINT-MAIXENT-L'ECOLE (79)",
     "location": "Espace Agapit, Saint-Maixent-l'Ecole (79)",
-    "coords": [46.4111, -0.2039]
+    "coords": [
+      46.4111,
+      -0.2039
+    ]
   },
   {
     "date": "2026-09-26",
     "title": "BSQ \"GB\" @ CHATELET-EN-BRIE (77)",
     "location": "Le Manège, Châtelet-en-Brie (77)",
-    "coords": [48.5042, 2.7842]
+    "coords": [
+      48.5042,
+      2.7842
+    ]
+  },
+  {
+    "date": "2026-10-03",
+    "title": "BSQ \"GB\" @ SAUTRON (44)",
+    "location": "Espace Phelippes Beaulieu, Sautron (44)",
+    "coords": [
+      47.2639,
+      -1.6667
+    ]
   },
   {
     "date": "2026-11-14",
     "title": "BSQ \"GB\" @ MIGNE-AUXANCES (86)",
     "location": "Salle d'animation, Migné-Auxances (86)",
-    "coords": [46.6267, 0.3131]
+    "coords": [
+      46.6267,
+      0.3131
+    ]
   },
   {
     "date": "2026-11-19",
     "title": "BSQ \"GB\" @ NEVERS (58)",
     "location": "Maison de la Culture, Nevers (58)",
-    "coords": [46.9926, 3.1601]
+    "coords": [
+      46.9926,
+      3.1601
+    ]
   },
   {
     "date": "2026-11-21",
     "title": "BSQ \"GB\" @ JAVREZAC (16)",
     "location": "Salle des fêtes, Javrezac (16)",
-    "coords": [45.7000, -0.3500]
+    "coords": [
+      45.7,
+      -0.35
+    ]
   },
   {
     "date": "2026-11-27",
     "title": "Option BSQ \"GB\" @ MONTVAL-SUR-LOIR (72)",
     "location": "La Castélorienne, Montval-sur-Loir (72)",
-    "coords": [47.6975, 0.4208]
+    "coords": [
+      47.6975,
+      0.4208
+    ]
   },
   {
     "date": "2026-12-01",
     "title": "Option BSQ \"GB\" @ MAISON-ALFORT (94)",
     "location": "Théâtre Claude Debussy, Maison-Alfort (94)",
-    "coords": [48.8049, 2.4344]
+    "coords": [
+      48.8049,
+      2.4344
+    ]
   },
   {
     "date": "2026-12-04",
     "title": "BSQ \"GB\" @ LA ROCHEFOUCAULD (16)",
     "location": "Les Carmes, la Rochefoucauld (16)",
-    "coords": [45.7414, 0.3861]
+    "coords": [
+      45.7414,
+      0.3861
+    ]
   },
   {
     "date": "2026-12-05",
     "title": "BSQ \"GB\" @ COUERON (44)",
     "location": "Théâtre Boris Vian, Couëron (44)",
-    "coords": [47.2153, -1.7247]
+    "coords": [
+      47.2153,
+      -1.7247
+    ]
   },
   {
     "date": "2026-12-31",
     "title": "Option BSQ \"GB\" @ LA ROCHELLE (17)",
     "location": "L'Azile, La Rochelle (17)",
-    "coords": [46.1558, -1.1381]
+    "coords": [
+      46.1558,
+      -1.1381
+    ]
   },
   {
     "date": "2027-01-09",
     "title": "Option BSQ \"GB\" @ SANGUINET (40)",
     "location": "Auditorium, Sanguinet (40)",
-    "coords": [44.4839, -1.0747]
+    "coords": [
+      44.4839,
+      -1.0747
+    ]
   },
-    {
+  {
     "date": "2027-01-10",
     "title": "Option 1 BSQ \"GB\" @ LA TESTE-DE-BUCH (33)",
     "location": "Théâtre Cravey, La Teste-de-Buch (33)",
-    "coords": [44.6294, -1.1444]
+    "coords": [
+      44.6294,
+      -1.1444
+    ]
   },
   {
     "date": "2027-01-16",
     "title": "BSQ \"GB\" @ PLOUGOUMELEN (56)",
     "location": "Le Triskell, Plougoumelen (56)",
-    "coords": [47.6522, -2.9167]
+    "coords": [
+      47.6522,
+      -2.9167
+    ]
   },
   {
     "date": "2027-01-22",
     "title": "Option BSQ \"GB\" @ VIBRAYE (72)",
     "location": "Quai des Arts, Vibraye (72)",
-    "coords": [48.0583, 0.7306]
+    "coords": [
+      48.0583,
+      0.7306
+    ]
   },
   {
     "date": "2027-02-05",
     "title": "BSQ \"GB\" @ SAINT-PRIEST-EN-JAREZ (42)",
     "location": "Le NEC, Saint-Priest-en-Jarez (42)",
-    "coords": [45.4744, 4.3789]
+    "coords": [
+      45.4744,
+      4.3789
+    ]
   },
   {
     "date": "2027-02-06",
     "title": "BSQ \"GB\" @ ISSOIRE (63)",
     "location": "Animatis, Issoire (63)",
-    "coords": [45.5414, 3.2458]
+    "coords": [
+      45.5414,
+      3.2458
+    ]
   },
   {
     "date": "2027-03-05",
     "title": "BSQ \"GB\" @ ARES (33)",
     "location": "Espace Brémontier, Ares (33)",
-    "coords": [44.7667, -1.1356]
+    "coords": [
+      44.7667,
+      -1.1356
+    ]
   },
   {
     "date": "2027-03-12",
     "title": "Option 1 BSQ \"GB\" @ SELESTAT (67)",
     "location": "Les Tanzmatten, Sélestat (67)",
-    "coords": [48.2592, 7.4475]
+    "coords": [
+      48.2592,
+      7.4475
+    ]
   },
   {
     "date": "2027-03-13",
     "title": "Option BSQ \"GB\" @ COLMAR (68)",
     "location": "Théâtre Municipal, Colmar (68)",
-    "coords": [48.0792, 7.3586]
+    "coords": [
+      48.0792,
+      7.3586
+    ]
   },
   {
     "date": "2027-03-14",
     "title": "Option 2 BSQ \"GB\" @ SELESTAT (67)",
     "location": "Les Tanzmatten, Sélestat (67)",
-    "coords": [48.2592, 7.4475]
+    "coords": [
+      48.2592,
+      7.4475
+    ]
   },
   {
     "date": "2027-03-18",
     "title": "Option 1 BSQ \"GB\" @ MONTBELIARD (25)",
     "location": "Les Bains Douches, Montbéliard (25)",
-    "coords": [47.5076, 6.7945]
+    "coords": [
+      47.5076,
+      6.7945
+    ]
   },
   {
     "date": "2027-04-02",
     "title": "Option BSQ \"GB\" @ SAINT-GENIS-LES-OLLIERES (69)",
     "location": "L'Escale, Saint-Genis-les-Ollières (69)",
-    "coords": [45.7533, 4.7214]
+    "coords": [
+      45.7533,
+      4.7214
+    ]
   },
   {
     "date": "2027-06-23",
     "title": "Option 2 BSQ \"GB\" @ MONTBELIARD (25)",
     "location": "Les Bains Douches, Montbéliard (25)",
-    "coords": [47.5076, 6.7945]
+    "coords": [
+      47.5076,
+      6.7945
+    ]
   },
   {
     "date": "2027-10-08",
     "title": "Option 2 BSQ \"GB\" @ LA TESTE-DE-BUCH (33)",
     "location": "Théâtre Cravey, La Teste-de-Buch (33)",
-    "coords": [44.6294, -1.1444]
+    "coords": [
+      44.6294,
+      -1.1444
+    ]
   },
   {
     "date": "2027-10-15",
     "title": "Option 3 BSQ \"GB\" @ LA TESTE-DE-BUCH (33)",
     "location": "Théâtre Cravey, La Teste-de-Buch (33)",
-    "coords": [44.6294, -1.1444]
+    "coords": [
+      44.6294,
+      -1.1444
+    ]
   }
 ]
