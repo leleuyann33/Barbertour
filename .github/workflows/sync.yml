@@ -1,10 +1,9 @@
 name: Sync Tour Dates
 
-# on:
-#   schedule:
-#     - cron: '0 4 * * *' # Désactivé temporairement pour sécurité
 on:
-  workflow_dispatch: # Garde uniquement le déclenchement manuel sécurisé
+  schedule:
+    - cron: '0 4 * * *' # Chaque nuit à 4h UTC (6h heure de Paris en été)
+  workflow_dispatch: # Déclenchement manuel toujours possible
 
 permissions:
   contents: write
