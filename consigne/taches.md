@@ -13,8 +13,8 @@ Liste des tâches terminées et à venir.
   - Étape 7 : Lancer le robot et vérifier que DUNKERQUE est bien récupérée
 
 ## 🟠 Travail inachevé (Modèle IA précédent)
-- [x] **Committer la modification locale** : Le fichier `sync_calendar.py` a été modifié en local (le Fallback par défaut `CALENDAR_ID` est désormais `leyannpro@gmail.com`). L'IA l'a committé et poussé sur GitHub.
-- [ ] **Mettre à jour le secret GitHub** : Si l'utilisateur a déjà configuré le secret GitHub `CALENDAR_ID` dans le passé, vérifier et s'assurer qu'il contient bien `leyannpro@gmail.com` (sinon il écrasera la nouvelle valeur par défaut).
+- [x] **Committer la modification locale** : Le fichier `sync_calendar.py` a été modifié en local. L'IA l'a committé et poussé sur GitHub.
+- [x] **Mettre à jour le secret GitHub** : Le secret GitHub `CALENDAR_ID` a été mis à jour avec `compagniebarbershopquartet@gmail.com`.
 ## À faire (futur)
 - [ ] Vérifier que DUNKERQUE (22 mars 2026) apparaît bien sur la carte après fix.
 - [ ] Valider que le robot tourne bien chaque nuit à 4h UTC.
@@ -27,6 +27,20 @@ Liste des tâches terminées et à venir.
   - `actions/checkout@v2` → `actions/checkout@v4`
   - `python_version` → `python-version`
 - [x] Déclenchement manuel du workflow — workflow OK, mais DUNKERQUE non récupérée (API issue).
+
+## Terminé (session 2026-03-22 - v6.2.2)
+- [x] **Focus Sécurisé** : Travail exclusif dans le dossier `proposition-projet`.
+- [x] **Optimisation Mobile Pixel Perfect** :
+    - Suppression de la grille des mois sur mobile.
+    - Réduction de la taille des marqueurs (12px).
+    - Augmentation de la transparence de la carte.
+    - Désactivation du déplacement de la carte sur mobile (pour faciliter le scroll de la page).
+- [x] **Optimisation Vidéo** :
+    - Intégration de l'affiche `poster.jpg` dans le lecteur.
+    - Implémentation de la **mise en pause automatique au scroll**.
+    - Volume par défaut réglé à **15%**.
+- [x] **Accès Distant** : Restauration du tunnel `localtunnel` avec subdomain `ready-geckos-know`.
+- [x] **Journal de Bord** : Mise à jour en temps réel dans `consigne/journal.md`.
 
 ## Terminé (sessions précédentes)
 - [x] Création du dossier `/consigne`

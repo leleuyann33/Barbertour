@@ -107,9 +107,9 @@ def sync():
     else:
         print(f"! {JSON_PATH} n'existe pas encore. Nouveau fichier sera créé.")
 
-    # Créer un index des dates existantes pour une fusion rapide (clé: date + titre)
-    # On normalise le titre pour la comparaison
-    def get_key(ev): return f"{ev['date']}_{ev['title'].strip().upper()}"
+    # Créer un index des dates existantes pour une fusion rapide (clé: date seule)
+    # L'utilisation de la date unique évite les doublons si le théâtre ajoute 2 événements le même jour avec des noms différents
+    def get_key(ev): return f"{ev['date']}"
     existing_map = {get_key(ev): ev for ev in existing_data}
 
     # 2. Se connecter à Google Calendar
@@ -178,8 +178,14 @@ def sync():
         if not title:
             continue
 
-        # Filtre de sécurité : seuls les titres avec BSQ, BARBER ou OPTION
-        if not any(x in title.upper() for x in ['BSQ', 'BARBER', 'OPTION']):
+        # Filtre de sécurité RÉTRÉCI : Uniquement les titres officiels du spectacle
+        # On n'accepte que ce qui contient "BSQ" (le code du groupe)
+        if "BSQ" not in title.upper():
+            continue
+            
+        # Exclusion de sécurité pour les emails ou noms de personnes détectés 
+        # (protection contre les fuites accidentelles)
+        if "@" in title or "Antoine" in title: # Exemple Antoine trouvé précédemment
             continue
 
         location = item.get('location', '')
@@ -187,7 +193,7 @@ def sync():
         date = date_str.split('T')[0] if 'T' in date_str else date_str
         
         # Créer l'objet événement
-        event_key = f"{date}_{title.upper()}"
+        event_key = f"{date}"
         
         if event_key in existing_map:
             # Mise à jour optionnelle d'une date existante (ex: changement de lieu)

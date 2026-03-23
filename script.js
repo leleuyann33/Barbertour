@@ -201,7 +201,7 @@ function placeMarker(coords, group) {
     }
 
     // Display Title & Date Logic: Special handling for "Prévu" shows
-    let displayTitle = originalTitle.replace(/Option/gi, '').replace(/À venir/gi, '').replace(/BSQ/gi, '').replace(/"GB"/gi, '').replace(/  +/g, ' ').trim();
+    let displayTitle = originalTitle.replace(/Option/gi, '').replace(/À venir/gi, '').replace(/B?BSQ/gi, '').replace(/"GB"/gi, '').replace(/  +/g, ' ').trim();
     if (status === 2) {
         const year = dateObj.getFullYear();
         displayTitle = `C'est prévu pour ${year} : BSQ "GB" @ ${displayTitle.split('@')[1] || displayTitle}`;
@@ -536,15 +536,16 @@ function renderChronologicalList(events) {
         html += `<div class="month-group" id="month-${month.replace(/\s+/g, '-')}"><h3 class="month-title">${month}</h3>`;
         html += groups[month].map(e => {
             const d = new Date(e.start?.dateTime || e.start?.date || e.date);
-            const displayTitle = (e.summary || e.title || "").replace(/Option/gi, '').replace(/BSQ/gi, '').replace(/"GB"/gi, '').trim();
+            const displayTitle = (e.summary || e.title || "").replace(/Option/gi, '').replace(/B?BSQ/gi, '').replace(/"GB"/gi, '').trim();
             const coordsStr = e.coords ? `[${e.coords[0]}, ${e.coords[1]}]` : "null";
+            const locText = e.location || e.venue || "";
 
             return `
                 <div class="date-item" onclick='centerOnShow(${coordsStr}, "${displayTitle.replace(/"/g, '&quot;')}")' style="cursor: pointer;">
                     <div class="item-date">${d.toLocaleDateString('fr-FR', { day: 'numeric' })}</div>
                     <div class="item-info">
                         <h3>${displayTitle}</h3>
-                        <p>${e.location || e.venue}</p>
+                        <p>${locText}</p>
                     </div>
                 </div>
             `;
@@ -629,6 +630,12 @@ radioWrap?.addEventListener('click', (e) => {
 radioPowerBtn?.addEventListener('click', (e) => {
     e.stopPropagation(); 
     const isOn = radioWrap.classList.contains('on');
+    setRadioOn(!isOn, true);
+});
+
+// Make the text label trigger the radio as well for maximum touchability on mobile
+document.getElementById('radio-label-node')?.addEventListener('click', () => {
+    const isOn = radioWrap?.classList.contains('on');
     setRadioOn(!isOn, true);
 });
 

@@ -15,7 +15,7 @@ Ce fichier centralise les liens et informations critiques qui ne doivent pas êt
 ## 🐙 GitHub Actions & Secrets
 - **Secrets configurés** :
   - `GOOGLE_SERVICE_ACCOUNT_KEY` : Contient la clé JSON complète.
-  - `CALENDAR_ID` : Contient les IDs des calendriers (`leyannpro@gmail.com, compagniebarbershopquartet@gmail.com`).
+  - `CALENDAR_ID` : Contient l'ID du calendrier (`compagniebarbershopquartet@gmail.com`).
 
 ---
 
