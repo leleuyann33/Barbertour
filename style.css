@@ -518,12 +518,7 @@ footer {
 }
 
 /* --- Radio Player Section --- */
-#radio-anchor {
-    position: relative;
-    width: fit-content;
-    height: fit-content;
-    display: inline-block;
-}
+
 
 #radio-section {
     display: flex;
@@ -683,18 +678,8 @@ svg.radio {
     top: -274px !important;
     z-index: 10;
 }
-#radio-anchor {
-    position: relative !important;
-    left: -1016px !important;
-    top: -198px !important;
-    z-index: 11;
-}
-#radio-label-node {
-    position: relative !important;
-    left: -1139px !important;
-    top: -249px !important;
-    z-index: 12;
-}
+
+
 #full-months-grid {
     position: relative !important;
     left: 3px !important;
@@ -703,6 +688,28 @@ svg.radio {
 }
 
 /* --- MOBILE USABILITY FIXES --- */
+
+/* Sauvegarde de tes coordonnees */
+#radio-anchor {
+    position: relative !important;
+    left: -1016px !important;
+    top: -198px !important;
+    z-index: 11;
+    text-align: left;
+}
+
+svg.radio {
+    transform: scale(0.59) !important;
+}
+
+#radio-label-node {
+    position: relative !important;
+    left: -1135px !important;
+    top: -260px !important;
+    transform: scale(1) !important;
+    z-index: 12;
+}
+
 @media (max-width: 768px) {
     /* 1. Éclaircir le filtre de fond sur mobile */
     body::before {
@@ -733,8 +740,5 @@ svg.radio {
         text-align: center;
     }
     
-    #radio-anchor {
-        text-align: center;
-        margin: 0 auto !important;
-    }
+    
 }
