@@ -49,31 +49,25 @@ body::before {
 header {
     padding: 2.5rem 1rem;
     text-align: center;
-    background: linear-gradient(to bottom, #0a3d37, #072c28);
-    border-bottom: 5px solid var(--gold);
-    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
+    background:transparent ;
+    border-bottom: none;
+    box-shadow: none;
     position: relative;
 }
 
 header::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 100%;
-    height: 10px;
-    background: repeating-linear-gradient(90deg, var(--gold), var(--gold) 2px, transparent 2px, transparent 8px);
-    opacity: 0.3;
+    display: none;
 }
+
 
 .brand-title {
     font-family: 'Sancreek', cursive;
-    font-size: 4rem;
-    color: #f1ebd3; /* Ivory color from poster text */
+    font-size: 3rem;
+    color: #f0ed4f; /* Ivory color from poster text */
     text-transform: uppercase;
     letter-spacing: 4px;
     -webkit-text-stroke: 1px var(--gold);
-    text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4), 0 0 30px rgba(225, 177, 44, 0.3);
+    text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4), 0 0 30px rgba(7, 7, 6, 0.575);
     margin-bottom: 0.5rem;
 }
 
@@ -371,7 +365,8 @@ footer {
     flex-direction: column;
     gap: 15px;
     margin: 20px auto;
-    max-width: fit-content;
+    width: max-content;
+    max-width: 100%;
     padding: 15px 30px;
     background: rgba(0, 0, 0, 0.05); /* Quasi-invisible veil */
     backdrop-filter: blur(10px);
@@ -505,6 +500,10 @@ footer {
 .month-group {
     margin-top: 2rem;
     padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .month-title {
@@ -513,7 +512,8 @@ footer {
     color: var(--teal);
     letter-spacing: 5px;
     margin-bottom: 1.5rem;
-    padding-left: 10px;
+    padding-left: 0;
+    text-align: center;
     text-shadow: 0 0 10px rgba(64, 224, 208, 0.3);
 }
 
@@ -621,6 +621,7 @@ svg.radio {
     text-shadow: 0 1px 3px rgba(0,0,0,0.3); /* Subtle shadow for depth, no blur */
     margin-top: 5px;
     text-align: center;
+    transform: rotate(-8deg);
     cursor: grab;
     width: max-content;
     display: inline-block;
@@ -671,45 +672,78 @@ svg.radio {
     color: var(--gold);
 }
 
-/* Finalized Layout Positions - LOCKED AS ORDERED */
-#section-title-main {
-    position: relative !important;
-    left: 145px !important;
-    top: -274px !important;
-    z-index: 10;
+/* Finalized Layout - FLEXBOX PROPRE */
+
+/* Section principale : radio à gauche, dates à droite */
+#list-section {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+    max-width: 1600px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    width: 100%;
 }
 
-
-#full-months-grid {
-    position: relative !important;
-    left: 3px !important;
-    top: 99px !important;
-    z-index: 10;
+/* Colonne gauche : radio + label */
+#radio-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 160px;
+    padding-top: 1rem;
 }
 
-/* --- MOBILE USABILITY FIXES --- */
-
-/* Sauvegarde de tes coordonnees */
 #radio-anchor {
-    position: relative !important;
-    left: -1016px !important;
-    top: -198px !important;
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
     z-index: 11;
-    text-align: left;
-}
-
-svg.radio {
-    transform: scale(0.59) !important;
 }
 
 #radio-label-node {
-    position: relative !important;
-    left: -1135px !important;
-    top: -260px !important;
-    transform: scale(1) !important;
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    margin-top: 8px !important;
+    text-align: center !important;
     z-index: 12;
 }
 
+/* Colonne droite : titre + liste des dates */
+#dates-column {
+    flex: 1;
+}
+
+#section-title-main {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    margin-bottom: 2rem;
+}
+
+#full-months-grid {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    max-width: 1600px;
+    margin: 1rem auto;
+    padding: 0 2rem;
+}
+svg.radio {
+    transform: scale(0.59) rotate(-8deg) !important;
+    transform-origin: top left !important;
+    overflow: hidden !important;
+}
+
+/* Vidéo desktop visible, mobile cachée */
+#media-frame-mobile { display: none; }
+
+@media (max-width: 768px) {
+    #media-frame-desktop { display: none; }
+    #media-frame-mobile { display: block; }
+}
 @media (max-width: 768px) {
     /* 1. Éclaircir le filtre de fond sur mobile */
     body::before {
@@ -718,7 +752,9 @@ svg.radio {
             url('Generation-barber-shop-spectacle.webp') !important;
         filter: brightness(0.85) contrast(1.1) !important;
     }
-
+.radio-label {
+        font-size: 0.35rem !important;
+    }
     /* 2. Réduire la taille de la carte pour permettre le défilement au doigt */
     .map-container {
         height: 45vh !important;
@@ -726,12 +762,11 @@ svg.radio {
     }
     #theater-frame {
         /* Ajoute une énorme zone "sûre" en bas (bande noire) pour pouvoir attraper l'écran et scroller */
-        padding-bottom: 80px !important;
-        margin-bottom: 20px !important;
+        padding-bottom: 50px !important;
+        margin-bottom: 10px !important;
     }
     
-    /* 3. Réinitialiser les positions absolues ridicules sur mobile pour éviter la collision radio / titre */
-    #section-title-main, #radio-anchor, #radio-label-node, #full-months-grid {
+   #section-title-main, #full-months-grid {
         position: static !important;
         left: auto !important;
         top: auto !important;
@@ -739,6 +774,95 @@ svg.radio {
         display: block !important;
         text-align: center;
     }
+
+    #radio-label-node {
+        position: static !important;
+        left: auto !important;
+        top: auto !important;
+        margin: 5px auto !important;
+        display: block !important;
+        text-align: center;
+    }
+
+    #radio-anchor {
+        position: static !important;
+        left: auto !important;
+        top: auto !important;
+        margin: 0 auto !important;
+        display: block !important;
+        text-align: center;
+    }
+
+    /* Sur mobile : radio au-dessus des dates en colonne */
+    #list-section {
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 0 1rem !important;
+    }
+
+    #radio-column {
+        width: 100% !important;
+        align-items: center !important;
+    }
+
+    #dates-column {
+        width: 100% !important;
+    }
     
     
+
+    /* 4. Réduction des titres sur mobile */
+    .brand-title {
+        font-size: 2.2rem !important;
+        letter-spacing: 2px !important;
+    }
+    .brand-subtitle {
+        font-size: 0.85rem !important;
+        letter-spacing: 3px !important;
+    }
+    .section-title {
+        font-size: 1.8rem !important;
+        letter-spacing: 2px !important;
+    }
+    .month-title {
+        font-size: 0.75rem !important;
+        letter-spacing: 3px !important;
+    }
+    .item-date {
+        font-size: 1.1rem !important;
+    }
+    .item-info h3 {
+        font-size: 1rem !important;
+    }
+    .item-info p {
+        font-size: 0.85rem !important;
+    }
+    header {
+        padding: 1.5rem 1rem !important;
+    }
+
+    /* 5. Masquer la grille des mois sur mobile */
+    #full-months-grid {
+        display: none !important;
+    }
+    svg.radio {
+        transform: scale(0.35) rotate(-8deg) !important;
+        transform-origin: top left !important;
+    }
+}
+
+
+
+/* DECALAGE VISUEL MANUEL - PC UNIQUEMENT */
+@media (min-width: 769px) {
+    #radio-anchor {
+        position: relative !important;
+        left: -33px !important;
+        top: -214px !important;
+    }
+    #radio-label-node {
+        position: relative !important;
+        left: -17px !important;
+        top: -280px !important;
+    }
 }

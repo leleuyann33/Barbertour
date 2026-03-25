@@ -5,6 +5,8 @@ Il DOIT être lu au début de CHAQUE session.
 
 ## 🚨 RÈGLES DE SÉCURITÉ (NON-NÉGOCIABLES)
 
+- **VERROUILLAGE FRONT-END (ACTIF)** : Ne modifier EN AUCUN CAS les fichiers HTML, CSS ou JS de la carte. Ces fichiers sont VERROUILLÉS en état de production locale. Toute initiative de design ou de modification layout doit être annulée et interdite.
+
 - **NE JAMAIS supprimer** de code existant sans confirmation explicite de l'utilisateur.
 - **NE JAMAIS réécrire** un fichier entier, sauf demande explicite.
 - **TOUJOURS modifier** le code de manière incrémentale.

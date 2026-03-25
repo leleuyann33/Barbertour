@@ -28,10 +28,7 @@
 
 
             <div class="side-panel">
-                <div class="poster-box">
-                    <img src="poster.jpg" alt="Génération Barber Poster">
-                </div>
-                <div id="media-frame">
+                <div id="media-frame-desktop" class="media-frame-instance">
                     <video src="WhatsApp Video 2026-03-22 at 22.46.58.mp4" poster="poster.jpg" controls style="max-width:100%; border-radius:8px;"></video>
                     <div class="media-controls admin-only" style="display: none;">
                         <input type="file" id="direct-media-upload" accept="image/*,video/*" style="display: none;">
@@ -55,9 +52,8 @@
         </section>
 
         <section id="list-section">
-            <h2 id="section-title-main" class="section-title">Prochaines Dates de la Tournée</h2>
-            
-            <div id="radio-anchor">
+            <div id="radio-column">
+                <div id="radio-anchor">
                 <section id="radio-section">
                     <div class="radio-header">Radio Barber</div>
                     <div class="radio-container" id="radioWrap">
@@ -145,13 +141,22 @@
                         <audio id="radio-audio" loop></audio>
                     </div>
                 </section>
-            </div>
+            </div><!-- fin radio-anchor -->
             <div id="radio-label-node" class="radio-label">Radio Barber</div>
+            </div><!-- fin radio-column -->
 
-            <div id="chronological-list">
-                <p style="text-align: center; color: #777;">Chargement des dates...</p>
-            </div>
+            <div id="dates-column">
+                <h2 id="section-title-main" class="section-title">Prochaines Dates de la Tournée</h2>
+                <div id="chronological-list">
+                    <p style="text-align: center; color: #777;">Chargement des dates...</p>
+                </div>
+            </div><!-- fin dates-column -->
+
         </section>
+
+    <div id="media-frame-mobile" class="media-frame-instance" style="max-width:500px; margin: 2rem auto;">
+        <video src="WhatsApp Video 2026-03-22 at 22.46.58.mp4" poster="poster.jpg" controls style="max-width:100%; border-radius:8px;"></video>
+    </div>
 
     <footer>
         <p><span id="secret-trigger" style="cursor: pointer;">&copy;</span> 2025 Compagnie Barber Shop Quartet. Tous droits réservés.</p>
@@ -203,6 +208,7 @@
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
+    <script src="layout_tool.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

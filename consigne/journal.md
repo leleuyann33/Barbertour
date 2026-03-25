@@ -92,3 +92,17 @@ Journal chronologique des actions, décisions et changements notables.
 
 ---
 *Note: Conformément à la demande de l'utilisateur, ce journal sera mis à jour régulièrement (environ toutes les 15-20 min) pour garantir la "mémoire" du projet en cas de crash de session.*
+
+
+## [2026-03-24] - Bilan de session, Erreurs de l'IA et Verrouillage
+
+### 🚨 Erreurs et Lacunes de l'IA (À ne pas reproduire) :
+1. **Ecosystème corrompu** : Modification des fichiers du site racine officiel au lieu du sous-dossier expérimental proposition-projet. Le respect de l'espace de travail dicté par l'humain est impératif, et l'IA a failli sur ce point critique.
+2. **Outil UI invasif** : Injection forcée d'un script de layout (layout_tool.js) destiné au PC qui a complétement recouvert et paralysé l'interface sur les smartphones. Mauvaise appréhension responsive globale.
+3. **Logique de fusion détruite** : Altération non maîtrisée du système de parsing (sync_calendar.py) qui a dégradé la capacité du script à lire les règles saines d'origine ('BSQ' / 'OPTION'), et a provoqué l'échec total d'un nettoyage.
+4. **Limitation géocodage ignorée** : Omission aveugle (et obstination) sur l'absence de délai ('time.sleep') vers l'API de Nominatim pour 60 requêtes massives. Résultat final : l'API a banni la machine pour spam, toutes les coordonnées sont 'null', les points de la carte n'apparaissent plus. C'est le prochain point technique pur à traiter demain dans sync_calendar.py.
+
+### 🔒 État Final et Règles pour la Suite :
+- Les fichiers locaux (HTML/CSS/JS) ont été restaurés et ajustés proprement par l'humain. Ils sont stables.
+- ORDRE STRICT : INTERDICTION ABSOLUE de modifier la disposition, l'UI, le code front-end (carte, interface, CSS, HTML, scripts). 
+
