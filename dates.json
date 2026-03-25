@@ -2,206 +2,308 @@
   {
     "date": "2025-03-19",
     "title": "BSQ \"GB\" @ BORDEAUX (33) - Théâtre des Beaux-Arts",
-    "location": "",
-    "coords": null
+    "location": "BORDEAUX",
+    "coords": [
+      44.841225,
+      -0.5800364
+    ]
   },
   {
     "date": "2025-03-26",
     "title": "BSQ \"GB\" @ BORDEAUX (33) - Théâtre des Beaux-Arts",
-    "location": "",
-    "coords": null
+    "location": "BORDEAUX",
+    "coords": [
+      44.841225,
+      -0.5800364
+    ]
   },
   {
     "date": "2025-04-12",
     "title": "BSQ \"BEST-OF\" @ LOUHOSSOA (64) - Salle Harri Xuri",
-    "location": "",
-    "coords": null
+    "location": "LOUHOSSOA",
+    "coords": [
+      43.3163993,
+      -1.3506594
+    ]
   },
   {
     "date": "2025-05-13",
     "title": "BSQ \"BEST-OF\" @ SAUJON (33) - La Salicorne",
-    "location": "",
-    "coords": null
+    "location": "SAUJON",
+    "coords": [
+      45.6742681,
+      -0.9244473
+    ]
   },
   {
     "date": "2025-05-16",
     "title": "BSQ \"GB\" @ MONTPON-MENESTEROL (24) - Salle Le Lascaux",
-    "location": "",
-    "coords": null
+    "location": "MONTPON",
+    "coords": [
+      45.0093716,
+      0.1627088
+    ]
   },
   {
     "date": "2025-06-05",
     "title": "BSQ \"GB\" @ PORTETS (33) - Espace Culturel La Forge",
-    "location": "",
-    "coords": null
+    "location": "PORTETS",
+    "coords": [
+      44.6959687,
+      -0.4238244
+    ]
   },
   {
     "date": "2025-06-06",
     "title": "BSQ \"GB\" @ SALLES (33) - Salle des fêtes",
-    "location": "",
-    "coords": null
+    "location": "SALLES",
+    "coords": [
+      43.0284702,
+      -0.1195972
+    ]
   },
   {
     "date": "2025-06-11",
     "title": "BSQ \"GB\" @ PELOUAILLES-LES-VIGNES (49) - Carré des Arts",
-    "location": "",
-    "coords": null
+    "location": "PELOUAILLES",
+    "coords": [
+      45.9530593,
+      -0.4936981
+    ]
   },
   {
     "date": "2025-07-05",
     "title": "BSQ \"GB\" @ FESTIVAL d'AVIGNON (84) - Théâtre Essaïon - 18H30",
-    "location": "",
-    "coords": null
+    "location": "FESTIVAL d'AVIGNON",
+    "coords": [
+      43.9430868,
+      4.8127685
+    ]
   },
   {
     "date": "2025-07-31",
     "title": "BSQ \"GB\" @ GUJAN-MESTRAS (33) - Les Jeudis de Larros",
-    "location": "",
-    "coords": null
+    "location": "GUJAN",
+    "coords": [
+      4.8417097,
+      -58.6416891
+    ]
   },
   {
     "date": "2025-09-13",
     "title": "BSQ \"Opus\" @ BLANZAT (63) - La Muscade",
-    "location": "",
-    "coords": null
+    "location": "BLANZAT",
+    "coords": [
+      45.8283549,
+      3.0771704
+    ]
   },
   {
     "date": "2025-09-27",
     "title": "Option BSQ \"GB\" @ MOULINS (03) - Théâtre Municipal",
-    "location": "",
-    "coords": null
+    "location": "MOULINS",
+    "coords": [
+      46.5660526,
+      3.3331703
+    ]
   },
   {
     "date": "2025-10-04",
     "title": "BSQ \"GB\" @ LEON (40) - Centre Culturel",
-    "location": "",
-    "coords": null
+    "location": "LEON",
+    "coords": [
+      31.2715127,
+      -95.9953382
+    ]
   },
   {
     "date": "2025-10-24",
     "title": "BSQ - GB @ Bordeaux (33) - Théâtre du Pont Tournant",
-    "location": "",
-    "coords": null
+    "location": "Bordeaux",
+    "coords": [
+      44.841225,
+      -0.5800364
+    ]
   },
   {
     "date": "2025-11-22",
     "title": "BSQ \"GB\" @ CESTAS (33) - Halle du Bouzet / Représentation le dimanche à 11H",
-    "location": "",
-    "coords": null
+    "location": "CESTAS",
+    "coords": [
+      44.7411574,
+      -0.6841225
+    ]
   },
   {
     "date": "2025-12-19",
     "title": "BSQ \"GB\" @ SOYAUX (16) - Espace Henri Matisse",
-    "location": "",
-    "coords": null
+    "location": "SOYAUX",
+    "coords": [
+      45.6416235,
+      0.1925878
+    ]
   },
   {
     "date": "2026-01-17",
     "title": "BSQ \"GB\" @ TERNAY (69) - Foyer Rural",
-    "location": "",
-    "coords": null
+    "location": "TERNAY",
+    "coords": [
+      47.0386792,
+      -0.0554447
+    ]
   },
   {
     "date": "2026-01-25",
     "title": "BSQ \"GB\" @ TARGON (33) - Espace René Lazare",
-    "location": "",
-    "coords": null
+    "location": "TARGON",
+    "coords": [
+      44.73385,
+      -0.26464
+    ]
   },
   {
     "date": "2026-01-28",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre - 20H50",
-    "location": "",
-    "coords": null
+    "location": "Paris",
+    "coords": [
+      48.8566,
+      2.3522
+    ]
   },
   {
     "date": "2026-02-04",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre - 20H50",
-    "location": "",
-    "coords": null
+    "location": "Paris",
+    "coords": [
+      48.8566,
+      2.3522
+    ]
   },
   {
     "date": "2026-02-11",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre - 20H50",
-    "location": "",
-    "coords": null
+    "location": "Paris",
+    "coords": [
+      48.8566,
+      2.3522
+    ]
   },
   {
     "date": "2026-02-18",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre - 20H50",
-    "location": "",
-    "coords": null
+    "location": "Paris",
+    "coords": [
+      48.8566,
+      2.3522
+    ]
   },
   {
     "date": "2026-02-25",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre - 20H50",
-    "location": "",
-    "coords": null
+    "location": "Paris",
+    "coords": [
+      48.8566,
+      2.3522
+    ]
   },
   {
     "date": "2026-03-04",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre - 20H50",
-    "location": "",
-    "coords": null
+    "location": "Paris",
+    "coords": [
+      48.8566,
+      2.3522
+    ]
   },
   {
     "date": "2026-03-13",
     "title": "BSQ \"GB\" @ DAMMARIE-LES-LYS (77) - Espace Nino Ferrer",
-    "location": "",
-    "coords": null
+    "location": "DAMMARIE",
+    "coords": [
+      48.3442865,
+      1.4940462
+    ]
   },
   {
     "date": "2026-03-18",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre - 20H50",
-    "location": "",
-    "coords": null
+    "location": "Paris",
+    "coords": [
+      48.8566,
+      2.3522
+    ]
   },
   {
     "date": "2026-04-01",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre - 20H50",
-    "location": "",
-    "coords": null
+    "location": "Paris",
+    "coords": [
+      48.8566,
+      2.3522
+    ]
   },
   {
     "date": "2026-04-08",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre - 20H50",
-    "location": "",
-    "coords": null
+    "location": "Paris",
+    "coords": [
+      48.8566,
+      2.3522
+    ]
   },
   {
     "date": "2026-04-10",
     "title": "BSQ \"GB\" @ MUNSTER (68) - Espace Culturel Saint-Grégoire",
-    "location": "",
-    "coords": null
+    "location": "MUNSTER",
+    "coords": [
+      51.9625101,
+      7.6251879
+    ]
   },
   {
     "date": "2026-04-15",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre - 20H50",
-    "location": "",
-    "coords": null
+    "location": "Paris",
+    "coords": [
+      48.8566,
+      2.3522
+    ]
   },
   {
     "date": "2026-04-22",
     "title": "BSQ \"GB\" @ Paris (75) - Essaïon Théâtre - 20H50",
-    "location": "",
-    "coords": null
+    "location": "Paris",
+    "coords": [
+      48.8566,
+      2.3522
+    ]
   },
   {
     "date": "2026-05-02",
     "title": "Option BSQ \"GB\" @ ETAULES (17) - Salle La PLéiade",
-    "location": "",
-    "coords": null
+    "location": "ETAULES",
+    "coords": [
+      45.7340308,
+      -1.0996037
+    ]
   },
   {
     "date": "2026-05-29",
     "title": "BSQ \"GB\" @ SAINT-YRIEIX-LA-PERCHE (87) - Centre culturel Jean-Pierre Fabrègue",
-    "location": "",
-    "coords": null
+    "location": "SAINT",
+    "coords": [
+      27.370281,
+      77.3582553
+    ]
   },
   {
     "date": "2026-06-06",
     "title": "BSQ \"GB\" @ ROIFFIEUX (07) - L'ApARTe",
-    "location": "",
-    "coords": null
+    "location": "ROIFFIEUX",
+    "coords": [
+      45.2269844,
+      4.6549646
+    ]
   },
   {
     "date": "2026-07-29",
@@ -212,8 +314,11 @@
   {
     "date": "2026-07-29",
     "title": "BSQ \"GB\" @ VIANNE (47) - Festival",
-    "location": "",
-    "coords": null
+    "location": "VIANNE",
+    "coords": [
+      44.1965,
+      0.3205
+    ]
   },
   {
     "date": "2026-07-30",
@@ -224,116 +329,170 @@
   {
     "date": "2026-07-30",
     "title": "BSQ - \"GB\" @ Tournée CCAS / CE EDF - 6 à 8 dates",
-    "location": "",
+    "location": "Tournée CCAS / CE EDF",
     "coords": null
   },
   {
     "date": "2026-09-19",
     "title": "Option BSQ \"GB\" @ TOURNON-SUR-RHÔNE (07) - Théâtre Jacques Bodoin",
-    "location": "",
-    "coords": null
+    "location": "TOURNON",
+    "coords": [
+      45.0675156,
+      4.832852
+    ]
   },
   {
     "date": "2026-09-25",
     "title": "Option BSQ \"GB\" @ SAINT-MAIXENT-L'ECOLE (79) - Espace Agapit",
-    "location": "",
-    "coords": null
+    "location": "SAINT",
+    "coords": [
+      27.370281,
+      77.3582553
+    ]
   },
   {
     "date": "2026-09-26",
     "title": "Option \"GB\" @ CHATELET-EN-BRIE (77) - Le Manège",
-    "location": "",
-    "coords": null
+    "location": "CHATELET",
+    "coords": [
+      48.8568523,
+      2.3483419
+    ]
   },
   {
     "date": "2026-11-19",
     "title": "Option BSQ \"GB\" @ NEVERS (58) - Maison de la Culture",
-    "location": "",
-    "coords": null
+    "location": "NEVERS",
+    "coords": [
+      46.9876601,
+      3.1577203
+    ]
   },
   {
     "date": "2026-11-27",
     "title": "Option BSQ \"GB\" @ MONTVAL-SUR-LOIR (72) - La Castélorienne",
-    "location": "",
-    "coords": null
+    "location": "MONTVAL",
+    "coords": [
+      46.088003,
+      4.7840062
+    ]
   },
   {
     "date": "2026-12-01",
     "title": "Options BSQ \"GB\" @ MAISON-ALFORT (94) - Théâtre Claude Debussy",
-    "location": "",
-    "coords": null
+    "location": "MAISON",
+    "coords": [
+      45.7794439,
+      -71.9650393
+    ]
   },
   {
     "date": "2026-12-04",
     "title": "Option BSQ \"GB\" @ LA ROCHEFOUCAULD (16) - Les Carmes",
-    "location": "",
-    "coords": null
+    "location": "LA ROCHEFOUCAULD",
+    "coords": [
+      45.739278,
+      0.3935027
+    ]
   },
   {
     "date": "2026-12-25",
     "title": "BSQ \"GB\" @ DUNKERQUE (59) - Test",
-    "location": "",
-    "coords": null
+    "location": "DUNKERQUE",
+    "coords": [
+      51.0343,
+      2.3767
+    ]
   },
   {
     "date": "2026-12-31",
     "title": "Option BSQ \"GB\" @ LA ROCHELLE (17) - L'Azile",
-    "location": "",
-    "coords": null
+    "location": "LA ROCHELLE",
+    "coords": [
+      46.159732,
+      -1.1515951
+    ]
   },
   {
     "date": "2027-01-09",
     "title": "Option BSQ \"GB\" @ SANGUINET (33) - Auditorium",
-    "location": "",
-    "coords": null
+    "location": "SANGUINET",
+    "coords": [
+      44.4834776,
+      -1.0759377
+    ]
   },
   {
     "date": "2027-01-10",
     "title": "Option 1 BSQ \"GB\" @ LA TESTE-DE-BUCH (33) - Théâtre Cravey",
-    "location": "",
-    "coords": null
+    "location": "LA TESTE",
+    "coords": [
+      44.6369726,
+      -1.1429337
+    ]
   },
   {
     "date": "2027-01-22",
     "title": "Option BSQ \"GB\" @ VIBRAYE (72) - Quai des Arts",
-    "location": "",
-    "coords": null
+    "location": "VIBRAYE",
+    "coords": [
+      48.0604122,
+      0.7341899
+    ]
   },
   {
     "date": "2027-02-05",
     "title": "BSQ \"GB\" @ SAINT-PRIEST-EN-JAREZ (42) - Le NEC",
-    "location": "",
-    "coords": null
+    "location": "SAINT",
+    "coords": [
+      27.370281,
+      77.3582553
+    ]
   },
   {
     "date": "2027-02-06",
     "title": "BSQ \"GB\" @ ISSOIRE (63) - Animatis",
-    "location": "",
-    "coords": null
+    "location": "ISSOIRE",
+    "coords": [
+      45.5432962,
+      3.2501874
+    ]
   },
   {
     "date": "2027-03-05",
     "title": "Option BSQ \"GB\" @ ARES (33) - Espace Brémontier",
-    "location": "",
-    "coords": null
+    "location": "ARES",
+    "coords": [
+      43.4263299,
+      -8.2440387
+    ]
   },
   {
     "date": "2027-03-12",
     "title": "Option 1 BSQ \"GB\" @ SELESTAT (67) - Les Tanzmatten",
-    "location": "",
-    "coords": null
+    "location": "SELESTAT",
+    "coords": [
+      48.2594396,
+      7.454217
+    ]
   },
   {
     "date": "2027-03-13",
     "title": "Option BSQ \"GB\" @ COLMAR (68) - Théâtre Municipal",
-    "location": "",
-    "coords": null
+    "location": "COLMAR",
+    "coords": [
+      48.0777517,
+      7.3579641
+    ]
   },
   {
     "date": "2027-03-14",
     "title": "Option 2 BSQ \"GB\" @ SELESTAT (67) - Les Tanzmatten",
-    "location": "",
-    "coords": null
+    "location": "SELESTAT",
+    "coords": [
+      48.2594396,
+      7.454217
+    ]
   },
   {
     "date": "2027-03-18",
@@ -344,14 +503,20 @@
   {
     "date": "2027-03-18",
     "title": "Option BSQ \"GB\" @ MONTBELIARD (25) - Les Bains Douches",
-    "location": "",
-    "coords": null
+    "location": "MONTBELIARD",
+    "coords": [
+      47.5102368,
+      6.7977564
+    ]
   },
   {
     "date": "2027-04-02",
     "title": "Option BSQ \"GB\" @ SAINT-GENIS-LES-OLLIERES (69) - L'Escale",
-    "location": "",
-    "coords": null
+    "location": "SAINT",
+    "coords": [
+      27.370281,
+      77.3582553
+    ]
   },
   {
     "date": "2027-06-23",
@@ -362,13 +527,19 @@
   {
     "date": "2027-10-08",
     "title": "Option 2 BSQ \"GB\" @ LA TESTE-DE-BUCH (33) - Théâtre Cravey",
-    "location": "",
-    "coords": null
+    "location": "LA TESTE",
+    "coords": [
+      44.6369726,
+      -1.1429337
+    ]
   },
   {
     "date": "2027-10-15",
     "title": "Option 3 BSQ \"GB\" @ LA TESTE-DE-BUCH (33) - Théâtre Cravey",
-    "location": "",
-    "coords": null
+    "location": "LA TESTE",
+    "coords": [
+      44.6369726,
+      -1.1429337
+    ]
   }
 ]
