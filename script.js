@@ -171,7 +171,7 @@ async function addTourMarker(event) {
     }
 
     try {
-        const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}&limit=1`;
+        const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}&countrycodes=fr&limit=1`;
         const response = await fetch(CORS_PROXY + encodeURIComponent(geocodeUrl), {
             headers: { 'User-Agent': 'BarbershopQuartetMap/1.0' }
         });
@@ -254,6 +254,10 @@ function placeMarker(coords, group) {
     `;
 
     marker.bindPopup(popupContent);
+    
+    marker.on('mouseover', function() {
+        this.openPopup();
+    });
 }
 
 // Interactivity
@@ -536,7 +540,18 @@ function renderChronologicalList(events) {
         html += `<div class="month-group" id="month-${month.replace(/\s+/g, '-')}"><h3 class="month-title">${month}</h3>`;
         html += groups[month].map(e => {
             const d = new Date(e.start?.dateTime || e.start?.date || e.date);
-            const displayTitle = (e.summary || e.title || "").replace(/Option/gi, '').replace(/B?BSQ/gi, '').replace(/"GB"/gi, '').trim();
+            let displayTitle = (e.summary || e.title || "");
+            if (displayTitle.includes('@')) {
+                displayTitle = displayTitle.split('@')[1];
+            }
+            if (displayTitle.includes('(')) {
+                displayTitle = displayTitle.split('(')[0];
+            }
+            if (displayTitle.includes('-')) {
+                displayTitle = displayTitle.split('-')[0];
+            }
+            displayTitle = displayTitle.trim();
+            
             const coordsStr = e.coords ? `[${e.coords[0]}, ${e.coords[1]}]` : "null";
             const locText = e.location || e.venue || "";
 
