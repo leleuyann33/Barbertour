@@ -65,7 +65,7 @@ def geocode(location):
     try:
         import requests
         time.sleep(2.5) # Délai ultra-safe (Nominatim exige max 1 req/sec)
-        url = f"https://nominatim.openstreetmap.org/search?format=json&q={location}&countrycodes=fr&limit=1"
+        url = f"https://nominatim.openstreetmap.org/search?format=json&q={location}&countrycodes=fr&viewbox=-5.5,51.5,9.5,41.0&bounded=1&limit=1"
         resp = requests.get(url, headers={'User-Agent': 'BarberSyncBot/3.0'}, timeout=5)
         data = resp.json()
         if data:

@@ -171,7 +171,7 @@ async function addTourMarker(event) {
     }
 
     try {
-        const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}&countrycodes=fr&limit=1`;
+        const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}&countrycodes=fr&viewbox=-5.5,51.5,9.5,41.0&bounded=1&limit=1`;
         const response = await fetch(CORS_PROXY + encodeURIComponent(geocodeUrl), {
             headers: { 'User-Agent': 'BarbershopQuartetMap/1.0' }
         });
@@ -200,13 +200,10 @@ function placeMarker(coords, group) {
         status = originalTitle.toUpperCase().includes('OPTION') ? 2 : 1;
     }
 
-    // Display Title & Date Logic: Special handling for "Prévu" shows
-    let displayTitle = originalTitle.replace(/Option/gi, '').replace(/À venir/gi, '').replace(/B?BSQ/gi, '').replace(/"GB"/gi, '').replace(/  +/g, ' ').trim();
-    if (status === 2) {
-        const year = dateObj.getFullYear();
-        displayTitle = `C'est prévu pour ${year} : BSQ "GB" @ ${displayTitle.split('@')[1] || displayTitle}`;
-    } else {
-        displayTitle = `BSQ "GB" @ ${displayTitle.split('@')[1] || displayTitle}`;
+    // STRICT RULE: Never show anything before the @
+    let displayTitle = originalTitle;
+    if (displayTitle.includes('@')) {
+        displayTitle = displayTitle.split('@')[1].trim();
     }
 
     const displayDate = group.dateRange ? group.dateRange : 
@@ -540,27 +537,30 @@ function renderChronologicalList(events) {
         html += `<div class="month-group" id="month-${month.replace(/\s+/g, '-')}"><h3 class="month-title">${month}</h3>`;
         html += groups[month].map(e => {
             const d = new Date(e.start?.dateTime || e.start?.date || e.date);
-            let displayTitle = (e.summary || e.title || "");
-            if (displayTitle.includes('@')) {
-                displayTitle = displayTitle.split('@')[1];
+            
+            let rawTitle = e.summary || e.title || "";
+            let afterAt = rawTitle;
+            if (rawTitle.includes('@')) {
+                afterAt = rawTitle.split('@')[1].trim();
             }
-            if (displayTitle.includes('(')) {
-                displayTitle = displayTitle.split('(')[0];
+            
+            let boldCity = afterAt;
+            let thinDetail = e.location || e.venue || "";
+            
+            if (afterAt.includes('-')) {
+                const parts = afterAt.split('-');
+                boldCity = parts[0].trim();
+                thinDetail = parts.slice(1).join('-').trim() + " - " + boldCity; // exemple: "Essaïon Théâtre - Paris (75)"
             }
-            if (displayTitle.includes('-')) {
-                displayTitle = displayTitle.split('-')[0];
-            }
-            displayTitle = displayTitle.trim();
             
             const coordsStr = e.coords ? `[${e.coords[0]}, ${e.coords[1]}]` : "null";
-            const locText = e.location || e.venue || "";
 
             return `
-                <div class="date-item" onclick='centerOnShow(${coordsStr}, "${displayTitle.replace(/"/g, '&quot;')}")' style="cursor: pointer;">
+                <div class="date-item" onclick='centerOnShow(${coordsStr}, "${boldCity.replace(/"/g, '&quot;')}")' style="cursor: pointer;">
                     <div class="item-date">${d.toLocaleDateString('fr-FR', { day: 'numeric' })}</div>
                     <div class="item-info">
-                        <h3>${displayTitle}</h3>
-                        <p>${locText}</p>
+                        <h3 style="font-weight: 800;">${boldCity}</h3>
+                        <p style="font-weight: 300; font-size: 0.85rem;">${thinDetail}</p>
                     </div>
                 </div>
             `;
