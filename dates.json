@@ -1,6 +1,6 @@
 [
   {
-    "title": "BSQ \"Génération Barber \" @ Avignon (84) - Theatre de l'Arrache-Coeur du04 au 26 juillet",
+    "title": "BSQ \"Génération Barber\" @ Avignon (84) - Théâtre de l'Arrache-Coeur du 04 au 26 juillet 2026",
     "date": "2026-07-04",
     "location": "Avignon",
     "manualStatus": 1
@@ -307,6 +307,12 @@
       45.2269844,
       4.6549646
     ]
+  },
+  {
+    "date": "2026-07-29",
+    "title": "Option BSQ \"GB\" @ VIANNE (47) - Festival",
+    "location": "",
+    "coords": null
   },
   {
     "date": "2026-07-29",
