@@ -791,3 +791,24 @@ function initParallax() {
     updateParallax(); 
 }
 initParallax();
+
+// --- RELOCALISATION RADIO MOBILE ---
+function handleMobileRadio() {
+    const radioCol = document.getElementById('radio-column');
+    const theater = document.getElementById('theater-frame');
+    const listSec = document.getElementById('list-section');
+    if (!radioCol || !theater || !listSec) return;
+    
+    if (window.innerWidth <= 768) {
+        if (radioCol.parentElement !== theater) {
+            theater.appendChild(radioCol);
+        }
+    } else {
+        if (radioCol.parentElement !== listSec) {
+            listSec.insertBefore(radioCol, document.getElementById('dates-column'));
+        }
+    }
+}
+window.addEventListener('resize', handleMobileRadio);
+document.addEventListener('DOMContentLoaded', handleMobileRadio);
+handleMobileRadio();
