@@ -853,16 +853,31 @@ svg.radio {
 
 
 
-/* DECALAGE VISUEL MANUEL - PC UNIQUEMENT */
+/* DECALAGES MANUELS GOLBAUX - PC UNIQUEMENT */
 @media (min-width: 769px) {
     #radio-anchor {
         position: relative !important;
-        left: -33px !important;
-        top: -214px !important;
+        left: -8px !important;
+        top: -204px !important;
     }
     #radio-label-node {
         position: relative !important;
-        left: -17px !important;
-        top: -280px !important;
+        left: 2px !important;
+        top: -246px !important;
+    }
+    #section-title-main {
+        position: relative !important;
+        left: 230px !important;
+        top: -90px !important;
+    }
+    #chronological-list {
+        position: relative !important;
+        left: -129px !important;
+        top: -26px !important;
+    }
+    #full-months-grid {
+        position: relative !important;
+        left: 23px !important;
+        top: 131px !important;
     }
 }
