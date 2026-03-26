@@ -189,8 +189,8 @@ def sync():
         # Extraction intelligente au cas où le champ 'Lieu' est vide dans l'agenda
         if not location and '@' in title:
             loc_candidate = title.split('@', 1)[1]
-            # On nettoie pour retirer tout ce qui suit une parenthèse ou un tiret
-            loc_candidate = loc_candidate.split('(')[0].split('-')[0].strip()
+            # On coupe au premier " - " (avec des espaces) pour ne pas casser les noms de villes composées (ex: SAINT-YRIEIX)
+            loc_candidate = loc_candidate.split(' - ')[0].split('(')[0].strip()
             if loc_candidate:
                 location = loc_candidate
                 

@@ -547,10 +547,10 @@ function renderChronologicalList(events) {
             let boldCity = afterAt;
             let thinDetail = e.location || e.venue || "";
             
-            if (afterAt.includes('-')) {
-                const parts = afterAt.split('-');
+            if (afterAt.includes(' - ')) {
+                const parts = afterAt.split(' - ');
                 boldCity = parts[0].trim();
-                thinDetail = parts.slice(1).join('-').trim() + " - " + boldCity; // exemple: "Essaïon Théâtre - Paris (75)"
+                thinDetail = parts.slice(1).join(' - ').trim() + " - " + boldCity; // ex: "Essaïon Théâtre - Paris (75)"
             }
             
             const coordsStr = e.coords ? `[${e.coords[0]}, ${e.coords[1]}]` : "null";
@@ -559,8 +559,8 @@ function renderChronologicalList(events) {
                 <div class="date-item" onclick='centerOnShow(${coordsStr}, "${boldCity.replace(/"/g, '&quot;')}")' style="cursor: pointer;">
                     <div class="item-date">${d.toLocaleDateString('fr-FR', { day: 'numeric' })}</div>
                     <div class="item-info">
-                        <h3 style="font-weight: 800;">${boldCity}</h3>
-                        <p style="font-weight: 300; font-size: 0.85rem;">${thinDetail}</p>
+                        <h3 style="font-weight: 800; font-size: 1.15rem;">${boldCity}</h3>
+                        <p style="font-weight: 300; font-size: 0.85rem; margin-top: 2px;">${thinDetail}</p>
                     </div>
                 </div>
             `;
