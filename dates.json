@@ -38,10 +38,10 @@
   {
     "date": "2025-05-16",
     "title": "BSQ \"GB\" @ MONTPON-MENESTEROL (24) - Salle Le Lascaux",
-    "location": "MONTPON",
+    "location": "MONTPON-MENESTEROL",
     "coords": [
-      45.0093716,
-      0.1627088
+      45.0081073,
+      0.1620955
     ]
   },
   {
@@ -65,11 +65,8 @@
   {
     "date": "2025-06-11",
     "title": "BSQ \"GB\" @ PELOUAILLES-LES-VIGNES (49) - Carré des Arts",
-    "location": "PELOUAILLES",
-    "coords": [
-      45.9530593,
-      -0.4936981
-    ]
+    "location": "PELOUAILLES-LES-VIGNES",
+    "coords": null
   },
   {
     "date": "2025-07-05",
@@ -83,10 +80,10 @@
   {
     "date": "2025-07-31",
     "title": "BSQ \"GB\" @ GUJAN-MESTRAS (33) - Les Jeudis de Larros",
-    "location": "GUJAN",
+    "location": "GUJAN-MESTRAS",
     "coords": [
-      4.8417097,
-      -58.6416891
+      44.6360982,
+      -1.0714014
     ]
   },
   {
@@ -218,10 +215,10 @@
   {
     "date": "2026-03-13",
     "title": "BSQ \"GB\" @ DAMMARIE-LES-LYS (77) - Espace Nino Ferrer",
-    "location": "DAMMARIE",
+    "location": "DAMMARIE-LES-LYS",
     "coords": [
-      48.3442865,
-      1.4940462
+      48.5106,
+      2.6358
     ]
   },
   {
@@ -290,10 +287,10 @@
   {
     "date": "2026-05-29",
     "title": "BSQ \"GB\" @ SAINT-YRIEIX-LA-PERCHE (87) - Centre culturel Jean-Pierre Fabrègue",
-    "location": "SAINT",
+    "location": "SAINT-YRIEIX-LA-PERCHE",
     "coords": [
-      27.370281,
-      77.3582553
+      45.5335103,
+      1.2583483
     ]
   },
   {
@@ -335,7 +332,7 @@
   {
     "date": "2026-09-19",
     "title": "Option BSQ \"GB\" @ TOURNON-SUR-RHÔNE (07) - Théâtre Jacques Bodoin",
-    "location": "TOURNON",
+    "location": "TOURNON-SUR-RHÔNE",
     "coords": [
       45.0675156,
       4.832852
@@ -344,19 +341,19 @@
   {
     "date": "2026-09-25",
     "title": "Option BSQ \"GB\" @ SAINT-MAIXENT-L'ECOLE (79) - Espace Agapit",
-    "location": "SAINT",
+    "location": "SAINT-MAIXENT-L'ECOLE",
     "coords": [
-      27.370281,
-      77.3582553
+      46.409657,
+      -0.2018603
     ]
   },
   {
     "date": "2026-09-26",
     "title": "Option \"GB\" @ CHATELET-EN-BRIE (77) - Le Manège",
-    "location": "CHATELET",
+    "location": "CHATELET-EN-BRIE",
     "coords": [
-      48.8568523,
-      2.3483419
+      48.5044282,
+      2.792873
     ]
   },
   {
@@ -371,19 +368,19 @@
   {
     "date": "2026-11-27",
     "title": "Option BSQ \"GB\" @ MONTVAL-SUR-LOIR (72) - La Castélorienne",
-    "location": "MONTVAL",
+    "location": "MONTVAL-SUR-LOIR",
     "coords": [
-      46.088003,
-      4.7840062
+      47.6954528,
+      0.4421323
     ]
   },
   {
     "date": "2026-12-01",
     "title": "Options BSQ \"GB\" @ MAISON-ALFORT (94) - Théâtre Claude Debussy",
-    "location": "MAISON",
+    "location": "MAISON-ALFORT",
     "coords": [
-      45.7794439,
-      -71.9650393
+      48.800288,
+      2.4297614
     ]
   },
   {
@@ -425,10 +422,10 @@
   {
     "date": "2027-01-10",
     "title": "Option 1 BSQ \"GB\" @ LA TESTE-DE-BUCH (33) - Théâtre Cravey",
-    "location": "LA TESTE",
+    "location": "LA TESTE-DE-BUCH",
     "coords": [
-      44.6369726,
-      -1.1429337
+      44.6316943,
+      -1.1491319
     ]
   },
   {
@@ -443,10 +440,10 @@
   {
     "date": "2027-02-05",
     "title": "BSQ \"GB\" @ SAINT-PRIEST-EN-JAREZ (42) - Le NEC",
-    "location": "SAINT",
+    "location": "SAINT-PRIEST-EN-JAREZ",
     "coords": [
-      27.370281,
-      77.3582553
+      45.473408,
+      4.3792689
     ]
   },
   {
@@ -512,10 +509,10 @@
   {
     "date": "2027-04-02",
     "title": "Option BSQ \"GB\" @ SAINT-GENIS-LES-OLLIERES (69) - L'Escale",
-    "location": "SAINT",
+    "location": "SAINT-GENIS-LES-OLLIERES",
     "coords": [
-      27.370281,
-      77.3582553
+      45.7601,
+      4.72654
     ]
   },
   {
@@ -527,19 +524,19 @@
   {
     "date": "2027-10-08",
     "title": "Option 2 BSQ \"GB\" @ LA TESTE-DE-BUCH (33) - Théâtre Cravey",
-    "location": "LA TESTE",
+    "location": "LA TESTE-DE-BUCH",
     "coords": [
-      44.6369726,
-      -1.1429337
+      44.6316943,
+      -1.1491319
     ]
   },
   {
     "date": "2027-10-15",
     "title": "Option 3 BSQ \"GB\" @ LA TESTE-DE-BUCH (33) - Théâtre Cravey",
-    "location": "LA TESTE",
+    "location": "LA TESTE-DE-BUCH",
     "coords": [
-      44.6369726,
-      -1.1429337
+      44.6316943,
+      -1.1491319
     ]
   }
 ]
