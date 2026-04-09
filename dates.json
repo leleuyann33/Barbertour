@@ -522,12 +522,30 @@
     ]
   },
   {
+    "date": "2027-03-23",
+    "title": "Option (1 date durant cette période) BSQ \"GB\" @ VIENNE (38) - Festival Humour",
+    "location": "VIENNE",
+    "coords": [
+      46.6121166,
+      0.465407
+    ]
+  },
+  {
     "date": "2027-04-02",
     "title": "Option BSQ \"GB\" @ SAINT-GENIS-LES-OLLIERES (69) - L'Escale",
     "location": "SAINT-GENIS-LES-OLLIERES",
     "coords": [
       45.7601,
       4.72654
+    ]
+  },
+  {
+    "date": "2027-04-16",
+    "title": "Option BSQ \"GB\" @ ROYAN (17) - Salle Jean Gabin",
+    "location": "ROYAN",
+    "coords": [
+      45.6245332,
+      -1.0287636
     ]
   },
   {
