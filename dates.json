@@ -345,6 +345,15 @@
     ]
   },
   {
+    "date": "2026-09-22",
+    "title": "Option 2 dates BSQ \"GB\" @ SELESTAT (67) - Les Tanzmatten",
+    "location": "SELESTAT",
+    "coords": [
+      48.2594396,
+      7.454217
+    ]
+  },
+  {
     "date": "2026-09-25",
     "title": "Option BSQ \"GB\" @ SAINT-MAIXENT-L'ECOLE (79) - Espace Agapit",
     "location": "SAINT-MAIXENT-L'ECOLE",
@@ -356,6 +365,15 @@
   {
     "date": "2026-09-26",
     "title": "Option \"GB\" @ CHATELET-EN-BRIE (77) - Le Manège",
+    "location": "CHATELET-EN-BRIE",
+    "coords": [
+      48.5044282,
+      2.792873
+    ]
+  },
+  {
+    "date": "2026-09-26",
+    "title": "Option BSQ \"GB\" @ CHATELET-EN-BRIE (77) - Le Manège",
     "location": "CHATELET-EN-BRIE",
     "coords": [
       48.5044282,
