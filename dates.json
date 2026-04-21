@@ -498,6 +498,15 @@
     ]
   },
   {
+    "date": "2027-03-06",
+    "title": "Option 2 BSQ \"GB\" @ ROYAN (17) - Salle Jean Gabin",
+    "location": "ROYAN",
+    "coords": [
+      45.6245332,
+      -1.0287636
+    ]
+  },
+  {
     "date": "2027-03-12",
     "title": "Option 1 BSQ \"GB\" @ SELESTAT (67) - Les Tanzmatten",
     "location": "SELESTAT",
@@ -560,6 +569,15 @@
   {
     "date": "2027-04-16",
     "title": "Option BSQ \"GB\" @ ROYAN (17) - Salle Jean Gabin",
+    "location": "ROYAN",
+    "coords": [
+      45.6245332,
+      -1.0287636
+    ]
+  },
+  {
+    "date": "2027-04-16",
+    "title": "Option 1 BSQ \"GB\" @ ROYAN (17) - Salle Jean Gabin",
     "location": "ROYAN",
     "coords": [
       45.6245332,
