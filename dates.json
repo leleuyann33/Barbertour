@@ -408,6 +408,15 @@
     ]
   },
   {
+    "date": "2026-09-19",
+    "title": "BSQ \"GB\" @ TOURNON-SUR-RHÔNE (07) - Théâtre Jacques Bodoin",
+    "location": "TOURNON-SUR-RHÔNE",
+    "coords": [
+      45.0675156,
+      4.832852
+    ]
+  },
+  {
     "date": "2026-09-22",
     "title": "Option 2 dates BSQ \"GB\" @ SELESTAT (67) - Les Tanzmatten",
     "location": "SELESTAT",
@@ -444,6 +453,15 @@
     ]
   },
   {
+    "date": "2026-09-26",
+    "title": "BSQ \"GB\" @ CHATELET-EN-BRIE (77) - Le Manège",
+    "location": "CHATELET-EN-BRIE",
+    "coords": [
+      48.5044282,
+      2.792873
+    ]
+  },
+  {
     "date": "2026-10-02",
     "title": "Option 3 BSQ \"GB\" @ SAINT-PIERRE-D'IRUBE (64) - Salle La Perle",
     "location": "SAINT-PIERRE-D'IRUBE",
@@ -455,6 +473,15 @@
   {
     "date": "2026-11-19",
     "title": "Option BSQ \"GB\" @ NEVERS (58) - Maison de la Culture",
+    "location": "NEVERS",
+    "coords": [
+      46.9876601,
+      3.1577203
+    ]
+  },
+  {
+    "date": "2026-11-19",
+    "title": "BSQ \"GB\" @ NEVERS (58) - Maison de la Culture",
     "location": "NEVERS",
     "coords": [
       46.9876601,
@@ -480,6 +507,15 @@
     ]
   },
   {
+    "date": "2026-12-03",
+    "title": "Option BSQ \"GB\" @ LA ROCHEFOUCAULD (16) - Les Carmes",
+    "location": "LA ROCHEFOUCAULD",
+    "coords": [
+      45.739278,
+      0.3935027
+    ]
+  },
+  {
     "date": "2026-12-04",
     "title": "Option BSQ \"GB\" @ LA ROCHEFOUCAULD (16) - Les Carmes",
     "location": "LA ROCHEFOUCAULD",
@@ -491,6 +527,15 @@
   {
     "date": "2026-12-05",
     "title": "Option BSQ \"GB\" @ LA ROCHEFOUCAULD (16) - Les Carmes",
+    "location": "LA ROCHEFOUCAULD",
+    "coords": [
+      45.739278,
+      0.3935027
+    ]
+  },
+  {
+    "date": "2026-12-05",
+    "title": "BSQ \"GB\" @ LA ROCHEFOUCAULD (16) - Les Carmes",
     "location": "LA ROCHEFOUCAULD",
     "coords": [
       45.739278,
@@ -518,6 +563,15 @@
   {
     "date": "2027-01-09",
     "title": "Option BSQ \"GB\" @ SANGUINET (33) - Auditorium",
+    "location": "SANGUINET",
+    "coords": [
+      44.4834776,
+      -1.0759377
+    ]
+  },
+  {
+    "date": "2027-01-09",
+    "title": "BSQ \"GB\" @ SANGUINET (40) - Auditorium",
     "location": "SANGUINET",
     "coords": [
       44.4834776,
@@ -590,6 +644,15 @@
   {
     "date": "2027-03-13",
     "title": "Option BSQ \"GB\" @ COLMAR (68) - Théâtre Municipal",
+    "location": "COLMAR",
+    "coords": [
+      48.0777517,
+      7.3579641
+    ]
+  },
+  {
+    "date": "2027-03-13",
+    "title": "BSQ \"GB\" @ COLMAR (68) - Théâtre Municipal",
     "location": "COLMAR",
     "coords": [
       48.0777517,
