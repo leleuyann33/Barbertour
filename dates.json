@@ -516,6 +516,15 @@
     ]
   },
   {
+    "date": "2026-12-03",
+    "title": "BSQ \"GB\" @ LA ROCHEFOUCAULD (16) - Les Carmes",
+    "location": "LA ROCHEFOUCAULD",
+    "coords": [
+      45.739278,
+      0.3935027
+    ]
+  },
+  {
     "date": "2026-12-04",
     "title": "Option BSQ \"GB\" @ LA ROCHEFOUCAULD (16) - Les Carmes",
     "location": "LA ROCHEFOUCAULD",
@@ -791,6 +800,15 @@
   {
     "date": "2027-10-15",
     "title": "Option 3 BSQ \"GB\" @ LA TESTE-DE-BUCH (33) - Théâtre Cravey",
+    "location": "LA TESTE-DE-BUCH",
+    "coords": [
+      44.6316943,
+      -1.1491319
+    ]
+  },
+  {
+    "date": "2027-10-30",
+    "title": "Option BSQ \"GB\" @ LA TESTE-DE-BUCH (33) - Théâtre Cravey",
     "location": "LA TESTE-DE-BUCH",
     "coords": [
       44.6316943,
