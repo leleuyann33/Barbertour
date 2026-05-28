@@ -175,9 +175,10 @@ def sync():
     if not all_items and len(CALENDAR_IDS) > 0:
         print("WAINING : Aucun événement trouvé sur l'ensemble des calendriers.")
 
-    # 4. Traiter et Fusionner
+    # 4. Traiter les événements du calendrier
     new_count = 0
     update_count = 0
+    calendar_keys = set()  # Toutes les clés présentes dans le calendrier
     
     for item in all_items:
         title = item.get('summary', '').strip()
@@ -203,6 +204,7 @@ def sync():
         
         # Créer l'objet événement
         event_key = f"{date}_{title.upper()}"
+        calendar_keys.add(event_key)
         
         if event_key in existing_map:
             # Mise à jour optionnelle d'une date existante (ex: changement de lieu)
@@ -226,7 +228,22 @@ def sync():
             new_count += 1
             print(f"  + Nouveau : {title} ({date})")
 
-    # 5. Sauvegarder (Fusion finale)
+    # 5. Supprimer les dates qui ne sont plus dans le calendrier
+    delete_count = 0
+    if calendar_keys:  # On ne supprime que si on a bien récupéré des événements (sécurité)
+        filtered_data = []
+        for ev in existing_data:
+            ev_key = get_key(ev)
+            if ev_key in calendar_keys:
+                filtered_data.append(ev)
+            else:
+                delete_count += 1
+                print(f"  ✗ Supprimé (plus dans le calendrier) : {ev['title']} ({ev['date']})")
+        existing_data = filtered_data
+    else:
+        print("⚠️ Aucun événement récupéré du calendrier → aucune suppression effectuée (sécurité).")
+
+    # 6. Sauvegarder
     # On trie par date pour garder un fichier propre
     existing_data.sort(key=lambda x: x['date'])
 
@@ -236,8 +253,8 @@ def sync():
         print(f"\n--- SYNCHRONISATION RÉUSSIE ---")
         print(f"Nouvelles dates ajoutées : {new_count}")
         print(f"Dates mises à jour : {update_count}")
+        print(f"Dates supprimées : {delete_count}")
         print(f"Total de dates dans le fichier : {len(existing_data)}")
-        print(f"Aucune date n'a été supprimée.")
     except Exception as e:
         print(f"ERREUR : Echec de l'écriture du fichier {JSON_PATH} : {e}")
         sys.exit(1)
