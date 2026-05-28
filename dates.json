@@ -276,15 +276,6 @@
     ]
   },
   {
-    "date": "2026-05-02",
-    "title": "Option BSQ \"GB\" @ ETAULES (17) - Salle La PLéiade",
-    "location": "ETAULES",
-    "coords": [
-      45.7340308,
-      -1.0996037
-    ]
-  },
-  {
     "date": "2026-05-29",
     "title": "BSQ \"GB\" @ SAINT-YRIEIX-LA-PERCHE (87) - Centre culturel Jean-Pierre Fabrègue",
     "location": "SAINT-YRIEIX-LA-PERCHE",
@@ -303,18 +294,6 @@
     ]
   },
   {
-    "title": "BSQ \"Génération Barber\" @ Avignon (84) - Théâtre de l'Arrache-Coeur du 04 au 26 juillet 2026",
-    "date": "2026-07-04",
-    "location": "Avignon",
-    "manualStatus": 1
-  },
-  {
-    "date": "2026-07-29",
-    "title": "Option BSQ \"GB\" @ VIANNE (47) - Festival",
-    "location": "",
-    "coords": null
-  },
-  {
     "date": "2026-07-29",
     "title": "BSQ \"GB\" @ VIANNE (47) - Festival",
     "location": "VIANNE",
@@ -322,18 +301,6 @@
       44.1965,
       0.3205
     ]
-  },
-  {
-    "date": "2026-07-30",
-    "title": "Option BSQ - \"GB\" @ Tournée CCAS / CE EDF - 6 à 8 dates",
-    "location": "",
-    "coords": null
-  },
-  {
-    "date": "2026-07-30",
-    "title": "BSQ - \"GB\" @ Tournée CCAS / CE EDF - 6 à 8 dates",
-    "location": "Tournée CCAS / CE EDF",
-    "coords": null
   },
   {
     "date": "2026-08-02",
@@ -400,15 +367,6 @@
   },
   {
     "date": "2026-09-19",
-    "title": "Option BSQ \"GB\" @ TOURNON-SUR-RHÔNE (07) - Théâtre Jacques Bodoin",
-    "location": "TOURNON-SUR-RHÔNE",
-    "coords": [
-      45.0675156,
-      4.832852
-    ]
-  },
-  {
-    "date": "2026-09-19",
     "title": "BSQ \"GB\" @ TOURNON-SUR-RHÔNE (07) - Théâtre Jacques Bodoin",
     "location": "TOURNON-SUR-RHÔNE",
     "coords": [
@@ -436,24 +394,6 @@
   },
   {
     "date": "2026-09-26",
-    "title": "Option \"GB\" @ CHATELET-EN-BRIE (77) - Le Manège",
-    "location": "CHATELET-EN-BRIE",
-    "coords": [
-      48.5044282,
-      2.792873
-    ]
-  },
-  {
-    "date": "2026-09-26",
-    "title": "Option BSQ \"GB\" @ CHATELET-EN-BRIE (77) - Le Manège",
-    "location": "CHATELET-EN-BRIE",
-    "coords": [
-      48.5044282,
-      2.792873
-    ]
-  },
-  {
-    "date": "2026-09-26",
     "title": "BSQ \"GB\" @ CHATELET-EN-BRIE (77) - Le Manège",
     "location": "CHATELET-EN-BRIE",
     "coords": [
@@ -468,15 +408,6 @@
     "coords": [
       43.4731208,
       -1.4474527
-    ]
-  },
-  {
-    "date": "2026-11-19",
-    "title": "Option BSQ \"GB\" @ NEVERS (58) - Maison de la Culture",
-    "location": "NEVERS",
-    "coords": [
-      46.9876601,
-      3.1577203
     ]
   },
   {
@@ -498,66 +429,12 @@
     ]
   },
   {
-    "date": "2026-12-01",
-    "title": "Options BSQ \"GB\" @ MAISON-ALFORT (94) - Théâtre Claude Debussy",
-    "location": "MAISON-ALFORT",
-    "coords": [
-      48.800288,
-      2.4297614
-    ]
-  },
-  {
-    "date": "2026-12-03",
-    "title": "Option BSQ \"GB\" @ LA ROCHEFOUCAULD (16) - Les Carmes",
-    "location": "LA ROCHEFOUCAULD",
-    "coords": [
-      45.739278,
-      0.3935027
-    ]
-  },
-  {
     "date": "2026-12-03",
     "title": "BSQ \"GB\" @ LA ROCHEFOUCAULD (16) - Les Carmes",
     "location": "LA ROCHEFOUCAULD",
     "coords": [
       45.739278,
       0.3935027
-    ]
-  },
-  {
-    "date": "2026-12-04",
-    "title": "Option BSQ \"GB\" @ LA ROCHEFOUCAULD (16) - Les Carmes",
-    "location": "LA ROCHEFOUCAULD",
-    "coords": [
-      45.739278,
-      0.3935027
-    ]
-  },
-  {
-    "date": "2026-12-05",
-    "title": "Option BSQ \"GB\" @ LA ROCHEFOUCAULD (16) - Les Carmes",
-    "location": "LA ROCHEFOUCAULD",
-    "coords": [
-      45.739278,
-      0.3935027
-    ]
-  },
-  {
-    "date": "2026-12-05",
-    "title": "BSQ \"GB\" @ LA ROCHEFOUCAULD (16) - Les Carmes",
-    "location": "LA ROCHEFOUCAULD",
-    "coords": [
-      45.739278,
-      0.3935027
-    ]
-  },
-  {
-    "date": "2026-12-25",
-    "title": "BSQ \"GB\" @ DUNKERQUE (59) - Test",
-    "location": "DUNKERQUE",
-    "coords": [
-      51.0343,
-      2.3767
     ]
   },
   {
@@ -571,29 +448,11 @@
   },
   {
     "date": "2027-01-09",
-    "title": "Option BSQ \"GB\" @ SANGUINET (33) - Auditorium",
-    "location": "SANGUINET",
-    "coords": [
-      44.4834776,
-      -1.0759377
-    ]
-  },
-  {
-    "date": "2027-01-09",
     "title": "BSQ \"GB\" @ SANGUINET (40) - Auditorium",
     "location": "SANGUINET",
     "coords": [
       44.4834776,
       -1.0759377
-    ]
-  },
-  {
-    "date": "2027-01-10",
-    "title": "Option 1 BSQ \"GB\" @ LA TESTE-DE-BUCH (33) - Théâtre Cravey",
-    "location": "LA TESTE-DE-BUCH",
-    "coords": [
-      44.6316943,
-      -1.1491319
     ]
   },
   {
@@ -625,47 +484,11 @@
   },
   {
     "date": "2027-03-05",
-    "title": "Option BSQ \"GB\" @ ARES (33) - Espace Brémontier",
-    "location": "ARES",
-    "coords": [
-      43.4263299,
-      -8.2440387
-    ]
-  },
-  {
-    "date": "2027-03-05",
     "title": "BSQ \"GB\" @ ARES (33) - Espace Brémontier",
     "location": "ARES",
     "coords": [
       44.767644,
       -1.1379928
-    ]
-  },
-  {
-    "date": "2027-03-06",
-    "title": "Option 2 BSQ \"GB\" @ ROYAN (17) - Salle Jean Gabin",
-    "location": "ROYAN",
-    "coords": [
-      45.6245332,
-      -1.0287636
-    ]
-  },
-  {
-    "date": "2027-03-12",
-    "title": "Option 1 BSQ \"GB\" @ SELESTAT (67) - Les Tanzmatten",
-    "location": "SELESTAT",
-    "coords": [
-      48.2594396,
-      7.454217
-    ]
-  },
-  {
-    "date": "2027-03-13",
-    "title": "Option BSQ \"GB\" @ COLMAR (68) - Théâtre Municipal",
-    "location": "COLMAR",
-    "coords": [
-      48.0777517,
-      7.3579641
     ]
   },
   {
@@ -678,21 +501,6 @@
     ]
   },
   {
-    "date": "2027-03-14",
-    "title": "Option 2 BSQ \"GB\" @ SELESTAT (67) - Les Tanzmatten",
-    "location": "SELESTAT",
-    "coords": [
-      48.2594396,
-      7.454217
-    ]
-  },
-  {
-    "date": "2027-03-18",
-    "title": "Option 1 BSQ \"GB\" @ MONTBELIARD (25) - Les Bains Douches",
-    "location": "",
-    "coords": null
-  },
-  {
     "date": "2027-03-18",
     "title": "Option BSQ \"GB\" @ MONTBELIARD (25) - Les Bains Douches",
     "location": "MONTBELIARD",
@@ -702,39 +510,12 @@
     ]
   },
   {
-    "date": "2027-03-20",
-    "title": "Option BSQ \"GB\" @ L'HOUMEAU (17) - Salle des fêtes",
-    "location": "L'HOUMEAU",
-    "coords": [
-      46.1906042,
-      -1.1870102
-    ]
-  },
-  {
     "date": "2027-03-23",
     "title": "Option (1 date durant cette période) BSQ \"GB\" @ VIENNE (38) - Festival Humour",
     "location": "VIENNE",
     "coords": [
       46.6121166,
       0.465407
-    ]
-  },
-  {
-    "date": "2027-04-02",
-    "title": "Option BSQ \"GB\" @ SAINT-GENIS-LES-OLLIERES (69) - L'Escale",
-    "location": "SAINT-GENIS-LES-OLLIERES",
-    "coords": [
-      45.7601,
-      4.72654
-    ]
-  },
-  {
-    "date": "2027-04-02",
-    "title": "BSQ \"GB\" @ SERRES-CASTET (64) - Centre Social Alexis Peyret",
-    "location": "SERRES-CASTET",
-    "coords": [
-      43.3861879,
-      -0.3541989
     ]
   },
   {
@@ -753,24 +534,6 @@
     "coords": [
       43.3861879,
       -0.3541989
-    ]
-  },
-  {
-    "date": "2027-04-16",
-    "title": "Option BSQ \"GB\" @ ROYAN (17) - Salle Jean Gabin",
-    "location": "ROYAN",
-    "coords": [
-      45.6245332,
-      -1.0287636
-    ]
-  },
-  {
-    "date": "2027-04-16",
-    "title": "Option 1 BSQ \"GB\" @ ROYAN (17) - Salle Jean Gabin",
-    "location": "ROYAN",
-    "coords": [
-      45.6245332,
-      -1.0287636
     ]
   },
   {
@@ -801,21 +564,6 @@
     ]
   },
   {
-    "date": "2027-06-23",
-    "title": "Option 2 BSQ \"GB\" @ MONTBELIARD (25) - Les Bains Douches",
-    "location": "",
-    "coords": null
-  },
-  {
-    "date": "2027-10-08",
-    "title": "Option 2 BSQ \"GB\" @ LA TESTE-DE-BUCH (33) - Théâtre Cravey",
-    "location": "LA TESTE-DE-BUCH",
-    "coords": [
-      44.6316943,
-      -1.1491319
-    ]
-  },
-  {
     "date": "2027-10-08",
     "title": "Option BSQ \"GB\" @ ROYAN (17) - Salle Jean Gabin",
     "location": "ROYAN",
@@ -831,15 +579,6 @@
     "coords": [
       45.0121558,
       -0.5291847
-    ]
-  },
-  {
-    "date": "2027-10-15",
-    "title": "Option 3 BSQ \"GB\" @ LA TESTE-DE-BUCH (33) - Théâtre Cravey",
-    "location": "LA TESTE-DE-BUCH",
-    "coords": [
-      44.6316943,
-      -1.1491319
     ]
   },
   {
