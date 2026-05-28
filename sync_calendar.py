@@ -229,12 +229,17 @@ def sync():
             print(f"  + Nouveau : {title} ({date})")
 
     # 5. Supprimer les dates qui ne sont plus dans le calendrier
+    # ⚠️ Les dates avec "source": "manual" ne sont JAMAIS supprimées
     delete_count = 0
+    manual_count = 0
     if calendar_keys:  # On ne supprime que si on a bien récupéré des événements (sécurité)
         filtered_data = []
         for ev in existing_data:
-            ev_key = get_key(ev)
-            if ev_key in calendar_keys:
+            if ev.get('source') == 'manual':
+                # Date ajoutée manuellement → on la garde toujours
+                filtered_data.append(ev)
+                manual_count += 1
+            elif get_key(ev) in calendar_keys:
                 filtered_data.append(ev)
             else:
                 delete_count += 1
@@ -254,6 +259,7 @@ def sync():
         print(f"Nouvelles dates ajoutées : {new_count}")
         print(f"Dates mises à jour : {update_count}")
         print(f"Dates supprimées : {delete_count}")
+        print(f"Dates manuelles protégées : {manual_count}")
         print(f"Total de dates dans le fichier : {len(existing_data)}")
     except Exception as e:
         print(f"ERREUR : Echec de l'écriture du fichier {JSON_PATH} : {e}")
