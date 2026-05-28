@@ -4,11 +4,10 @@ const map = L.map('map', {
     zoom: 6,
     zoomSnap: 0.5,
     zoomDelta: 0.5,
-    wheelPxPerZoomLevel: 120,
-    minZoom: 5,
-    maxZoom: 13,
+    wheelPxPerZoomLevel: 200,  // 🔧 Molette plus douce (plus grand = plus lent)
+    minZoom: 5.5,              // 🔧 Limite de dézoom (on reste sur la France)
+    maxZoom: 10,               // 🔧 Limite de zoom (on ne peut plus rentrer "dans les immeubles")
     zoomControl: false
-    // maxBounds removed to stop map from "sliding away" or "snapping"
 });
 
 // Add zoom control to top right
@@ -16,10 +15,17 @@ L.control.zoom({
     position: 'topright'
 }).addTo(map);
 
+// 🔧 Isolation du scroll molette : empêche la molette de défiler la page quand on est sur la carte
+document.getElementById('map').addEventListener('wheel', function(e) {
+    e.stopPropagation();
+}, { passive: false });
+
 // Automated Aspiration: Data will be fetched live from Google Calendar
 let tourDates = []; // Dynamic container
 const CORS_PROXY = "https://corsproxy.io/?";
 const markersLayer = L.layerGroup().addTo(map);
+const FUTURE_MESSAGES = ["On a hâte !", "Ça va swinguer !", "Préparez vos oreilles !", "Une dose de bonne humeur !", "Vite, réservez !"];
+const PAST_MESSAGES = ["Une soirée mémorable !", "Quel accueil !", "Encore des chansons dans la tête !", "Souvenirs de scène"];
 
 
 // Venue Coordinates Cache (to bypass CORS blocks for known locations)
@@ -50,19 +56,50 @@ const VENUE_COORDS = {
     "Les Bains Douches": [47.5076, 6.7945],
     "L'Escale": [45.7533, 4.7214],
     "Dammarie-les-Lys": [48.5106, 2.6358],
-    "Paris": [48.8566, 2.3522]
+    "Paris": [48.8566, 2.3522],
+    // Villes courantes (pour les nouvelles dates saisies manuellement)
+    "AVIGNON": [43.9493, 4.8055],
+    "Avignon": [43.9493, 4.8055],
+    "BORDEAUX": [44.8378, -0.5792],
+    "Bordeaux": [44.8378, -0.5792],
+    "LYON": [45.7640, 4.8357],
+    "Lyon": [45.7640, 4.8357],
+    "MARSEILLE": [43.2965, 5.3698],
+    "TOULOUSE": [43.6047, 1.4442],
+    "NANTES": [47.2184, -1.5536],
+    "STRASBOURG": [48.5734, 7.7521],
+    "MONTPELLIER": [43.6112, 3.8767],
+    "RENNES": [48.1173, -1.6778],
+    "LILLE": [50.6292, 3.0573],
+    "NICE": [43.7102, 7.2620],
+    "GRENOBLE": [45.1885, 5.7245]
 };
 
-// Primary Data Loader (Now automated via GitHub Actions)
+// Primary Data Loader
 async function updateCalendarData() {
     try {
+        // 1. Charger depuis le fichier local
         const res = await fetch('dates.json');
         if (res.ok) {
             const localEvents = await res.json();
-            tourDates = localEvents;
+
+            // 2. Vérifier si un cache localStorage plus récent existe (modifs du Coffre)
+            const cached = localStorage.getItem('tourDates_cache');
+            if (cached) {
+                try {
+                    const cachedData = JSON.parse(cached);
+                    tourDates = cachedData;
+                    console.log("✅ Cache localStorage utilisé (modifications du Coffre conservées).");
+                } catch(e) {
+                    tourDates = localEvents;
+                }
+            } else {
+                tourDates = localEvents;
+                console.log("✅ Données chargées depuis dates.json.");
+            }
+
             refreshMarkers(tourDates);
-            renderChronologicalList(tourDates); // Phase 3: Update list
-            console.log("Données de la tournée chargées avec succès.");
+            renderChronologicalList(tourDates);
         }
     } catch (e) {
         console.error("Erreur lors du chargement des dates de tournée.", e);
@@ -155,7 +192,7 @@ async function refreshMarkers(events) {
 
 
 async function addTourMarker(event) {
-    const location = event.location || event.venue;
+    const location = (event.location || event.venue || "").trim();
     if (!location) return;
 
     if (event.coords) {
@@ -163,13 +200,27 @@ async function addTourMarker(event) {
         return;
     }
 
+    // 1️⃣ Chercher dans le dictionnaire de coordonnées connus
     for (const venueName in VENUE_COORDS) {
-        if (location.includes(venueName)) {
+        if (location.toLowerCase().includes(venueName.toLowerCase())) {
             placeMarker(VENUE_COORDS[venueName], event);
             return;
         }
     }
 
+    // 2️⃣ Chercher dans les dates existantes si une autre date du même lieu a déjà des coords
+    const existingWithCoords = tourDates.find(d =>
+        d !== event &&
+        d.coords && Array.isArray(d.coords) &&
+        (d.location || d.venue || "").trim().toLowerCase() === location.toLowerCase()
+    );
+    if (existingWithCoords) {
+        console.log(`📍 Coordonnées réutilisées depuis une date existante pour : ${location}`);
+        placeMarker(existingWithCoords.coords, event);
+        return;
+    }
+
+    // 3️⃣ Géocodage réseau (Nominatim via CORS proxy)
     try {
         const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}&countrycodes=fr&viewbox=-5.5,51.5,9.5,41.0&bounded=1&limit=1`;
         const response = await fetch(CORS_PROXY + encodeURIComponent(geocodeUrl), {
@@ -178,82 +229,110 @@ async function addTourMarker(event) {
         const data = await response.json();
         if (data && data.length > 0) {
             placeMarker([parseFloat(data[0].lat), parseFloat(data[0].lon)], event);
+        } else {
+            console.warn(`⚠️ Géocodage sans résultat pour : "${location}". Ajoutez les coords manuellement si besoin.`);
         }
     } catch (error) {
-        console.error('Geocoding blocked or failed for:', location);
+        console.error('Géocodage échoué pour :', location, error);
     }
 }
 
 function placeMarker(coords, group) {
-    if (!coords || coords[0] === 0 || isNaN(coords[0])) return; // Admin Security
+    if (!coords || coords[0] === 0 || isNaN(coords[0])) return; 
     
     const event = group;
     const rawDate = event.start?.dateTime || event.start?.date || event.date;
-
     const dateObj = new Date(rawDate);
     const isPast = dateObj < new Date();
 
-    // Determine status: 1 = Confirmed, 2 = Option, 0 = Hidden
     let status = event.manualStatus;
     const originalTitle = event.summary || event.title || 'Date de tournée';
     if (status === undefined) {
         status = originalTitle.toUpperCase().includes('OPTION') ? 2 : 1;
     }
 
-    // STRICT RULE: Never show anything before the @
-    let displayTitle = originalTitle;
-    if (displayTitle.includes('@')) {
-        displayTitle = displayTitle.split('@')[1].trim();
+    // Traduction intelligente du titre (BSQ, GB, etc.)
+    function translateTitle(raw) {
+        // 1. Garder uniquement la partie AVANT le "@" (le reste = lieu, déjà affiché)
+        let t = raw.includes('@') ? raw.substring(0, raw.indexOf('@')).trim() : raw;
+        // 2. Nettoyer les préfixes techniques
+        t = t.replace(/"GB"/gi, 'Génération Barber')   // "GB" → Génération Barber
+             .replace(/\bGB\b/gi, 'Génération Barber') // GB seul → idem
+             .replace(/Option\s*\d*/gi, '')             // Option, Option 1, Option 2...
+             .replace(/Options?\s*\d*/gi, '')           // Options
+             .replace(/BSQ/gi, '')                      // BSQ
+             .replace(/À venir/gi, '')
+             .replace(/~/g, '')
+             .replace(/"/g, '')                         // guillemets restants
+             .replace(/\s+/g, ' ')                      // espaces multiples
+             .trim();
+        return t || 'Concert';
     }
+
+    let displayTitle = translateTitle(originalTitle);
+    if (status === 2) displayTitle = `C'est prévu : ${displayTitle}`;
 
     const displayDate = group.dateRange ? group.dateRange : 
-        ((status === 2) 
-            ? `Année ${dateObj.getFullYear()}` 
-            : (isNaN(dateObj) ? rawDate : dateObj.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })));
+        ((status === 2) ? `Année ${dateObj.getFullYear()}` : (isNaN(dateObj) ? rawDate : dateObj.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })));
 
-
-    // Dynamic Styling
     let className = status === 2 ? 'option-marker' : 'custom-marker';
-    if (isPast || status === 3) {
-        className += status === 2 ? ' past-option' : ' past-confirmed';
-    } 
+    if (isPast || status === 3) className += status === 2 ? ' past-option' : ' past-confirmed';
 
+    const icon = L.divIcon({ className: className, iconSize: [12, 12], iconAnchor: [6, 6] });
 
-    const icon = L.divIcon({
-        className: className,
-        iconSize: [12, 12],
-        iconAnchor: [6, 6]
-    });
+    // 📐 Micro-décalage déterministe pour éviter la superposition des marqueurs au même lieu
+    const dateHash = new Date(rawDate).getTime();
+    const jitter = 0.004; // ~400m
+    const jitterLat = ((dateHash % 97) - 48) / 48 * jitter;
+    const jitterLng = ((Math.floor(dateHash / 97) % 97) - 48) / 48 * jitter;
+    const finalCoords = [coords[0] + jitterLat, coords[1] + jitterLng];
 
-    const marker = L.marker(coords, { icon: icon }).addTo(markersLayer);
+    const marker = L.marker(finalCoords, { icon: icon }).addTo(markersLayer);
 
-    // Random fun messages
-    const plannedMessages = ["On a hâte !", "Vivement !", "C'est pour bientôt !", "Préparez-vous !", "On arrive !"];
-    const pastMessages = ["Un public de fou !", "C'était trop bien !", "Vivement qu'on revienne !", "Souvenir mémorable !", "Merci encore !"];
-    
-    let funMessage = "";
-    if (status === 2) { // "C'est prévu" (Yellow/Option)
-        funMessage = `<div style="color: var(--gold); font-style: italic; margin-top: 8px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 5px;">"${plannedMessages[Math.floor(Math.random() * plannedMessages.length)]}"</div>`;
-    } else if (isPast && status !== 0) { // "C'était fait" (Past Confirmed)
-        funMessage = `<div style="color: #bbb; font-style: italic; margin-top: 8px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 5px;">"${pastMessages[Math.floor(Math.random() * pastMessages.length)]}"</div>`;
+    // Parsing depuis le TITLE qui contient toute l'info : "BSQ \"GB\" @ VILLE (DPT) - Salle"
+    const rawTitleForParsing = event.title || event.summary || "";
+    const atIndex = rawTitleForParsing.indexOf('@');
+
+    let cityHeader, venueDetail;
+    if (atIndex !== -1) {
+        // Tout ce qui est après le "@"
+        const afterAt = rawTitleForParsing.substring(atIndex + 1).trim();
+        const venueParts = afterAt.split(' - ');
+        cityHeader = venueParts[0].trim().toUpperCase(); // ex: "DAMMARIE-LES-LYS (77)"
+        venueDetail = venueParts.length > 1 ? venueParts.slice(1).join(' - ').trim() : "Lieu à confirmer"; // ex: "Espace Nino Ferrer"
+    } else {
+        // Fallback : on lit location si pas de @ dans le titre
+        const rawLoc = (event.location || event.venue || "");
+        const venueParts = rawLoc.split(' - ');
+        cityHeader = venueParts[0].trim().toUpperCase();
+        venueDetail = venueParts.length > 1 ? venueParts.slice(1).join(' - ').trim() : "Lieu à confirmer";
     }
 
-    const statusLine = (isPast || status === 3) ? "" : `<p><strong>Statut:</strong> ${status === 2 ? "C'est prévu" : "Vite, réservez !"}</p>`;
+    // Message Fun intelligent (Selon date passée ou future)
+    const msgList = isPast ? PAST_MESSAGES : FUTURE_MESSAGES;
+    const activeMessage = event.customFunMessage || msgList[Math.floor(Math.random() * msgList.length)];
+    const statusLine = (isPast || status === 3) ? `<p style="color: #666; font-style: italic; margin: 5px 0 0 0;">"${activeMessage}" (Archive)</p>` : `<p style="color: var(--gold); font-style: italic; margin: 5px 0 0 0;">"${activeMessage}"</p>`;
 
     const popupContent = `
         <div class="tour-popup">
-            <h4>${displayTitle}</h4>
-            <p><strong>Lieu:</strong> ${event.location || event.venue}</p>
-            <p><strong>Date:</strong> ${displayDate}</p>
+            <h4 style="color: var(--gold); margin-bottom: 5px; font-family: 'Bebas Neue', cursive; font-size: 1.2rem;">📍 ${cityHeader}</h4>
+            <div style="font-size: 0.9rem; margin-bottom: 8px;">
+                <p style="margin: 0;"><strong>Lieu :</strong> ${venueDetail}</p>
+                <p style="margin: 4px 0;">🎙️ <em>${displayTitle}</em></p>
+                <p style="margin: 0;">📅 ${displayDate}</p>
+            </div>
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 8px 0;">
             ${statusLine}
-            ${funMessage}
         </div>
     `;
-
     marker.bindPopup(popupContent);
-    
-    marker.on('mouseover', function() {
+
+    // Rétablissement des bulles au survol (v6.6)
+    marker.on('mouseover', function (e) {
         this.openPopup();
+    });
+    marker.on('mouseout', function (e) {
+        this.closePopup();
     });
 }
 
@@ -323,7 +402,7 @@ window.isAdmin = false;
 window.checkAdmin = function(type) {
     if (window.isAdmin) return; // Already admin
     const password = prompt("Veuillez entrer le mot de passe administrateur :");
-    if (password === "BARBER2025") {
+    if (password && password.trim().toUpperCase() === "BARBER2025") {
         window.isAdmin = true;
         document.querySelectorAll('.admin-only').forEach(el => {
             el.style.display = 'block';
@@ -353,13 +432,40 @@ function renderShowsList() {
             status = rawTitle.toUpperCase().includes('OPTION') ? 2 : 1;
         }
 
+        // Décomposer le titre pour pré-remplir les champs
+        const atIdx = rawTitle.indexOf('@');
+        let spectacle = '', villeRaw = '', salle = '';
+        if (atIdx !== -1) {
+            spectacle = rawTitle.substring(0, atIdx).replace(/BSQ/gi,'').replace(/Option\s*\d*/gi,'').replace(/"/g,'').trim();
+            const afterAt = rawTitle.substring(atIdx + 1).trim();
+            const parts = afterAt.split(' - ');
+            villeRaw = parts[0].trim();
+            salle = parts.slice(1).join(' - ').trim();
+        } else {
+            spectacle = rawTitle;
+        }
+        // Séparer ville et département
+        const dptMatch = villeRaw.match(/^(.+?)\s*\((\d+[AB]?)\)$/);
+        const ville = dptMatch ? dptMatch[1].trim() : villeRaw;
+        const dpt   = dptMatch ? dptMatch[2] : '';
+
+        const isPastEvent = new Date(date) < new Date();
+        const msgList = isPastEvent ? PAST_MESSAGES : FUTURE_MESSAGES;
+        const msgOptions = msgList.map(m => `<option value="${m}" ${event.customFunMessage === m ? 'selected' : ''}>${m}</option>`).join('');
+
         const row = document.createElement('div');
         row.className = 'show-item-row edit-mode';
         row.innerHTML = `
-            <div class="show-edit-group">
-                <input type="text" class="edit-title" value="${rawTitle}" onchange="updateEvent(${index}, 'title', this.value)" placeholder="Titre">
-                <input type="date" class="edit-date" value="${new Date(date).toISOString().split('T')[0]}" onchange="updateEvent(${index}, 'date', this.value)">
-                <input type="text" class="edit-location" value="${event.location || event.venue || ''}" onchange="updateEvent(${index}, 'location', this.value)" placeholder="Lieu">
+            <div class="show-edit-group" style="grid-template-columns:1fr 1fr;">
+                <input type="text" value="${spectacle}" onchange="updateTitleField(${index}, 'spectacle', this.value)" placeholder="🎭 Spectacle (ex: Génération Barber)" title="Nom du spectacle">
+                <input type="date"  value="${date ? new Date(date).toISOString().split('T')[0] : ''}" onchange="updateEvent(${index}, 'date', this.value)">
+                <input type="text" value="${ville}" onchange="updateTitleField(${index}, 'ville', this.value)" placeholder="🏠 Ville (ex: AVIGNON)" title="Ville">
+                <input type="text" value="${dpt}" onchange="updateTitleField(${index}, 'dpt', this.value)" placeholder="Dépt (ex: 84)" title="Numéro de département" style="max-width:80px;">
+                <input type="text" value="${salle}" onchange="updateTitleField(${index}, 'salle', this.value)" placeholder="🏛️ Salle (ex: Théâtre du Chêne Noir)" title="Salle" style="grid-column:1/-1;">
+                <select class="edit-message" style="width:100%; border-radius:5px; padding:5px; font-size:0.8rem; grid-column:1/-1;" onchange="updateEvent(${index}, 'customFunMessage', this.value)">
+                    <option value="">🎯 Message aléatoire (défaut)</option>
+                    ${msgOptions}
+                </select>
             </div>
             <div class="show-actions">
                 <span class="dot red ${status === 1 ? 'active' : ''}" title="Confirmé" onclick="toggleStatus(${index}, 1)"></span>
@@ -369,6 +475,12 @@ function renderShowsList() {
                 <button class="delete-btn" onclick="deleteEvent(${index})">🗑️</button>
             </div>
         `;
+        // Stocker les champs décomposés (pour reconstruction du titre)
+        row.dataset.spectacle = spectacle;
+        row.dataset.ville = ville;
+        row.dataset.dpt = dpt;
+        row.dataset.salle = salle;
+        row.dataset.index = index;
         showsContainer.appendChild(row);
     });
 
@@ -378,15 +490,45 @@ function renderShowsList() {
     footerActions.innerHTML = `
         <button class="add-btn" onclick="addNewEvent()">➕ Ajouter une date</button>
         <button class="save-btn" onclick="saveAllAndRefresh()">💾 Appliquer (Carte)</button>
-        <button class="save-btn" style="background: #27ae60; color: white;" onclick="exportJson()">📥 Télécharger dates.json</button>
+        <div style="margin-top:20px; padding:15px; background: rgba(0,0,0,0.3); border-radius:10px; border: 1px dashed var(--gold);">
+            <p style="margin-top:0; font-size:0.9rem;">🚀 <strong>Persistence Collaborative (GitHub)</strong></p>
+            <input type="password" id="gh-token" placeholder="Coller votre Token GitHub ici" style="width:100%; margin-bottom:10px; font-size:0.8rem;" value="${localStorage.getItem('gh_token') || ''}" onchange="localStorage.setItem('gh_token', this.value)">
+            <div style="display:flex; gap:10px;">
+                <button class="save-btn" style="background: #27ae60; color: white; flex:1;" onclick="publishToGithub()">🚀 Publier sur le site</button>
+                <button class="save-btn" style="background: #888; flex:0.5;" onclick="exportJson()">📥 Export JSON</button>
+            </div>
+        </div>
     `;
     showsContainer.appendChild(footerActions);
 }
 
 window.updateEvent = function(index, field, value) {
     if (field === 'title') tourDates[index].title = value;
-    if (field === 'date') tourDates[index].date = value;
+    if (field === 'date') { tourDates[index].date = value; if (tourDates[index].start) tourDates[index].start.date = value; }
     if (field === 'location') tourDates[index].location = value;
+    if (field === 'customFunMessage') tourDates[index].customFunMessage = value;
+};
+
+// Reconstruit le titre format standard depuis les champs décomposés
+window.updateTitleField = function(index, field, value) {
+    const rows = showsContainer.querySelectorAll('.show-item-row');
+    let row = null;
+    rows.forEach(r => { if (parseInt(r.dataset.index) === index) row = r; });
+    if (!row) return;
+    if (field === 'spectacle') row.dataset.spectacle = value;
+    if (field === 'ville')     row.dataset.ville = value;
+    if (field === 'dpt')       row.dataset.dpt = value;
+    if (field === 'salle')     row.dataset.salle = value;
+
+    const s = row.dataset.spectacle || 'Concert';
+    const v = row.dataset.ville || '';
+    const d = row.dataset.dpt || '';
+    const sa = row.dataset.salle || '';
+    const dptStr = d ? ` (${d})` : '';
+    const salleStr = sa ? ` - ${sa}` : '';
+    const newTitle = `BSQ "${s}" @ ${v}${dptStr}${salleStr}`;
+    tourDates[index].title = newTitle;
+    tourDates[index].location = v;
 };
 
 window.deleteEvent = function(index) {
@@ -398,17 +540,30 @@ window.deleteEvent = function(index) {
 
 window.addNewEvent = function() {
     tourDates.unshift({
-        title: "NOUVELLE DATE",
+        title: 'BSQ "Génération Barber" @ VILLE (00) - Salle',
         date: new Date().toISOString().split('T')[0],
-        location: "Ville (Code Postal)",
+        location: 'VILLE',
         manualStatus: 1
     });
     renderShowsList();
 };
 
-window.saveAllAndRefresh = function() {
+window.saveAllAndRefresh = async function() {
     refreshMarkers(tourDates);
-    alert("Modifications appliquées sur la carte ! (N'oubliez pas de sauvegarder votre fichier dates.json manuellement si vous voulez qu'elles soient permanentes après rechargement)");
+    renderChronologicalList(tourDates);
+
+    // 💾 Sauvegarde dans localStorage (persistance au rechargement)
+    localStorage.setItem('tourDates_cache', JSON.stringify(tourDates));
+
+    // Auto-publication GitHub si token présent
+    const token = localStorage.getItem('gh_token');
+    if (token) {
+        await publishToGithub();
+        // Après succès GitHub, le cache local n'est plus nécessaire
+        localStorage.removeItem('tourDates_cache');
+    } else {
+        alert("✅ Modifications appliquées et sauvegardées localement.\n\u26a0️ Entrez un Token GitHub dans le Coffre pour publier sur le site.");
+    }
 };
 
 window.toggleStatus = function(index, newStatus) {
@@ -579,9 +734,11 @@ function initTriggers() {
     
     secretBtn?.addEventListener('click', () => {
         const password = prompt("Entrez le mot de passe secret :");
-        if (password === "BARBER2025") {
+        if (password && password.trim().toUpperCase() === "BARBER2025") {
             modal.style.display = 'block';
             renderShowsList();
+        } else if (password !== null) {
+            alert("❌ Mot de passe incorrect.");
         }
     });
 
@@ -807,6 +964,62 @@ function initParallax() {
 }
 initParallax();
 
+// --- COLLABORATIVE PERSISTENCE (GITHUB API) ---
+window.publishToGithub = async function() {
+    const token = localStorage.getItem('gh_token');
+    if (!token) {
+        alert("Veuillez entrer votre Token GitHub pour publier.");
+        return;
+    }
+
+    const repo = "leleuyann33/Barbertour";
+    const path = "dates.json";
+    const url = `https://api.github.com/repos/${repo}/contents/${path}`;
+
+    try {
+        const getResp = await fetch(url, {
+            headers: { 'Authorization': `token ${token}` }
+        });
+        
+        if (!getResp.ok) throw new Error("Impossible de récupérer l'état actuel sur GitHub (Vérifiez votre token).");
+        const fileData = await getResp.json();
+        const sha = fileData.sha;
+
+        // Base64 encoding properly for UTF-8
+        const jsonString = JSON.stringify(tourDates, null, 2);
+        const encoder = new TextEncoder();
+        const data = encoder.encode(jsonString);
+        let binary = "";
+        for (let i = 0; i < data.byteLength; i++) {
+            binary += String.fromCharCode(data[i]);
+        }
+        const content = btoa(binary);
+
+        const putResp = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                message: "Mise à jour des dates (via Interface Admin)",
+                content: content,
+                sha: sha
+            })
+        });
+
+        if (putResp.ok) {
+            alert("🚀 Succès ! Les modifications sont sur GitHub. Le site sera à jour dans 1 à 2 minutes.");
+        } else {
+            const err = await putResp.json();
+            throw new Error(err.message || "Erreur lors de l'envoi.");
+        }
+    } catch (error) {
+        console.error("GitHub API Error:", error);
+        alert("❌ Échec : " + error.message);
+    }
+};
+
 // --- RELOCALISATION RADIO MOBILE ---
 function handleMobileRadio() {
     const radioCol = document.getElementById('radio-column');
@@ -827,3 +1040,26 @@ function handleMobileRadio() {
 window.addEventListener('resize', handleMobileRadio);
 document.addEventListener('DOMContentLoaded', handleMobileRadio);
 handleMobileRadio();
+
+// ============================================================
+// 🎬 GARDIEN DE VISIBILITÉ VIDÉO (Auto-Stop sur Scroll)
+// v6.5 - v6.6
+// ============================================================
+window.addEventListener('scroll', () => {
+    // Ciblage des vidéos (Desktop et Mobile)
+    const videos = document.querySelectorAll('video');
+    
+    videos.forEach(video => {
+        const rect = video.getBoundingClientRect();
+        // Vérifie si la vidéo est encore au moins partiellement visible
+        const isVisible = (rect.bottom >= 0 && rect.top <= window.innerHeight);
+        
+        // Si la vidéo est lancée mais n'est plus visible -> STOP
+        if (!isVisible && !video.paused) {
+            video.pause();
+            video.currentTime = 0; // Remet à zéro
+            video.load(); // FORCE le rechargement pour afficher le poster.jpg
+            console.log('🎬 Vidéo arrêtée et Poster rétabli (hors champ)');
+        }
+    });
+}, { passive: true });
