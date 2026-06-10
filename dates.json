@@ -447,15 +447,6 @@
     ]
   },
   {
-    "date": "2027-01-22",
-    "title": "Option BSQ \"GB\" @ VIBRAYE (72) - Quai des Arts",
-    "location": "VIBRAYE",
-    "coords": [
-      48.0604122,
-      0.7341899
-    ]
-  },
-  {
     "date": "2027-02-05",
     "title": "BSQ \"GB\" @ SAINT-PRIEST-EN-JAREZ (42) - Le NEC",
     "location": "SAINT-PRIEST-EN-JAREZ",
@@ -552,6 +543,15 @@
     "coords": [
       43.4731208,
       -1.4474527
+    ]
+  },
+  {
+    "date": "2027-09-18",
+    "title": "Option BSQ \"GB\" @ VIBRAYE (72) - Quai des Arts",
+    "location": "VIBRAYE",
+    "coords": [
+      48.0604122,
+      0.7341899
     ]
   },
   {
