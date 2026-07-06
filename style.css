@@ -1,20 +1,25 @@
+/* ============================================================
+   🎨 PALETTE DE COULEURS GLOBALES
+   Modifie ces valeurs pour changer les couleurs sur TOUT le site
+   ============================================================ */
 :root {
-    --bg-dark: #072c28; /* Dark teal from poster */
-    --gold: #E1B12C;
-    --teal: #40E0D0;
+    --bg-dark: #0a0a0a;       /* 🎨 Fond Noir Théâtre profond */
+    --gold: #E1B12C;          /* 🎨 Doré Barber */
     --white: #ffffff;
-    --glass-bg: rgba(7, 44, 40, 0.9);
-    --glass-border: rgba(225, 177, 44, 0.5);
-    --poster-teal: #106359;
+    --glass-bg: rgba(10, 10, 10, 0.85); /* Effet verre fumé */
+    --glass-border: rgba(225, 177, 44, 0.35);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif; /* 🔤 Police globale du site */
 }
 
+/* ============================================================
+   🖼️ FOND D'ÉCRAN (image de spectacle en arrière-plan)
+   ============================================================ */
 body {
     background-color: var(--bg-dark);
     color: var(--white);
@@ -31,39 +36,43 @@ body::before {
     top: 0;
     left: -5%;
     width: 110%;
-    height: 100%; /* Sync with viewport */
+    height: 100%;
     z-index: -1;
     background-color: var(--bg-dark);
     background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url('Generation-barber-shop-spectacle.webp');
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), /* 🎨 Assombrissement de l'image (0.7 = 70% noir) - diminue pour éclaircir */
+        url('01 Affiche GB Bleue Neutre.jpg.jpeg');              /* 🖼️ Fichier image de fond */
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center var(--bg-pos-y, 0%); /* Progressive scroll */
-    filter: brightness(0.65) contrast(1.11);
+    background-position: center var(--bg-pos-y, 0%);
+    filter: brightness(0.65) contrast(1.11); /* 🎨 Luminosité image (0.65 = sombre). Augmente vers 1.0 pour éclaircir */
     pointer-events: none;
     will-change: background-position;
 }
 
-
+/* ============================================================
+   🏷️ EN-TÊTE (zone du titre principal en haut de page)
+   ============================================================ */
 header {
-    padding: 2.5rem 1rem;
+    padding: 2.5rem 1rem; /* 📐 Espace haut/bas du header. Diminue pour le resserrer */
     text-align: center;
-    background:transparent ;
+    background: transparent; /* 🎨 Fond transparent (pas de couleur derrière le titre) */
     border-bottom: none;
     box-shadow: none;
     position: relative;
 }
 
 header::after {
-    display: none;
+    display: none; /* Ligne décorative dorée désactivée */
 }
 
-
+/* ============================================================
+   🔤 TITRE PRINCIPAL "Compagnie Barber Shop Quartet"
+   ============================================================ */
 .brand-title {
-    font-family: 'Sancreek', cursive;
-    font-size: 3rem;
-    color: #f0ed4f; /* Ivory color from poster text */
+    font-family: 'Bebas Neue', cursive; /* 🔤 Police du titre principal */
+    font-size: 4rem;
+    color: #f0ed4f;
     text-transform: uppercase;
     letter-spacing: 4px;
     -webkit-text-stroke: 1px var(--gold);
@@ -71,17 +80,25 @@ header::after {
     margin-bottom: 0.5rem;
 }
 
+/* ============================================================
+   🔤 SOUS-TITRE "La Carte de la Tournée"
+   ============================================================ */
 .brand-subtitle {
-    font-size: 1.2rem;
-    color: var(--gold);
+    font-size: 2rem;       /* 📐 Taille du sous-titre PC */
+    color: var(--gold);      /* 🎨 Couleur du sous-titre (doré) */
     text-transform: uppercase;
-    letter-spacing: 6px;
+    letter-spacing: 6px;     /* 📐 Espacement entre les lettres */
     font-weight: 400;
 }
 
+/* ============================================================
+   📐 MISE EN PAGE PRINCIPALE (carte + panneau côte à côte)
+   ============================================================ */
 main {
     flex: 1;
     display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
     padding: 2rem;
     gap: 3rem;
     max-width: 1600px;
@@ -89,54 +106,85 @@ main {
     width: 100%;
 }
 
+.site-centered-title {
+    text-align: center !important;
+    width: 100%;
+    margin: 2.5rem 0 1rem 0 !important;
+    font-size: 2.5rem !important;
+    letter-spacing: 4px !important;
+    color: var(--gold) !important;
+    text-shadow: 0 0 15px rgba(225, 177, 44, 0.4);
+}
+
 @media (max-width: 1200px) {
     main {
-        flex-direction: column;
+        flex-direction: column; /* Empile carte + vidéo en colonne sur petits écrans */
         padding: 1rem;
         gap: 2rem;
     }
 }
 
+/* ============================================================
+   🗺️ CADRE DE LA CARTE (le cadre noir autour de la carte)
+   ============================================================ */
 #theater-frame {
-    flex: 2;
-    padding: 12px;
-    background: #111;
+    flex: 2;              /* 📐 Proportion : la carte prend 2/3 de la largeur */
+    padding: 12px;        /* 📐 Épaisseur du cadre autour de la carte */
+    background: #111;     /* 🎨 Couleur du cadre (noir) */
     border: 1px solid #333;
-    border-radius: 25px;
+    border-radius: 25px;  /* 📐 Arrondi des coins du cadre */
     box-shadow: 0 0 40px rgba(0, 0, 0, 1), inset 0 0 20px rgba(225, 177, 44, 0.2);
     position: relative;
     z-index: 10;
 }
 
+/* ============================================================
+   🗺️ CONTENEUR DE LA CARTE
+   ============================================================ */
 .map-container {
     width: 100%;
-    height: 650px;
+    height: 650px;              /* 📐 HAUTEUR DE LA CARTE sur PC. Modifie ce chiffre */
     border-radius: 15px;
     overflow: hidden;
-    border: 3px solid var(--gold);
+    border: 3px solid var(--gold); /* 🎨 Bordure dorée autour de la carte */
     position: relative;
 }
 
 #map {
     width: 100%;
     height: 100%;
-    background: #0a312d;
+    background: #264b5c;
 }
 
-/* Dark mode filter for the map tiles - matching poster teal */
+/* 🎨 Filtre de couleur appliqué aux tuiles de la carte (effet vintage teal) */
 .leaflet-tile-pane {
     filter: invert(100%) hue-rotate(150deg) brightness(0.5) contrast(1.3) sepia(0.3);
 }
 
-.side-panel {
-    flex: 1;
+.map-section-wrapper {
+    flex: 1.1; 
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    min-width: 400px;
 }
 
-/* Poster Styling */
+.video-section-wrapper {
+    flex: 0.9;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.video-section-wrapper video, #media-frame-mobile video {
+    max-height: 400px !important; /* Format compact élégant */
+    width: 100% !important;
+    height: auto !important;
+    object-fit: cover; /* Remplit sans déformer, style bandeau */
+    border: 3px solid var(--gold);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+/* Ancienne zone affiche (désactivée) */
 .poster-box {
     border: 3px solid var(--gold);
     border-radius: 15px;
@@ -144,39 +192,40 @@ main {
     box-shadow: 0 10px 30px rgba(0,0,0,0.8);
 }
 
-
 .poster-box img {
     width: 100%;
     display: block;
     filter: sepia(0.2) contrast(1.1);
 }
 
-/* Markers */
+/* ============================================================
+   📍 PASTILLES SUR LA CARTE
+   ============================================================ */
 .custom-marker {
-    background: #ff0000;
+    background: #ff3e3e;   /* 🎨 Rouge Barber */
     border: 2px solid #fff;
     border-radius: 50%;
-    box-shadow: 0 0 20px #ff0000, 0 0 10px #fff;
+    box-shadow: 0 0 15px #ff3e3e, 0 0 5px #fff;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    width: 18px;
-    height: 18px;
+    width: 12px;           /* 📐 Taille réduite pour l'élégance */
+    height: 12px;
 }
 
 .option-marker {
-    background: #bbb;
+    background: #bbb;      
     border: 2px solid var(--gold);
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(225, 177, 44, 0.4);
-    width: 14px;
-    height: 14px;
+    width: 10px;           /* 📐 Taille réduite prévu */
+    height: 10px;
 }
 
-/* Past Dates (Dimmed) */
+/* 🎨 Pastilles dates passées (assombries) */
 .past-confirmed {
     background: #4a0000 !important;
     border-color: #666 !important;
     box-shadow: none !important;
-    opacity: 0.6;
+    opacity: 0.6;          /* 📐 Transparence des dates passées (0=invisible, 1=plein) */
 }
 
 .past-option {
@@ -187,48 +236,57 @@ main {
 }
 
 .custom-marker:hover, .option-marker:hover {
-    transform: scale(1.5);
+    transform: scale(1.5); /* 📐 Grossissement au survol (1.5 = 150%) */
     z-index: 1000 !important;
 }
 
-/* Popup Styles */
+/* ============================================================
+   💬 POPUPS AU CLIC SUR LES PASTILLES
+   ============================================================ */
+/* --- Popups Fusionnées (Glassmorphism + Gold) --- */
 .leaflet-popup-content-wrapper {
-    background: #111 !important;
-    color: var(--white) !important;
-    border: 2px solid var(--gold);
-    border-radius: 15px !important;
-    padding: 10px;
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 12px !important;
+    color: white !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    padding: 5px;
 }
 
 .leaflet-popup-tip {
-    background: var(--gold) !important;
+    background: var(--glass-border) !important;
 }
 
 .tour-popup h4 {
-    color: var(--teal);
-    font-family: 'Sancreek', cursive;
-    font-size: 1.5rem;
-    margin-bottom: 0.8rem;
-    border-bottom: 1px solid rgba(225, 177, 44, 0.3);
+    margin: 5px 0 10px 0 !important;
+    border-bottom: 1px solid rgba(225, 177, 44, 0.1);
     padding-bottom: 5px;
+    font-size: 1.1rem;
+    color: var(--gold);
 }
 
 .tour-popup p {
-    margin: 8px 0;
-    font-size: 1.1rem;
+    margin: 4px 0;
+    font-size: 0.95rem;
     color: #ddd;
 }
 
+/* ============================================================
+   🦶 FOOTER (bas de page avec le copyright)
+   ============================================================ */
 footer {
-    padding: 3rem;
+    padding: 3rem;           /* 📐 Espace autour du footer */
     text-align: center;
-    color: #444;
+    color: #444;             /* 🎨 Couleur du texte footer (gris discret) */
     font-size: 1rem;
     letter-spacing: 2px;
     text-transform: uppercase;
 }
 
-/* Modal Styles */
+/* ============================================================
+   🔒 MODALE (fenêtre "Coffre Secret" admin)
+   ============================================================ */
 .modal {
     display: none;
     position: fixed;
@@ -237,15 +295,15 @@ footer {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.95);
+    background-color: rgba(0,0,0,0.95); /* 🎨 Fond noir derrière la modale */
     backdrop-filter: blur(10px);
 }
 
 .modal-content {
-    background: #0a0a0a;
+    background: #0a0a0a;          /* 🎨 Fond de la fenêtre modale */
     margin: 5% auto;
     padding: 2rem;
-    border: 3px solid var(--gold);
+    border: 3px solid var(--gold); /* 🎨 Bordure dorée de la modale */
     width: 80%;
     max-width: 900px;
     border-radius: 25px;
@@ -265,7 +323,7 @@ footer {
 
 .modal-header h2 {
     font-family: 'Sancreek', cursive;
-    color: var(--gold);
+    color: var(--gold);   /* 🎨 Couleur du titre de la modale */
     font-size: 2rem;
 }
 
@@ -323,9 +381,9 @@ footer {
     transition: all 0.2s;
 }
 
-.add-btn { background: #2ecc71; color: white; border: none; }
-.save-btn { background: var(--gold); color: black; border: none; }
-.delete-btn { background: transparent; border: 1px solid #ff3e3e; color: #ff3e3e; padding: 5px 10px; }
+.add-btn { background: #2ecc71; color: white; border: none; }     /* 🎨 Bouton Ajouter (vert) */
+.save-btn { background: var(--gold); color: black; border: none; } /* 🎨 Bouton Sauvegarder (doré) */
+.delete-btn { background: transparent; border: 1px solid #ff3e3e; color: #ff3e3e; padding: 5px 10px; } /* 🎨 Bouton Supprimer (rouge) */
 
 .show-actions {
     display: flex;
@@ -334,7 +392,33 @@ footer {
     justify-content: flex-end;
 }
 
-/* Status Dots */
+/* Zone nettoyée (styles déplacés en amont) */
+
+/* 🪒 Styles Additionnels Admin */
+.edit-message {
+    background: #151515 !important;
+    color: var(--gold) !important;
+    border: 1px solid #444 !important;
+    border-radius: 4px;
+    padding: 4px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 5px;
+    width: 100%;
+}
+#gh-token {
+    background: #000 !important;
+    color: #4cd137 !important;
+    border: 1px solid #333 !important;
+    font-family: monospace;
+    font-size: 0.8rem;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* ============================================================
+   🔴 PASTILLES DE STATUT (dans la modale admin)
+   ============================================================ */
 .dot {
     height: 18px;
     width: 18px;
@@ -344,9 +428,10 @@ footer {
     border: 2px solid transparent;
 }
 
-.dot.red { background-color: #ff3e3e; }
-.dot.yellow { background-color: var(--gold); }
-.dot.gray { background-color: #777; }
+.dot.red { background-color: #ff3e3e; }        /* 🎨 Pastille Confirmé */
+.dot.yellow { background-color: var(--gold); } /* 🎨 Pastille Prévu */
+.dot.gray { background-color: #777; }          /* 🎨 Pastille Masqué */
+
 .dot.empty { 
     background-color: transparent; 
     border: 2px solid #555; 
@@ -358,8 +443,9 @@ footer {
     box-shadow: 0 0 10px rgba(255,255,255,0.5);
 }
 
-/* --- Months Grid Navigation --- */
-/* --- Months Grid Navigation (Original Capsule Style) --- */
+/* ============================================================
+   📅 GRILLE DE NAVIGATION PAR MOIS (capsules 2026/2027)
+   ============================================================ */
 .months-grid {
     display: flex;
     flex-direction: column;
@@ -367,11 +453,11 @@ footer {
     margin: 20px auto;
     width: max-content;
     max-width: 100%;
-    padding: 15px 30px;
-    background: rgba(0, 0, 0, 0.05); /* Quasi-invisible veil */
+    padding: 15px 30px;      /* 📐 Espace interne de la barre */
+    background: rgba(0, 0, 0, 0.05);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(225, 177, 44, 0.2);
-    border-radius: 100px; /* Essential pill shape for the bar */
+    border: 1px solid rgba(225, 177, 44, 0.2); /* 🎨 Bordure dorée discrète */
+    border-radius: 100px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.5);
     z-index: 100;
 }
@@ -385,8 +471,8 @@ footer {
 .year-label {
     font-family: 'Montserrat', sans-serif;
     font-weight: 900;
-    font-size: 1.3rem;
-    color: var(--gold);
+    font-size: 1.3rem;  /* 📐 Taille du "2026" / "2027" */
+    color: var(--gold); /* 🎨 Couleur des années */
     min-width: 60px;
 }
 
@@ -398,15 +484,15 @@ footer {
 
 .month-btn {
     background: transparent;
-    border: 1.5px solid var(--gold); /* Pill border */
-    color: var(--gold);
+    border: 1.5px solid var(--gold); /* 🎨 Couleur bordure des boutons mois */
+    color: var(--gold);              /* 🎨 Couleur texte des boutons mois */
     padding: 6px 18px;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     font-size: 0.75rem;
     font-weight: 900;
     text-transform: uppercase;
-    border-radius: 40px; /* Pill shape for buttons */
+    border-radius: 40px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     letter-spacing: 1px;
     display: flex;
@@ -415,7 +501,7 @@ footer {
 }
 
 .month-btn:hover {
-    background: var(--gold);
+    background: var(--gold); /* 🎨 Fond doré au survol */
     color: #000;
     transform: scale(1.05);
     box-shadow: 0 0 15px rgba(225, 177, 44, 0.4);
@@ -426,25 +512,13 @@ footer {
     box-shadow: inset 0 0 5px rgba(225, 177, 44, 0.2);
 }
 
-/* --- Chronological List Section --- */
-#list-section {
-    max-width: 1200px;
-    margin: 4rem auto;
-    padding: 0 2rem;
-}
-
-.list-header-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    margin-bottom: 40px;
-}
-
+/* ============================================================
+   📋 TITRE "Prochaines Dates de la Tournée"
+   ============================================================ */
 .section-title {
-    font-family: 'Sancreek', cursive;
-    font-size: 3rem;
-    color: var(--gold);
+    font-family: 'Bebas Neue', cursive; /* 🔤 Police du titre de section */
+    font-size: 3rem;                  /* 📐 Taille du titre sur PC */
+    color: var(--gold);               /* 🎨 Couleur dorée du titre */
     text-transform: uppercase;
     letter-spacing: 3px;
     text-shadow: 0 0 20px rgba(225, 177, 44, 0.4);
@@ -456,46 +530,49 @@ footer {
 #chronological-list {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.5rem; /* 📐 Espace entre chaque carte de date */
 }
 
+/* ============================================================
+   🎫 CARTE D'UNE DATE (chaque ligne de concert)
+   ============================================================ */
 .date-item {
     display: grid;
-    grid-template-columns: 80px 1fr;
+    grid-template-columns: 80px 1fr; /* 📐 Largeur colonne date | largeur infos */
     align-items: center;
     width: 650px;
     max-width: 90vw;
     margin: 0 auto;
     padding: 1.2rem 1.5rem;
     min-height: 90px;
-    background: rgba(7, 44, 40, 0.85); /* Teal from poster */
+    background: rgba(8, 35, 59, 0.85); /* 🎨 Fond de chaque carte de date */
     border: 1px solid rgba(225, 177, 44, 0.4);
     border-radius: 12px;
     transition: all 0.3s ease;
-    border-left: 8px solid #ff3e3e;
+    border-left: 8px solid #ff3e3e;    /* 🎨 Barre rouge à gauche = concert confirmé */
     box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
 
 .date-item:hover {
-    background: rgba(64, 224, 208, 0.1);
+    background: rgba(64, 224, 208, 0.1); /* 🎨 Couleur au survol d'une date */
     border-color: var(--gold);
     transform: scale(1.02);
 }
 
 .item-date {
     font-family: 'Sancreek', cursive;
-    font-size: 1.4rem;
-    color: #ffffff;
+    font-size: 1.4rem; /* 📐 Taille de la date (ex: "15 Mar") sur PC */
+    color: #ffffff;    /* 🎨 Couleur de la date */
 }
 
 .item-info h3 {
-    font-size: 1.3rem;
+    font-size: 1.3rem; /* 📐 Taille du nom du concert sur PC */
     margin-bottom: 5px;
     color: var(--white);
 }
 
 .item-info p {
-    color: #888;
+    color: #888;       /* 🎨 Couleur du lieu (gris) */
     font-size: 1rem;
 }
 
@@ -511,7 +588,7 @@ footer {
 .month-title {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    color: var(--teal);
+    color: var(--teal);   /* 🎨 Couleur des titres de mois (turquoise) */
     letter-spacing: 5px;
     margin-bottom: 1.5rem;
     padding-left: 0;
@@ -519,9 +596,9 @@ footer {
     text-shadow: 0 0 10px rgba(64, 224, 208, 0.3);
 }
 
-/* --- Radio Player Section --- */
-
-
+/* ============================================================
+   📻 RADIO SVG (le poste de radio vintage)
+   ============================================================ */
 #radio-section {
     display: flex;
     flex-direction: column;
@@ -529,13 +606,13 @@ footer {
 }
 
 .radio-header {
-    display: none;
+    display: none; /* Titre "Radio Barber" caché (remplacé par le label externe) */
 }
 
 .radio-container {
     position: relative;
-    width: 132px;  /* 220 * 0.6 */
-    height: 90px;  /* 150 * 0.6 */
+    width: 132px;
+    height: 90px;
     cursor: pointer;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
@@ -565,6 +642,7 @@ footer {
     transition: opacity 1.2s ease;
 }
 
+/* ⚠️ NE PAS MODIFIER - géré par le bloc PC uniquement plus bas */
 svg.radio {
     width: 220px;
     height: 150px;
@@ -580,7 +658,7 @@ svg.radio {
 
 #power-dot {
     transition: fill 0.5s ease;
-    fill: #333;
+    fill: #333;                /* 🎨 Couleur du voyant éteint */
 }
 
 .radio-container.on #dial-light,
@@ -588,7 +666,7 @@ svg.radio {
 .radio-container.on #bulb,
 .radio-container.on #bulb2,
 .radio-container.on #speaker-glow { opacity: 1; }
-.radio-container.on #power-dot { fill: #e87020; }
+.radio-container.on #power-dot { fill: #e87020; } /* 🎨 Couleur du voyant allumé (orange) */
 
 .radio-container.flickering #dial-light { animation: flicker 1.1s ease forwards; }
 .radio-container.flickering #bulb { animation: flicker 0.9s ease forwards; }
@@ -601,7 +679,6 @@ svg.radio {
     100% { opacity: 1; }
 }
 
-/* Volume Fader Hidden */
 .vol-fader-container {
     position: absolute;
     top: 50%;
@@ -612,18 +689,20 @@ svg.radio {
     z-index: 10;
 }
 
-/* Label Radio Barber Shop Quartet */
+/* ============================================================
+   🔤 LABEL "Radio Barber" (texte sous la radio)
+   ============================================================ */
 .radio-label {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    font-size: 0.9rem;
-    color: var(--teal);
+    font-size: 0.9rem;     /* 📐 Taille du texte "Radio Barber" sur PC */
+    color: var(--teal);    /* 🎨 Couleur du label (turquoise) */
     text-transform: uppercase;
     letter-spacing: 2px;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3); /* Subtle shadow for depth, no blur */
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
     margin-top: 5px;
     text-align: center;
-    transform: rotate(-8deg);
+    transform: rotate(-8deg); /* 📐 Inclinaison du label (même angle que la radio) */
     cursor: grab;
     width: max-content;
     display: inline-block;
@@ -631,15 +710,17 @@ svg.radio {
 }
 
 #radio-label-node-svg {
-    display: none; /* Hidden inside SVG to use the outer div */
+    display: none;
 }
 
-/* Media Gallery Mini */
+/* ============================================================
+   🎬 CADRE VIDÉO
+   ============================================================ */
 #media-frame {
     margin-top: 1rem;
     padding: 15px;
-    background: rgba(0,0,0,0.5);
-    border: 3px double var(--gold);
+    background: rgba(0,0,0,0.5);          /* 🎨 Fond du cadre vidéo */
+    border: 3px double var(--gold);       /* 🎨 Double bordure dorée */
     border-radius: 15px;
     min-height: 180px;
     display: flex;
@@ -654,7 +735,7 @@ svg.radio {
 }
 
 .upload-btn {
-    background: var(--gold);
+    background: var(--gold); /* 🎨 Couleur bouton upload */
     color: #000;
     border: none;
     padding: 8px 15px;
@@ -671,12 +752,14 @@ svg.radio {
 }
 #secret-trigger:hover {
     opacity: 1;
-    color: var(--gold);
+    color: var(--gold); /* 🎨 Couleur du © au survol */
 }
 
-/* Finalized Layout - FLEXBOX PROPRE */
-
-/* Section principale : radio à gauche, dates à droite */
+/* ============================================================
+   📐 MISE EN PAGE FLEXBOX - SECTION RADIO + DATES
+   Radio à gauche, Dates à droite
+   ⚠️ NE PAS MODIFIER cette section — utilise le bloc PC plus bas
+   ============================================================ */
 #list-section {
     display: flex;
     flex-direction: row;
@@ -688,7 +771,6 @@ svg.radio {
     width: 100%;
 }
 
-/* Colonne gauche : radio + label */
 #radio-column {
     display: flex;
     flex-direction: column;
@@ -713,7 +795,6 @@ svg.radio {
     z-index: 12;
 }
 
-/* Colonne droite : titre + liste des dates */
 #dates-column {
     flex: 1;
 }
@@ -733,42 +814,84 @@ svg.radio {
     margin: 1rem auto;
     padding: 0 2rem;
 }
+
+/* ============================================================
+   📻 TAILLE ET ROTATION DE LA RADIO (PC)
+   ============================================================ */
 svg.radio {
-    transform: scale(0.59) rotate(-8deg) !important;
+    transform: scale(0.59) rotate(-8deg) !important; /* 📐 Zoom (0.59) et rotation (-8deg) */
     transform-origin: top left !important;
     overflow: hidden !important;
 }
 
-/* Vidéo desktop visible, mobile cachée */
+/* ============================================================
+   🎬 VIDÉO : desktop visible / mobile cachée
+   ============================================================ */
 #media-frame-mobile { display: none; }
 
 @media (max-width: 768px) {
-    #media-frame-desktop { display: none; }
-    #media-frame-mobile { display: block; }
-}
-@media (max-width: 768px) {
-    /* 1. Éclaircir le filtre de fond sur mobile */
+    main {
+        flex-direction: column; /* Empile carte + vidéo en colonne sur petits écrans */
+        padding: 0; 
+        gap: 0;
+    }
+    #media-frame-desktop { display: none !important; }
+    #media-frame-mobile { display: block !important; }
+
+    .map-section-wrapper, .video-section-wrapper {
+        flex: none !important;
+        width: 100vw !important; /* Pleine largeur écran */
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    #theater-frame {
+        width: 100% !important;
+        border-radius: 0 !important; /* Épouse les bords du téléphone */
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        margin-bottom: 2rem !important;
+    }
+
+    .map-container {
+        height: 50vh !important;
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+    }
+
+    .brand-subtitle.map-title-over {
+        padding: 1rem 1.5rem !important; /* Garde une marge pour le titre */
+        margin-bottom: 0 !important;
+    }
+
+    /* 🖼️ Image de fond plus claire sur mobile */
     body::before {
         background-image: 
             linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-            url('Generation-barber-shop-spectacle.webp') !important;
+            url("01 Affiche GB Bleue Neutre.jpg.jpeg") !important;
         filter: brightness(0.85) contrast(1.1) !important;
     }
-.radio-label {
-        font-size: 0.35rem !important;
+
+    /* 🔤 Label radio (taille sur mobile) */
+    .radio-label {
+        font-size: 0.35rem !important; /* 📐 Taille du label "Radio Barber" sur mobile */
     }
-    /* 2. Réduire la taille de la carte pour permettre le défilement au doigt */
+
+    /* 🗺️ Hauteur de la carte sur mobile */
     .map-container {
-        height: 45vh !important;
+        height: 45vh !important;    /* 📐 Hauteur carte mobile (45% écran) */
         min-height: 350px !important;
     }
+
     #theater-frame {
-        /* Ajoute une énorme zone "sûre" en bas (bande noire) pour pouvoir attraper l'écran et scroller */
-        padding-bottom: 50px !important;
+        padding-bottom: 50px !important; /* 📐 Zone de sécurité pour scroller */
         margin-bottom: 10px !important;
     }
-    
-   #section-title-main, #full-months-grid {
+
+    /* Titre et grille des mois : repositionnement standard */
+    #section-title-main, #full-months-grid {
         position: static !important;
         left: auto !important;
         top: auto !important;
@@ -777,10 +900,11 @@ svg.radio {
         text-align: center;
     }
 
+    /* 🔤 Label "Radio Barber" sur mobile */
     #radio-label-node {
         position: absolute !important;
-        left: 15px !important;
-        top: 15px !important;
+        left: 25px !important;   /* 📐 Recentrage du label sur mobile */
+        top: 15px !important;    
         margin: 0 !important;
         display: block !important;
         text-align: center;
@@ -788,9 +912,10 @@ svg.radio {
         pointer-events: auto !important;
     }
 
+    /* 📻 Radio sur mobile */
     #radio-anchor {
         position: relative !important;
-        left: 5px !important;
+        left: 15px !important;   /* 📐 Recentrage de la radio sur mobile */
         bottom: 0 !important;
         margin: 0 !important;
         display: block !important;
@@ -799,17 +924,18 @@ svg.radio {
         pointer-events: auto !important;
     }
 
-    /* Sur mobile : radio au-dessus des dates en colonne */
+    /* Layout mobile : colonne unique */
     #list-section {
         flex-direction: column !important;
         align-items: center !important;
         padding: 0 1rem !important;
     }
 
+    /* Colonne radio sur mobile */
     #radio-column {
         position: absolute !important;
-        bottom: -20px !important;
-        left: -10px !important;
+        bottom: -60px !important;  /* Descente finale dans la marge noire */
+        left: 15px !important;    
         width: auto !important;
         align-items: flex-start !important;
         z-index: 1000 !important;
@@ -820,76 +946,102 @@ svg.radio {
     #dates-column {
         width: 100% !important;
     }
-    
-    
 
-    /* 4. Réduction des titres sur mobile */
+    /* ============================================================
+       🔤 RÉDUCTION DES TEXTES SUR MOBILE
+       ============================================================ */
     .brand-title {
-        font-size: 2.2rem !important;
-        letter-spacing: 2px !important;
-    }
-    .brand-subtitle {
-        font-size: 0.85rem !important;
+        font-family: 'Bebas Neue', cursive !important; /* 🧪 TEST mobile - Bebas Neue sobre */
+        font-size: 2.2rem !important;    /* 📐 Titre principal sur mobile */
         letter-spacing: 3px !important;
+        text-transform: uppercase !important;
+    }
+    .brand-subtitle, .site-centered-title {
+        font-size: 0.85rem !important;   /* 📐 Retour à la taille discrète d'origine sur mobile */
+        letter-spacing: 3px !important;
+        margin: 1.5rem 0 1rem 0 !important;
     }
     .section-title {
-        font-size: 1.8rem !important;
+        font-size: 1.8rem !important;    /* 📐 "Prochaines Dates" sur mobile */
         letter-spacing: 2px !important;
     }
     .month-title {
-        font-size: 0.75rem !important;
+        font-size: 0.75rem !important;   /* 📐 Titres de mois sur mobile */
         letter-spacing: 3px !important;
     }
     .item-date {
-        font-size: 1.1rem !important;
+        font-size: 1.1rem !important;    /* 📐 Date du concert sur mobile */
     }
     .item-info h3 {
-        font-size: 1rem !important;
+        font-size: 1rem !important;      /* 📐 Nom du concert sur mobile */
     }
     .item-info p {
-        font-size: 0.85rem !important;
+        font-size: 0.85rem !important;   /* 📐 Lieu du concert sur mobile */
     }
     header {
-        padding: 1.5rem 1rem !important;
+        padding: 1.5rem 1rem !important; /* 📐 Espace header sur mobile */
     }
 
-    /* 5. Masquer la grille des mois sur mobile */
+    /* 📅 Grille des mois : cachée sur mobile */
     #full-months-grid {
         display: none !important;
     }
+
+    /* 📻 Taille de la radio sur mobile */
     svg.radio {
-        transform: scale(0.35) rotate(-8deg) !important;
+        transform: scale(0.35) rotate(-8deg) !important; /* 📐 Zoom radio mobile (0.35) */
         transform-origin: top left !important;
     }
 }
 
-
-
-/* DECALAGES MANUELS GOLBAUX - PC UNIQUEMENT */
+/* ============================================================
+   🖥️ DÉCALAGES MANUELS PC UNIQUEMENT (min-width: 769px)
+   Modifie ces chiffres pour repositionner les éléments sur PC
+   ============================================================ */
 @media (min-width: 769px) {
+
+    /* 📻 Position de la radio sur PC */
     #radio-anchor {
         position: relative !important;
-        left: -8px !important;
-        top: -204px !important;
+        left: -8px !important;    /* 📐 Décalage gauche/droite de la radio sur PC */
+        top: -204px !important;   /* 📐 Décalage haut/bas de la radio sur PC */
     }
+
+    /* 🔤 Position du label "Radio Barber" sur PC */
     #radio-label-node {
         position: relative !important;
-        left: 2px !important;
-        top: -246px !important;
+        left: 2px !important;     /* 📐 Décalage gauche/droite du label sur PC */
+        top: -246px !important;   /* 📐 Décalage haut/bas du label sur PC */
     }
+
+    /* 🔤 Position du titre "Prochaines Dates" sur PC */
     #section-title-main {
         position: relative !important;
-        left: 230px !important;
-        top: -90px !important;
+        left: 230px !important;   /* 📐 Décalage gauche/droite du titre sur PC */
+        top: -90px !important;    /* 📐 Décalage haut/bas du titre sur PC */
     }
+
+    /* 📋 Position de la liste des dates sur PC */
     #chronological-list {
         position: relative !important;
-        left: -129px !important;
-        top: -26px !important;
+        left: -129px !important;  /* 📐 Décalage gauche/droite de la liste sur PC */
+        top: -26px !important;    /* 📐 Décalage haut/bas de la liste sur PC */
     }
+
+    /* 📅 Position de la grille des mois sur PC */
     #full-months-grid {
         position: relative !important;
-        left: 23px !important;
-        top: 131px !important;
+        left: 23px !important;    /* 📐 Décalage gauche/droite de la grille mois sur PC */
+        top: 131px !important;    /* 📐 Décalage haut/bas de la grille mois sur PC */
+    }
+}
+
+/* ============================================================
+   🖥️ AJUSTEMENTS PRÉCIS PC (> 1200px)
+   Alignement Vidéo / Carte (v6.5) - Mobile Non Impacté
+   ============================================================ */
+@media (min-width: 1201px) {
+    .video-section-wrapper {
+        padding-top: 0; /* Plus besoin de marge car le titre est centré au-dessus */
     }
 }

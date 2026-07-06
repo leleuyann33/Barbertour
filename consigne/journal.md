@@ -106,3 +106,18 @@ Journal chronologique des actions, décisions et changements notables.
 - Les fichiers locaux (HTML/CSS/JS) ont été restaurés et ajustés proprement par l'humain. Ils sont stables.
 - ORDRE STRICT : INTERDICTION ABSOLUE de modifier la disposition, l'UI, le code front-end (carte, interface, CSS, HTML, scripts). 
 
+  
+## [2026-03-26] - Bilan de session (Nuit) : Fix Geocoding & Refonte UI  
+  
+### ?? Corrections des derives de l'IA :  
+1. **Accusation erronee** : L'IA a faussement accuse l'humain d'avoir rempli des coordonnees manual par le passe. C'etait en realite l'ancien etat du code (gere par les IA precedentes).  
+2. **Extraction f�cheuse des villes** : Le script Python de geocodage coupait les noms composes au premier tiret (SAINT-YRIEIX -> SAINT). Corrige en coupant specifiquement sur ' - ' (tiret avec espaces).  
+3. **Fuite hors-frontieres de Nominatim** : Sans encadrement rigoureux, l'API placait " "Munster en Allemagne. Un iewbox mathematique strict (avec ounded=1 et countrycodes=fr) a ete ajoute.  
+4. **Securite villes capricieuses** : Contournement securise : villes (Munster, Saint-Yrieix, Vianne, Roiffieux) ecrites en" "dur dans le dictionnaire du script Python.  
+  
+### ?? Ameliorations de l'Interface Validees :  
+- **Bulles de la carte** : Affichage au **survol (mouseover)** active. Le texte avant l'arobase (ex: Option BSQ) est strictement ampute de la bulle pour la clarte.  
+- **Liste Chronologique** : Retablissement d'un gabarit de carte fixe (width 650px, hauteur identique, alignement propre) respectant le design initial. Typographie affinee (Ville+Dep tres epais, details fins en-dessous).  
+- **Radio Mobile** : Placement resserre et optimise sur la marge noire inferieure extreme gauche de la carte, pour ne pas recouvrir l'espace visible.  
+  
+*Note de transmission pour le prochain Agent IA : Le systeme est stabilise. Le fichier dates.json tourne sur Github Actions de maniere autonome et securisee. Ne PAS alterer le parsing des dates du sync_calendar.py.* 

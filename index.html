@@ -3,59 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barbershop Quartet - Tournée en France</title>
-    <!-- Leaflet CSS -->
+    <title>Barbershop Quartet - Tournée en France</title> <!-- 🔤 Titre de l'onglet navigateur -->
+
+    <!-- ======================================================
+         📦 DÉPENDANCES EXTERNES (ne pas modifier)
+         ====================================================== -->
+    <!-- Leaflet : bibliothèque de carte interactive -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <!-- Google Fonts: Sancreek & Montserrat -->
+    <!-- Google Fonts : Sancreek (titres vintage) + Montserrat (texte courant) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sancreek&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Great+Vibes&family=Sancreek&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Feuille de style principale du site -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="app">
-        <header>
-            <h1 class="brand-title">Compagnie Barber Shop Quartet</h1>
-            <p class="brand-subtitle">La Carte de la Tournée </p>
-        </header>
-        
-        <main>
+<div id="app">
+
+    <!-- ======================================================
+         🏷️ EN-TÊTE : Titre + Sous-titre
+         🔤 Pour changer le titre → modifie le texte ci-dessous
+         ====================================================== -->
+    <header>
+        <h1 class="brand-title">Compagnie Barber Shop Quartet</h1> <!-- 🔤 Titre principal -->
+    </header>
+
+    <!-- 🗺️ TITRE DE LA CARTE (Centré désormais) -->
+    <p class="brand-subtitle site-centered-title">La Carte de la Tournée</p>
+
+    <!-- ======================================================
+         🗺️ ZONE PRINCIPALE : Carte (gauche) + Vidéo (droite)
+         ====================================================== -->
+    <main>
+
+        <!-- 🗺️ BLOC GAUCHE : Carte -->
+        <div class="map-section-wrapper">
             <div id="theater-frame">
                 <div class="map-container">
-                    <div id="map"></div>
+                    <div id="map"></div> <!-- La carte Leaflet est injectée ici par script.js -->
                 </div>
             </div>
+        </div>
 
-
-            <div class="side-panel">
-                <div id="media-frame-desktop" class="media-frame-instance">
-                    <video src="WhatsApp Video 2026-03-22 at 22.46.58.mp4" poster="poster.jpg" controls style="max-width:100%; border-radius:8px;"></video>
-                    <div class="media-controls admin-only" style="display: none;">
-                        <input type="file" id="direct-media-upload" accept="image/*,video/*" style="display: none;">
-                        <button class="upload-btn" onclick="document.getElementById('direct-media-upload').click()">➕ Ajouter un média</button>
-                    </div>
-                </div>
+        <!-- 🎬 BLOC DROIT : Vidéo (sur PC uniquement par défaut) -->
+        <div class="video-section-wrapper">
+            <div id="media-frame-desktop">
+                <video src="WhatsApp Video 2026-03-22 at 22.46.58.mp4"
+                       poster="poster.jpg"
+                       preload="metadata"
+                       controls
+                       style="width:100%; border-radius:15px; border: 3px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
+                </video>
             </div>
+        </div>
 
-        </main>
+    </main>
 
-        <!-- Grille des Mois 2026/2027 (Navigation Rapide) -->
-        <section id="full-months-grid" class="months-grid">
-            <div class="year-row">
-                <div class="year-label">2026</div>
-                <div id="months-2026" class="months-buttons"></div>
-            </div>
-            <div class="year-row">
-                <div class="year-label">2027</div>
-                <div id="months-2027" class="months-buttons"></div>
-            </div>
-        </section>
+    <!-- ======================================================
+         📅 GRILLE DE NAVIGATION PAR MOIS (2026 / 2027)
+         ⚠️ Cachée sur mobile (voir style.css @media mobile)
+         Le contenu (boutons des mois) est généré automatiquement par script.js
+         ====================================================== -->
+    <section id="full-months-grid" class="months-grid">
+        <div class="year-row">
+            <div class="year-label">2026</div>       <!-- 🔤 Libellé année -->
+            <div id="months-2026" class="months-buttons"></div> <!-- Boutons injectés par script.js -->
+        </div>
+        <div class="year-row">
+            <div class="year-label">2027</div>       <!-- 🔤 Libellé année -->
+            <div id="months-2027" class="months-buttons"></div> <!-- Boutons injectés par script.js -->
+        </div>
+    </section>
 
-        <section id="list-section">
-            <div id="radio-column">
-                <div id="radio-anchor">
+    <!-- ======================================================
+         📻 + 📋 SECTION : Radio (gauche) + Liste des dates (droite)
+         Structure Flexbox : deux colonnes côte à côte sur PC,
+         empilées sur mobile
+         ====================================================== -->
+    <section id="list-section">
+
+        <!-- ── COLONNE GAUCHE : Radio SVG + Label ── -->
+        <div id="radio-column">
+
+            <div id="radio-anchor"> <!-- 📐 Position réglable dans style.css bloc PC -->
                 <section id="radio-section">
-                    <div class="radio-header">Radio Barber</div>
+                    <div class="radio-header">Radio Barber</div> <!-- Caché en CSS -->
+
+                    <!-- 📻 Le poste de radio (dessin SVG) -->
+                    <!-- ⚠️ NE PAS MODIFIER le SVG — c'est le dessin de la radio -->
                     <div class="radio-container" id="radioWrap">
                         <div class="glow-ring"></div>
                         <svg class="radio" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
@@ -91,14 +126,11 @@
                                     <stop offset="100%" stop-color="#e87020" stop-opacity="0"/>
                                 </radialGradient>
                             </defs>
-
-                            
                             <rect x="8" y="18" width="304" height="186" rx="16" fill="url(#wood)"/>
                             <rect x="14" y="24" width="292" height="174" rx="12" fill="#9a6828"/>
                             <rect x="14" y="24" width="292" height="40" rx="12" fill="rgba(255,220,120,0.07)"/>
                             <rect x="8" y="18" width="304" height="186" rx="16" fill="none" stroke="#3a1e04" stroke-width="3"/>
                             <rect x="10" y="20" width="300" height="182" rx="15" fill="none" stroke="#c8901a" stroke-width="1.5" opacity="0.5"/>
-
                             <rect x="18" y="34" width="130" height="148" rx="12" fill="#2a1204"/>
                             <rect x="20" y="36" width="126" height="144" rx="10" fill="#1a0c02"/>
                             <rect x="22" y="38" width="122" height="140" rx="9" fill="#2e1606"/>
@@ -106,108 +138,141 @@
                             <circle cx="83" cy="110" r="52" fill="none" stroke="#0e0804" stroke-width="2.5"/>
                             <circle cx="83" cy="110" r="40" fill="#1e0e04"/>
                             <circle id="speaker-glow" cx="83" cy="110" r="52" fill="url(#spkGlow)"/>
-
                             <rect x="158" y="34" width="146" height="66" rx="8" fill="url(#dialOff)"/>
                             <rect id="dial-light" x="158" y="34" width="146" height="66" rx="8" fill="url(#dialOn)"/>
                             <rect id="dial-glow" x="158" y="34" width="146" height="66" rx="8" fill="url(#dialGlow)" opacity="0.7"/>
                             <text x="250" y="74" text-anchor="middle" font-size="7" fill="rgba(60,30,0,0.7)" font-family="serif">FM</text>
                             <text x="270" y="74" text-anchor="middle" font-size="7" fill="rgba(60,30,0,0.7)" font-family="serif">MW</text>
                             <text x="290" y="74" text-anchor="middle" font-size="7" fill="rgba(60,30,0,0.7)" font-family="serif">LW</text>
-
                             <circle cx="232" cy="90" r="5" fill="#1a0a02"/>
                             <circle id="bulb" cx="232" cy="90" r="5" fill="#ff9920"/>
                             <circle id="bulb2" cx="232" cy="90" r="9" fill="#ff9920" opacity="0.2"/>
-
                             <circle id="vol-knob" cx="200" cy="148" r="20" fill="#4a2808" style="cursor: ns-resize;"/>
                             <circle cx="200" cy="148" r="15" fill="#6a3a0e" pointer-events="none"/>
                             <line id="vol-indicator" x1="200" y1="133" x2="200" y2="141" stroke="#c8901a" stroke-width="2" stroke-linecap="round"/>
-                            
                             <circle id="tuning-knob" cx="280" cy="148" r="30" fill="#4a2808" style="cursor: ns-resize;"/>
                             <circle cx="280" cy="148" r="25" fill="#6a3a0e" pointer-events="none"/>
                             <line id="tuning-indicator" x1="280" y1="123" x2="280" y2="133" stroke="#c8901a" stroke-width="2.5" stroke-linecap="round"/>
-
                             <circle id="radio-power-btn" cx="162" cy="158" r="13" fill="#1a0c02" style="cursor: pointer;"/>
                             <circle id="power-dot" cx="162" cy="158" r="6"/>
-                            
                             <text id="radio-label-node-svg" x="83" y="194" text-anchor="middle" font-size="9" fill="#c8901a" font-family="serif" font-style="italic" opacity="0.7">♪ Barber Radio ♪</text>
                         </svg>
-                        
-                        <!-- Volume Fader Invisible / Tooltip UI -->
+
+                        <!-- Curseur de volume (caché, géré par script.js) -->
                         <div class="vol-fader-container">
                             <input type="range" id="vol-fader-input" min="0" max="1" step="0.01" value="0.05">
                         </div>
-
                         <div class="hint">Cliquez pour allumer / régler le volume</div>
                         <audio id="radio-audio" loop></audio>
                     </div>
                 </section>
             </div><!-- fin radio-anchor -->
-            <div id="radio-label-node" class="radio-label">Radio Barber</div>
-            </div><!-- fin radio-column -->
 
-            <div id="dates-column">
-                <h2 id="section-title-main" class="section-title">Prochaines Dates de la Tournée</h2>
-                <div id="chronological-list">
-                    <p style="text-align: center; color: #777;">Chargement des dates...</p>
-                </div>
-            </div><!-- fin dates-column -->
+            <!-- 🔤 Label "Radio Barber" affiché sous la radio -->
+            <!-- 📐 Position réglable dans style.css bloc PC (#radio-label-node) -->
+            <div id="radio-label-node" class="radio-label">Radio Barber</div> <!-- 🔤 Texte du label -->
 
-        </section>
+        </div><!-- fin radio-column -->
 
-    <div id="media-frame-mobile" class="media-frame-instance" style="max-width:500px; margin: 2rem auto;">
-        <video src="WhatsApp Video 2026-03-22 at 22.46.58.mp4" poster="poster.jpg" controls style="max-width:100%; border-radius:8px;"></video>
-    </div>
+        <!-- ── COLONNE DROITE : Titre + Liste des dates ── -->
+        <div id="dates-column">
 
+            <!-- 🔤 Titre de la section dates -->
+            <!-- 📐 Position réglable dans style.css bloc PC (#section-title-main) -->
+            <h2 id="section-title-main" class="section-title">Prochaines Dates de la Tournée</h2> <!-- 🔤 Titre modifiable -->
+
+            <!-- 📋 Liste des dates (injectée automatiquement par script.js depuis dates.json) -->
+            <!-- ⚠️ NE PAS MODIFIER — le contenu est généré dynamiquement -->
+            <div id="chronological-list">
+                <p style="text-align: center; color: #777;">Chargement des dates...</p>
+            </div>
+
+            <div id="media-frame-mobile" class="media-frame-instance" style="max-width:500px; margin: 2rem auto;">
+                <video src="WhatsApp Video 2026-03-22 at 22.46.58.mp4"
+                       poster="poster.jpg"
+                       preload="metadata"
+                       controls
+                       style="max-width:100%; border-radius:15px; border: 3px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
+                </video>
+            </div>
+
+        </div><!-- fin dates-column -->
+
+    </section>
+
+
+    <!-- ======================================================
+         🦶 FOOTER
+         🔐 Le © est le déclencheur secret du Coffre Admin
+         Mot de passe : BARBER2025
+         ====================================================== -->
     <footer>
-        <p><span id="secret-trigger" style="cursor: pointer;">&copy;</span> 2025 Compagnie Barber Shop Quartet. Tous droits réservés.</p>
+        <p>
+            <span id="secret-trigger" style="cursor: default;">&copy;</span> <!-- 🔐 Cliquer ici = ouvre le Coffre Secret -->
+
+            2025 Compagnie Barber Shop Quartet. Tous droits réservés. <!-- 🔤 Texte du footer -->
+        </p>
     </footer>
-    </div>
 
-    <!-- Secret Chest Modal -->
-    <div id="secret-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>🪒 Coffre Secret - Gestion des Tournées</h2>
-                <span class="close-modal">&times;</span>
-            </div>
-            <div id="shows-list-header">
-                <p>Cliquez sur les pastilles pour basculer le statut : <span class="dot red"></span> Confirmé | <span class="dot yellow"></span> Prévu | <span class="dot empty"></span> Masqué</p>
-            </div>
-            <div id="shows-list-container">
-                <!-- Data will be injected here -->
-            </div>
+</div><!-- fin #app -->
+
+<!-- ======================================================
+     🔒 MODALE COFFRE SECRET (Admin - gestion des dates)
+     ⚠️ NE PAS MODIFIER la structure — géré par script.js
+     ====================================================== -->
+<div id="secret-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>🪒 Coffre Secret - Gestion des Tournées</h2>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div id="shows-list-header">
+            <p>Cliquez sur les pastilles pour basculer le statut :
+                <span class="dot red"></span> Confirmé |
+                <span class="dot yellow"></span> Prévu |
+                <span class="dot empty"></span> Masqué
+            </p>
+        </div>
+        <div id="shows-list-container">
+            <!-- Contenu injecté par script.js -->
         </div>
     </div>
+</div>
 
-    <!-- Media Upload Modal -->
-    <div id="media-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>🪒 Galerie Barber - Photos & Vidéos</h2>
-                <span class="close-media-modal">&times;</span>
+<!-- ======================================================
+     🎬 MODALE GALERIE MÉDIA (Admin)
+     ⚠️ NE PAS MODIFIER la structure — géré par script.js
+     ====================================================== -->
+<div id="media-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>🪒 Galerie Barber - Photos & Vidéos</h2>
+            <span class="close-media-modal">&times;</span>
+        </div>
+        <div class="media-upload-zone admin-only" style="display: none;">
+            <p>Uploader un souvenir de la tournée :</p>
+            <div class="upload-group">
+                <input type="file" id="media-upload" accept="image/*,video/*">
             </div>
-            <div class="media-upload-zone admin-only" style="display: none;">
-                <p>Uploader un souvenir de la tournée :</p>
-                <div class="upload-group">
-                    <input type="file" id="media-upload" accept="image/*,video/*">
-                </div>
-                <hr style="margin: 20px 0; border: 0; border-top: 1px solid rgba(225,177,44,0.3);">
-                <p>🎵 Gestion de la Radio Barber :</p>
-                <div style="display:flex; gap:10px; margin-bottom:10px;">
-                    <button class="upload-btn" onclick="switchToJazzStream()" style="flex:1;">📻 Jazz Radio (défaut)</button>
-                    <button class="upload-btn" onclick="openRadioPlaylistUpload()" style="flex:1; background:#1a6b5a;">➕ Ajouter un morceau</button>
-                </div>
-                <div id="radio-playlist-panel" style="max-height:200px; overflow-y:auto; margin-top:10px;">
-                    <p style="color:#888;font-size:0.85rem;">Aucun morceau ajouté.</p>
-                </div>
-                <div id="media-preview"></div>
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid rgba(225,177,44,0.3);">
+            <p>🎵 Gestion de la Radio Barber :</p>
+            <div style="display:flex; gap:10px; margin-bottom:10px;">
+                <button class="upload-btn" onclick="switchToJazzStream()" style="flex:1;">📻 Jazz Radio (défaut)</button>
+                <button class="upload-btn" onclick="openRadioPlaylistUpload()" style="flex:1; background:#1a6b5a;">➕ Ajouter un morceau</button>
             </div>
+            <div id="radio-playlist-panel" style="max-height:200px; overflow-y:auto; margin-top:10px;">
+                <p style="color:#888;font-size:0.85rem;">Aucun morceau ajouté.</p>
+            </div>
+            <div id="media-preview"></div>
         </div>
     </div>
+</div>
 
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<!-- ======================================================
+     📦 SCRIPTS (ne pas modifier l'ordre)
+     ====================================================== -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="script.js?v=3"></script> <!-- ⚠️ Le ?v=3 force le rechargement du cache -->
 
-    <script src="script.js?v=3"></script>
 </body>
 </html>
