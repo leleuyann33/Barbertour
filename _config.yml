@@ -1,0 +1,11 @@
+exclude:
+  - consigne/
+  - backup/
+  - saveclaude/
+  - "carte barber2/"
+  - sync_calendar.py
+  - debug_ical.py
+  - "Lancer Serveur.bat"
+  - "*.txt"
+  - "*.md"
+  - ".venv/"

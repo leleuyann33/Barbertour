@@ -1,4 +1,4 @@
-# 📓 JOURNAL DU PROJET
+﻿# 📓 JOURNAL DU PROJET
 
 Journal chronologique des actions, décisions et changements notables.
 
@@ -111,7 +111,7 @@ Journal chronologique des actions, décisions et changements notables.
   
 ### ?? Corrections des derives de l'IA :  
 1. **Accusation erronee** : L'IA a faussement accuse l'humain d'avoir rempli des coordonnees manual par le passe. C'etait en realite l'ancien etat du code (gere par les IA precedentes).  
-2. **Extraction f�cheuse des villes** : Le script Python de geocodage coupait les noms composes au premier tiret (SAINT-YRIEIX -> SAINT). Corrige en coupant specifiquement sur ' - ' (tiret avec espaces).  
+2. **Extraction f�cheuse des villes** : Le script Python de geocodage coupait les noms composes au premier tiret (SAINT-YRIEIX -> SAINT). Corrige en coupant specifiquement sur ' - ' (tiret avec espaces).  
 3. **Fuite hors-frontieres de Nominatim** : Sans encadrement rigoureux, l'API placait " "Munster en Allemagne. Un iewbox mathematique strict (avec ounded=1 et countrycodes=fr) a ete ajoute.  
 4. **Securite villes capricieuses** : Contournement securise : villes (Munster, Saint-Yrieix, Vianne, Roiffieux) ecrites en" "dur dans le dictionnaire du script Python.  
   
