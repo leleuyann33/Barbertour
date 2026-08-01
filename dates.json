@@ -492,30 +492,12 @@
     ]
   },
   {
-    "date": "2027-04-03",
-    "title": "Option 4 BSQ \"GB\" @ SAINT-PIERRE-D'IRUBE (64) - Salle La Perle",
-    "location": "SAINT-PIERRE-D'IRUBE",
-    "coords": [
-      43.4731208,
-      -1.4474527
-    ]
-  },
-  {
     "date": "2027-04-04",
     "title": "BSQ \"GB\" @ SERRES-CASTET (64) - Centre Social Alexis Peyret",
     "location": "SERRES-CASTET",
     "coords": [
       43.3861879,
       -0.3541989
-    ]
-  },
-  {
-    "date": "2027-05-14",
-    "title": "Option 1 BSQ \"GB\" @ SAINT-PIERRE-D'IRUBE (64) - Salle La Perle",
-    "location": "SAINT-PIERRE-D'IRUBE",
-    "coords": [
-      43.4731208,
-      -1.4474527
     ]
   },
   {
@@ -532,15 +514,6 @@
     "title": "Option BSQ \"GB\" @ LUZOS (64) - Salle des fêtes",
     "location": "LUZOS",
     "coords": null
-  },
-  {
-    "date": "2027-05-29",
-    "title": "Option 2 BSQ \"GB\" @ SAINT-PIERRE-D'IRUBE (64) - Salle La Perle",
-    "location": "SAINT-PIERRE-D'IRUBE",
-    "coords": [
-      43.4731208,
-      -1.4474527
-    ]
   },
   {
     "date": "2027-09-18",
