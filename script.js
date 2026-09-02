@@ -708,10 +708,20 @@ function renderChronologicalList(events) {
                 thinDetail = parts.slice(1).join(' - ').trim() + " - " + boldCity; // ex: "Essaïon Théâtre - Paris (75)"
             }
             
-            const coordsStr = e.coords ? `[${e.coords[0]}, ${e.coords[1]}]` : "null";
+            // Résolution des coordonnées : coords explicites, sinon dictionnaire VENUE_COORDS
+            let resolvedCoords = e.coords && Array.isArray(e.coords) ? e.coords : null;
+            if (!resolvedCoords) {
+                const loc = (e.location || e.venue || rawTitle || "").toLowerCase();
+                for (const venueName in VENUE_COORDS) {
+                    if (loc.includes(venueName.toLowerCase())) { resolvedCoords = VENUE_COORDS[venueName]; break; }
+                }
+            }
+            const coordsStr = resolvedCoords ? `[${resolvedCoords[0]}, ${resolvedCoords[1]}]` : "null";
+            // Échappe guillemets ET apostrophes (l'attribut onclick est en quotes simples)
+            const safeCity = boldCity.replace(/"/g, '&quot;').replace(/'/g, "&#39;");
 
             return `
-                <div class="date-item" onclick='centerOnShow(${coordsStr}, "${boldCity.replace(/"/g, '&quot;')}")' style="cursor: pointer;">
+                <div class="date-item" onclick='centerOnShow(${coordsStr}, "${safeCity}")' style="cursor: pointer;">
                     <div class="item-date">${d.toLocaleDateString('fr-FR', { day: 'numeric' })}</div>
                     <div class="item-info">
                         <h3 style="font-weight: 800; font-size: 1.15rem;">${boldCity}</h3>
@@ -728,21 +738,31 @@ function renderChronologicalList(events) {
 // Re-init Triggers (Solid logic for multiple sources)
 function initTriggers() {
     const secretBtn = document.getElementById('secret-trigger');
-    const mediaBtn = document.getElementById('media-trigger');
     const modal = document.getElementById('secret-modal');
     const mediaModal = document.getElementById('media-modal');
     
-    secretBtn?.addEventListener('click', () => {
-        const password = prompt("Entrez le mot de passe secret :");
+    function promptAdminAccess() {
+        const password = prompt("🔑 Mode Admin - Entrez le mot de passe secret :");
         if (password && password.trim().toUpperCase() === "BARBER2025") {
             modal.style.display = 'block';
             renderShowsList();
         } else if (password !== null) {
             alert("❌ Mot de passe incorrect.");
         }
+    }
+
+    secretBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        promptAdminAccess();
     });
 
-    // Note: mediaBtn trigger is now handled by window.checkAdmin in HTML
+    // Raccourci clavier (F2 ou Ctrl+Shift+A) pour ouvrir le coffre facilement
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'F2' || (e.ctrlKey && e.shiftKey && e.key.toUpperCase() === 'A')) {
+            e.preventDefault();
+            promptAdminAccess();
+        }
+    });
 
     document.querySelectorAll('.close-modal, .close-media-modal').forEach(btn => {
         btn.addEventListener('click', () => {
