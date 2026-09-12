@@ -511,18 +511,12 @@
   },
   {
     "date": "2027-05-21",
-    "title": "Option BSQ \"GB\" @ LA-TESTE-DE-BUCH (33) - Salle Pierre Cravey",
-    "location": "LA-TESTE-DE-BUCH",
+    "title": "Option BSQ \"GB\" @ UZOS (64) - Salle des fêtes",
+    "location": "UZOS",
     "coords": [
-      44.6316943,
-      -1.1491319
+      43.26987,
+      -0.3440445
     ]
-  },
-  {
-    "date": "2027-05-22",
-    "title": "Option BSQ \"GB\" @ LUZOS (64) - Salle des fêtes",
-    "location": "LUZOS",
-    "coords": null
   },
   {
     "date": "2027-09-18",
@@ -549,15 +543,6 @@
     "coords": [
       45.0121558,
       -0.5291847
-    ]
-  },
-  {
-    "date": "2027-10-30",
-    "title": "Option BSQ \"GB\" @ LA TESTE-DE-BUCH (33) - Théâtre Cravey",
-    "location": "LA TESTE-DE-BUCH",
-    "coords": [
-      44.6316943,
-      -1.1491319
     ]
   }
 ]
