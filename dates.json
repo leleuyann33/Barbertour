@@ -537,6 +537,24 @@
     "coords": null
   },
   {
+    "date": "2027-09-10",
+    "title": "Option 2 BSQ \"GB\" @ CHABEUIL (26) - Espace Culturel",
+    "location": "CHABEUIL",
+    "coords": [
+      44.9003613,
+      5.0187071
+    ]
+  },
+  {
+    "date": "2027-09-17",
+    "title": "Option 1 BSQ \"GB\" @ CHABEUIL (26) - Espace Culturel",
+    "location": "CHABEUIL",
+    "coords": [
+      44.9003613,
+      5.0187071
+    ]
+  },
+  {
     "date": "2027-09-18",
     "title": "Option BSQ \"GB\" @ VIBRAYE (72) - Quai des Arts",
     "location": "VIBRAYE",
@@ -561,6 +579,15 @@
     "coords": [
       45.0121558,
       -0.5291847
+    ]
+  },
+  {
+    "date": "2028-02-12",
+    "title": "Option 3 BSQ \"GB\" @ CHABEUIL (26) - Espace Culturel",
+    "location": "CHABEUIL",
+    "coords": [
+      44.9003613,
+      5.0187071
     ]
   }
 ]
