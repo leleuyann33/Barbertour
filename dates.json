@@ -456,6 +456,15 @@
     ]
   },
   {
+    "date": "2027-02-19",
+    "title": "BSQ \"GB\" @ MOËLAN-SUR-MER (29) - L'Ellipse",
+    "location": "MOËLAN-SUR-MER",
+    "coords": [
+      47.8133996,
+      -3.6309833
+    ]
+  },
+  {
     "date": "2027-03-05",
     "title": "BSQ \"GB\" @ ARES (33) - Espace Brémontier",
     "location": "ARES",
@@ -523,6 +532,15 @@
     "title": "Option 2 BSQ \"GB\" @ AIGUE-MORTES (30) - Extérieur",
     "location": "AIGUE-MORTES",
     "coords": null
+  },
+  {
+    "date": "2027-06-05",
+    "title": "Option BSQ \"GB\" @ BRINON (58) - Chapiteau",
+    "location": "BRINON",
+    "coords": [
+      47.2814385,
+      3.4908313
+    ]
   },
   {
     "date": "2027-06-12",
