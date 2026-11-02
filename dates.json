@@ -541,9 +541,12 @@
   },
   {
     "date": "2027-07-02",
-    "title": "Option 1 BSQ \"GB\" @ AIGUE-MORTES (30) - Extérieur",
-    "location": "AIGUE-MORTES",
-    "coords": null
+    "title": "Option 1 BSQ \"GB\" @ AIGUES-MORTES (30) - Extérieur",
+    "location": "AIGUES-MORTES",
+    "coords": [
+      43.5661521,
+      4.19154
+    ]
   },
   {
     "date": "2027-09-10",
