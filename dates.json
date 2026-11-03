@@ -403,7 +403,7 @@
   },
   {
     "date": "2026-11-19",
-    "title": "BSQ \"GB\" @ NEVERS (58) - Maison de la Culture",
+    "title": "Validé BSQ \"GB\" @ NEVERS (58) - Maison de la Culture",
     "location": "NEVERS",
     "coords": [
       46.9876601,
@@ -412,7 +412,7 @@
   },
   {
     "date": "2026-11-27",
-    "title": "BSQ \"GB\" @ MONTVAL-SUR-LOIR (72) - La Castélorienne",
+    "title": "Validé BSQ \"GB\" @ MONTVAL-SUR-LOIR (72) - La Castélorienne",
     "location": "MONTVAL-SUR-LOIR",
     "coords": [
       47.6954528,
@@ -421,7 +421,7 @@
   },
   {
     "date": "2026-12-03",
-    "title": "BSQ \"GB\" @ LA ROCHEFOUCAULD (16) - Les Carmes",
+    "title": "Validé BSQ \"GB\" @ LA ROCHEFOUCAULD (16) - Les Carmes",
     "location": "LA ROCHEFOUCAULD",
     "coords": [
       45.739278,
@@ -430,7 +430,7 @@
   },
   {
     "date": "2027-01-09",
-    "title": "BSQ \"GB\" @ SANGUINET (40) - Auditorium",
+    "title": "Validé BSQ \"GB\" @ SANGUINET (40) - Auditorium",
     "location": "SANGUINET",
     "coords": [
       44.4834776,
@@ -439,7 +439,7 @@
   },
   {
     "date": "2027-02-05",
-    "title": "BSQ \"GB\" @ SAINT-PRIEST-EN-JAREZ (42) - Le NEC",
+    "title": "Validé BSQ \"GB\" @ SAINT-PRIEST-EN-JAREZ (42) - Le NEC",
     "location": "SAINT-PRIEST-EN-JAREZ",
     "coords": [
       45.473408,
@@ -448,7 +448,7 @@
   },
   {
     "date": "2027-02-06",
-    "title": "BSQ \"GB\" @ ISSOIRE (63) - Animatis",
+    "title": "Validé BSQ \"GB\" @ ISSOIRE (63) - Animatis",
     "location": "ISSOIRE",
     "coords": [
       45.5432962,
@@ -457,7 +457,7 @@
   },
   {
     "date": "2027-03-05",
-    "title": "BSQ \"GB\" @ ARES (33) - Espace Brémontier",
+    "title": "Validé BSQ \"GB\" @ ARES (33) - Espace Brémontier",
     "location": "ARES",
     "coords": [
       44.767644,
@@ -466,7 +466,7 @@
   },
   {
     "date": "2027-03-13",
-    "title": "BSQ \"GB\" @ COLMAR (68) - Théâtre Municipal",
+    "title": "Validé BSQ \"GB\" @ COLMAR (68) - Théâtre Municipal",
     "location": "COLMAR",
     "coords": [
       48.0777517,
@@ -475,7 +475,7 @@
   },
   {
     "date": "2027-03-18",
-    "title": "Option BSQ \"GB\" @ MONTBELIARD (25) - Les Bains Douches",
+    "title": "Validé BSQ \"GB\" @ MONTBELIARD (25) - Les Bains Douches",
     "location": "MONTBELIARD",
     "coords": [
       47.5102368,
@@ -502,7 +502,7 @@
   },
   {
     "date": "2027-04-04",
-    "title": "BSQ \"GB\" @ SERRES-CASTET (64) - Centre Social Alexis Peyret",
+    "title": "Validé BSQ \"GB\" @ SERRES-CASTET (64) - Centre Social Alexis Peyret",
     "location": "SERRES-CASTET",
     "coords": [
       43.3861879,
@@ -511,18 +511,12 @@
   },
   {
     "date": "2027-05-21",
-    "title": "Option BSQ \"GB\" @ UZOS (64) - Salle des fêtes",
+    "title": "Validé BSQ \"GB\" @ UZOS (64) - Salle des fêtes",
     "location": "UZOS",
     "coords": [
       43.26987,
       -0.3440445
     ]
-  },
-  {
-    "date": "2027-06-05",
-    "title": "Option 2 BSQ \"GB\" @ AIGUE-MORTES (30) - Extérieur",
-    "location": "AIGUE-MORTES",
-    "coords": null
   },
   {
     "date": "2027-06-05",
@@ -541,7 +535,7 @@
   },
   {
     "date": "2027-07-02",
-    "title": "Option 1 BSQ \"GB\" @ AIGUES-MORTES (30) - Extérieur",
+    "title": "Option 1 (à éviter) BSQ \"GB\" @ AIGUES-MORTES (30) - Extérieur",
     "location": "AIGUES-MORTES",
     "coords": [
       43.5661521,
@@ -558,12 +552,12 @@
     ]
   },
   {
-    "date": "2027-09-11",
-    "title": "Option 4 BSQ \"GB\" @ AIGUES-MORTES (30) - Extérieur",
-    "location": "AIGUES-MORTES",
+    "date": "2027-09-12",
+    "title": "Option BSQ \"GB\" @ CABOURG (14) - La Sall'in",
+    "location": "CABOURG",
     "coords": [
-      43.5661521,
-      4.19154
+      49.2934373,
+      -0.1155085
     ]
   },
   {
