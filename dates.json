@@ -492,15 +492,6 @@
     ]
   },
   {
-    "date": "2027-03-27",
-    "title": "Option BSQ \"GB\" @ LANGRES (52) - Festival Tinta'Mars",
-    "location": "LANGRES",
-    "coords": [
-      47.8639612,
-      5.333947
-    ]
-  },
-  {
     "date": "2027-04-04",
     "title": "Validé BSQ \"GB\" @ SERRES-CASTET (64) - Centre Social Alexis Peyret",
     "location": "SERRES-CASTET",
@@ -597,6 +588,15 @@
     "coords": [
       44.9003613,
       5.0187071
+    ]
+  },
+  {
+    "date": "2028-03-10",
+    "title": "Option BSQ \"GB\" @ LANGRES (52) - Festival Tinta'Mars",
+    "location": "LANGRES",
+    "coords": [
+      47.8639612,
+      5.333947
     ]
   }
 ]
