@@ -591,8 +591,17 @@
     ]
   },
   {
-    "date": "2028-03-10",
-    "title": "Option BSQ \"GB\" @ LANGRES (52) - Festival Tinta'Mars",
+    "date": "2028-03-07",
+    "title": "Option 1 BSQ \"GB\" @ LANGRES (52) - Festival Tinta'Mars",
+    "location": "LANGRES",
+    "coords": [
+      47.8639612,
+      5.333947
+    ]
+  },
+  {
+    "date": "2028-03-14",
+    "title": "Option 2 BSQ \"GB\" @ LANGRES (52) - Festival Tinta'Mars",
     "location": "LANGRES",
     "coords": [
       47.8639612,
